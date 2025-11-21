@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QPushButton,
-    QScrollArea, QSizePolicy, QStackedWidget, QStatusBar,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
+    QPushButton, QScrollArea, QSizePolicy, QStackedWidget,
+    QStatusBar, QVBoxLayout, QWidget)
 
 class Ui_HomeWindow(object):
     def setupUi(self, HomeWindow):
@@ -56,74 +56,125 @@ class Ui_HomeWindow(object):
         self.menuWidget.setMinimumSize(QSize(0, 700))
         self.verticalLayoutWidget = QWidget(self.menuWidget)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(0, 0, 221, 731))
+        self.verticalLayoutWidget.setGeometry(QRect(0, 0, 221, 1015))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setSpacing(8)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.btnPage1 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage1.setObjectName(u"btnPage1")
+        self.lblSectionGeneral = QLabel(self.verticalLayoutWidget)
+        self.lblSectionGeneral.setObjectName(u"lblSectionGeneral")
+
+        self.verticalLayout.addWidget(self.lblSectionGeneral)
+
+        self.btnUniversidad = QPushButton(self.verticalLayoutWidget)
+        self.btnUniversidad.setObjectName(u"btnUniversidad")
         font1 = QFont()
         font1.setFamilies([u"Segoe UI"])
-        font1.setPointSize(24)
-        font1.setBold(True)
-        self.btnPage1.setFont(font1)
+        font1.setPointSize(22)
+        font1.setBold(False)
+        self.btnUniversidad.setFont(font1)
+        self.btnUniversidad.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
 
-        self.verticalLayout.addWidget(self.btnPage1)
+        self.verticalLayout.addWidget(self.btnUniversidad)
 
-        self.btnPage2 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage2.setObjectName(u"btnPage2")
-        self.btnPage2.setFont(font1)
+        self.btnFacultad = QPushButton(self.verticalLayoutWidget)
+        self.btnFacultad.setObjectName(u"btnFacultad")
+        self.btnFacultad.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage2)
+        self.verticalLayout.addWidget(self.btnFacultad)
 
-        self.btnPage3 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage3.setObjectName(u"btnPage3")
-        self.btnPage3.setFont(font1)
+        self.btnEdificio = QPushButton(self.verticalLayoutWidget)
+        self.btnEdificio.setObjectName(u"btnEdificio")
+        self.btnEdificio.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage3)
+        self.verticalLayout.addWidget(self.btnEdificio)
 
-        self.btnPage4 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage4.setObjectName(u"btnPage4")
-        self.btnPage4.setFont(font1)
+        self.btnGrado = QPushButton(self.verticalLayoutWidget)
+        self.btnGrado.setObjectName(u"btnGrado")
+        self.btnGrado.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage4)
+        self.verticalLayout.addWidget(self.btnGrado)
 
-        self.btnPage5 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage5.setObjectName(u"btnPage5")
-        self.btnPage5.setFont(font1)
+        self.btnDepartamento = QPushButton(self.verticalLayoutWidget)
+        self.btnDepartamento.setObjectName(u"btnDepartamento")
+        self.btnDepartamento.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage5)
+        self.verticalLayout.addWidget(self.btnDepartamento)
 
-        self.btnPage6 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage6.setObjectName(u"btnPage6")
-        self.btnPage6.setFont(font1)
+        self.lblSectionAcademico = QLabel(self.verticalLayoutWidget)
+        self.lblSectionAcademico.setObjectName(u"lblSectionAcademico")
 
-        self.verticalLayout.addWidget(self.btnPage6)
+        self.verticalLayout.addWidget(self.lblSectionAcademico)
 
-        self.btnPage7 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage7.setObjectName(u"btnPage7")
-        self.btnPage7.setFont(font1)
+        self.btnAlumno = QPushButton(self.verticalLayoutWidget)
+        self.btnAlumno.setObjectName(u"btnAlumno")
+        self.btnAlumno.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage7)
+        self.verticalLayout.addWidget(self.btnAlumno)
 
-        self.btnPage8 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage8.setObjectName(u"btnPage8")
-        self.btnPage8.setFont(font1)
+        self.btnProfesor = QPushButton(self.verticalLayoutWidget)
+        self.btnProfesor.setObjectName(u"btnProfesor")
+        self.btnProfesor.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage8)
+        self.verticalLayout.addWidget(self.btnProfesor)
 
-        self.btnPage9 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage9.setObjectName(u"btnPage9")
-        self.btnPage9.setFont(font1)
+        self.btnAsignatura = QPushButton(self.verticalLayoutWidget)
+        self.btnAsignatura.setObjectName(u"btnAsignatura")
+        self.btnAsignatura.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage9)
+        self.verticalLayout.addWidget(self.btnAsignatura)
 
-        self.btnPage10 = QPushButton(self.verticalLayoutWidget)
-        self.btnPage10.setObjectName(u"btnPage10")
-        self.btnPage10.setFont(font1)
+        self.btnClase = QPushButton(self.verticalLayoutWidget)
+        self.btnClase.setObjectName(u"btnClase")
+        self.btnClase.setFont(font1)
 
-        self.verticalLayout.addWidget(self.btnPage10)
+        self.verticalLayout.addWidget(self.btnClase)
+
+        self.btnDebate = QPushButton(self.verticalLayoutWidget)
+        self.btnDebate.setObjectName(u"btnDebate")
+        self.btnDebate.setFont(font1)
+
+        self.verticalLayout.addWidget(self.btnDebate)
+
+        self.btnPremio = QPushButton(self.verticalLayoutWidget)
+        self.btnPremio.setObjectName(u"btnPremio")
+        self.btnPremio.setFont(font1)
+        self.btnPremio.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+
+        self.verticalLayout.addWidget(self.btnPremio)
+
+        self.lblSectionInvestigacion = QLabel(self.verticalLayoutWidget)
+        self.lblSectionInvestigacion.setObjectName(u"lblSectionInvestigacion")
+
+        self.verticalLayout.addWidget(self.lblSectionInvestigacion)
+
+        self.btnInvestigacion = QPushButton(self.verticalLayoutWidget)
+        self.btnInvestigacion.setObjectName(u"btnInvestigacion")
+        self.btnInvestigacion.setFont(font1)
+
+        self.verticalLayout.addWidget(self.btnInvestigacion)
+
+        self.btnProyecto = QPushButton(self.verticalLayoutWidget)
+        self.btnProyecto.setObjectName(u"btnProyecto")
+        self.btnProyecto.setFont(font1)
+
+        self.verticalLayout.addWidget(self.btnProyecto)
+
+        self.btnSubvencion = QPushButton(self.verticalLayoutWidget)
+        self.btnSubvencion.setObjectName(u"btnSubvencion")
+        font2 = QFont()
+        font2.setFamilies([u"Dubai"])
+        font2.setPointSize(22)
+        font2.setBold(False)
+        self.btnSubvencion.setFont(font2)
+
+        self.verticalLayout.addWidget(self.btnSubvencion)
+
+        self.btnPublicacion = QPushButton(self.verticalLayoutWidget)
+        self.btnPublicacion.setObjectName(u"btnPublicacion")
+        self.btnPublicacion.setFont(font1)
+
+        self.verticalLayout.addWidget(self.btnPublicacion)
 
         self.scrollArea.setWidget(self.menuWidget)
         HomeWindow.setCentralWidget(self.centralwidget)
@@ -142,15 +193,23 @@ class Ui_HomeWindow(object):
 
     def retranslateUi(self, HomeWindow):
         HomeWindow.setWindowTitle(QCoreApplication.translate("HomeWindow", u"MainWindow", None))
-        self.btnPage1.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 1", None))
-        self.btnPage2.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 2", None))
-        self.btnPage3.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 3", None))
-        self.btnPage4.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 4", None))
-        self.btnPage5.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 5", None))
-        self.btnPage6.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 6", None))
-        self.btnPage7.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 7", None))
-        self.btnPage8.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 8", None))
-        self.btnPage9.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 9", None))
-        self.btnPage10.setText(QCoreApplication.translate("HomeWindow", u"P\u00e1gina 10", None))
+        self.lblSectionGeneral.setText(QCoreApplication.translate("HomeWindow", u"General", None))
+        self.btnUniversidad.setText(QCoreApplication.translate("HomeWindow", u"Universidad", None))
+        self.btnFacultad.setText(QCoreApplication.translate("HomeWindow", u"Facultades", None))
+        self.btnEdificio.setText(QCoreApplication.translate("HomeWindow", u"Edificios", None))
+        self.btnGrado.setText(QCoreApplication.translate("HomeWindow", u"Grados", None))
+        self.btnDepartamento.setText(QCoreApplication.translate("HomeWindow", u"Dptos.", None))
+        self.lblSectionAcademico.setText(QCoreApplication.translate("HomeWindow", u"Ac\u00e1demico", None))
+        self.btnAlumno.setText(QCoreApplication.translate("HomeWindow", u"Alumnos", None))
+        self.btnProfesor.setText(QCoreApplication.translate("HomeWindow", u"Profesores", None))
+        self.btnAsignatura.setText(QCoreApplication.translate("HomeWindow", u"Asignaturas", None))
+        self.btnClase.setText(QCoreApplication.translate("HomeWindow", u"Clases", None))
+        self.btnDebate.setText(QCoreApplication.translate("HomeWindow", u"Debates", None))
+        self.btnPremio.setText(QCoreApplication.translate("HomeWindow", u"Premios", None))
+        self.lblSectionInvestigacion.setText(QCoreApplication.translate("HomeWindow", u"Investigaci\u00f3n", None))
+        self.btnInvestigacion.setText(QCoreApplication.translate("HomeWindow", u"Gr. Inv.", None))
+        self.btnProyecto.setText(QCoreApplication.translate("HomeWindow", u"Proyectos", None))
+        self.btnSubvencion.setText(QCoreApplication.translate("HomeWindow", u"Subvenciones", None))
+        self.btnPublicacion.setText(QCoreApplication.translate("HomeWindow", u"Publicaciones", None))
     # retranslateUi
 

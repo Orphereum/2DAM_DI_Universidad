@@ -75,7 +75,7 @@
         <x>0</x>
         <y>0</y>
         <width>221</width>
-        <height>731</height>
+        <height>1015</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -83,142 +83,239 @@
         <number>8</number>
        </property>
        <item>
-        <widget class="QPushButton" name="btnPage1">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
+        <widget class="QLabel" name="lblSectionGeneral">
          <property name="text">
-          <string>Página 1</string>
+          <string>General</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage2">
+        <widget class="QPushButton" name="btnUniversidad">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         </property>
          <property name="text">
-          <string>Página 2</string>
+          <string>Universidad</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage3">
+        <widget class="QPushButton" name="btnFacultad">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 3</string>
+          <string>Facultades</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage4">
+        <widget class="QPushButton" name="btnEdificio">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 4</string>
+          <string>Edificios</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage5">
+        <widget class="QPushButton" name="btnGrado">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 5</string>
+          <string>Grados</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage6">
+        <widget class="QPushButton" name="btnDepartamento">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 6</string>
+          <string>Dptos.</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage7">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
+        <widget class="QLabel" name="lblSectionAcademico">
          <property name="text">
-          <string>Página 7</string>
+          <string>Acádemico</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage8">
+        <widget class="QPushButton" name="btnAlumno">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 8</string>
+          <string>Alumnos</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage9">
+        <widget class="QPushButton" name="btnProfesor">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 9</string>
+          <string>Profesores</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnPage10">
+        <widget class="QPushButton" name="btnAsignatura">
          <property name="font">
           <font>
            <family>Segoe UI</family>
-           <pointsize>24</pointsize>
-           <bold>true</bold>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
           </font>
          </property>
          <property name="text">
-          <string>Página 10</string>
+          <string>Asignaturas</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnClase">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Clases</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnDebate">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Debates</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnPremio">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Premios</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblSectionInvestigacion">
+         <property name="text">
+          <string>Investigación</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnInvestigacion">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Gr. Inv.</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnProyecto">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Proyectos</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSubvencion">
+         <property name="font">
+          <font>
+           <family>Dubai</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Subvenciones</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnPublicacion">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>22</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Publicaciones</string>
          </property>
         </widget>
        </item>

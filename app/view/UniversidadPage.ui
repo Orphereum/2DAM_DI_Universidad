@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Pagina1</class>
- <widget class="QWidget" name="Pagina1">
+ <class>UniversidadPage</class>
+ <widget class="QWidget" name="UniversidadPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,19 +16,14 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>200</y>
-     <width>121</width>
-     <height>31</height>
+     <x>140</x>
+     <y>100</y>
+     <width>161</width>
+     <height>61</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>Ejemplo pagina 1</string>
+    <string>Ventana universidad</string>
    </property>
   </widget>
  </widget>

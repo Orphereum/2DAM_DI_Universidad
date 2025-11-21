@@ -1,8 +1,8 @@
 from PySide6.QtWidgets import QWidget
-from app.view.Pagina1_ui import Ui_Pagina1
+from app.view.UniversidadPage_ui import Ui_UniversidadPage
 
-class Pagina1(QWidget):
+class UniversidadPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.ui = Ui_Pagina1()
+        self.ui = Ui_UniversidadPage()
         self.ui.setupUi(self)

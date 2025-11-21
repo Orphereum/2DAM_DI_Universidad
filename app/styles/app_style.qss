@@ -77,3 +77,14 @@ QScrollBar::add-page:vertical,
 QScrollBar::sub-page:vertical {
     background: none;
 }
+
+/* para los bloques de botones*/
+#lblSectionAcademico,
+#lblSectionGeneral,
+#lblSectionInvestigacion {
+    color: #9CA3AF;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 4px 10px;
+    text-transform: uppercase;
+}

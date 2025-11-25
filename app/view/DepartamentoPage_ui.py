@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QHBoxLayout
     QHeaderView, QLabel, QLineEdit, QPushButton,
     QSizePolicy, QTableView, QWidget)
 
-class Ui_Departamento(object):
+class Ui_DepartamentoPage(object):
     def setupUi(self, DepartamentoPage):
         if not DepartamentoPage.objectName():
             DepartamentoPage.setObjectName(u"DepartamentoPage")
@@ -110,23 +110,23 @@ class Ui_Departamento(object):
     # setupUi
 
     def retranslateUi(self, DepartamentoPage):
-        DepartamentoPage.setWindowTitle(QCoreApplication.translate("Departamento", u"Form", None))
-        self.btnAgregar.setText(QCoreApplication.translate("Departamento", u"Agregar", None))
-        self.btnEliminar.setText(QCoreApplication.translate("Departamento", u"Eliminar", None))
-        self.btnEditar.setText(QCoreApplication.translate("Departamento", u"Editar", None))
-        self.btnActualizar.setText(QCoreApplication.translate("Departamento", u"Actualizar", None))
-        self.lblFacultades.setText(QCoreApplication.translate("Departamento", u"Facultades", None))
-        self.lblDepartamento.setText(QCoreApplication.translate("Departamento", u"Departamentos", None))
-        self.lblNombre.setText(QCoreApplication.translate("Departamento", u"Nombre: ", None))
+        DepartamentoPage.setWindowTitle(QCoreApplication.translate("DepartamentoPage", u"Form", None))
+        self.btnAgregar.setText(QCoreApplication.translate("DepartamentoPage", u"Agregar", None))
+        self.btnEliminar.setText(QCoreApplication.translate("DepartamentoPage", u"Eliminar", None))
+        self.btnEditar.setText(QCoreApplication.translate("DepartamentoPage", u"Editar", None))
+        self.btnActualizar.setText(QCoreApplication.translate("DepartamentoPage", u"Actualizar", None))
+        self.lblFacultades.setText(QCoreApplication.translate("DepartamentoPage", u"Facultades", None))
+        self.lblDepartamento.setText(QCoreApplication.translate("DepartamentoPage", u"Departamentos", None))
+        self.lblNombre.setText(QCoreApplication.translate("DepartamentoPage", u"Nombre: ", None))
         self.LineEditDepartamento.setInputMask("")
         self.LineEditDepartamento.setText("")
-        self.LineEditDepartamento.setPlaceholderText(QCoreApplication.translate("Departamento", u"Nombre Departamento", None))
-        self.lblFacultad.setText(QCoreApplication.translate("Departamento", u"Facultad", None))
-        self.comboBoxFacultad.setItemText(0, QCoreApplication.translate("Departamento", u"Facultad_1", None))
-        self.comboBoxFacultad.setItemText(1, QCoreApplication.translate("Departamento", u"Facultad_2", None))
-        self.comboBoxFacultad.setItemText(2, QCoreApplication.translate("Departamento", u"Facultad_3", None))
-        self.comboBoxFacultad.setItemText(3, QCoreApplication.translate("Departamento", u"Facultad_4", None))
-        self.comboBoxFacultad.setItemText(4, QCoreApplication.translate("Departamento", u"Facultad_5", None))
+        self.LineEditDepartamento.setPlaceholderText(QCoreApplication.translate("DepartamentoPage", u"Nombre Departamento", None))
+        self.lblFacultad.setText(QCoreApplication.translate("DepartamentoPage", u"Facultad", None))
+        self.comboBoxFacultad.setItemText(0, QCoreApplication.translate("DepartamentoPage", u"Facultad_1", None))
+        self.comboBoxFacultad.setItemText(1, QCoreApplication.translate("DepartamentoPage", u"Facultad_2", None))
+        self.comboBoxFacultad.setItemText(2, QCoreApplication.translate("DepartamentoPage", u"Facultad_3", None))
+        self.comboBoxFacultad.setItemText(3, QCoreApplication.translate("DepartamentoPage", u"Facultad_4", None))
+        self.comboBoxFacultad.setItemText(4, QCoreApplication.translate("DepartamentoPage", u"Facultad_5", None))
 
     # retranslateUi
 

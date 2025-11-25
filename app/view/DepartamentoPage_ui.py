@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Departamento.ui'
+## Form generated from reading UI file 'DepartamentoPage.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.2
 ##
@@ -20,11 +20,11 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QHBoxLayout
     QSizePolicy, QTableView, QWidget)
 
 class Ui_Departamento(object):
-    def setupUi(self, Departamento):
-        if not Departamento.objectName():
-            Departamento.setObjectName(u"Departamento")
-        Departamento.resize(879, 621)
-        self.horizontalLayoutWidget = QWidget(Departamento)
+    def setupUi(self, DepartamentoPage):
+        if not DepartamentoPage.objectName():
+            DepartamentoPage.setObjectName(u"DepartamentoPage")
+        DepartamentoPage.resize(879, 621)
+        self.horizontalLayoutWidget = QWidget(DepartamentoPage)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
         self.horizontalLayoutWidget.setGeometry(QRect(9, 19, 861, 331))
         self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
@@ -40,7 +40,7 @@ class Ui_Departamento(object):
 
         self.horizontalLayout.addWidget(self.tablaDepartamentos)
 
-        self.horizontalLayoutWidget_2 = QWidget(Departamento)
+        self.horizontalLayoutWidget_2 = QWidget(DepartamentoPage)
         self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
         self.horizontalLayoutWidget_2.setGeometry(QRect(450, 360, 421, 41))
         self.horizontalBotones = QHBoxLayout(self.horizontalLayoutWidget_2)
@@ -66,13 +66,13 @@ class Ui_Departamento(object):
 
         self.horizontalBotones.addWidget(self.btnActualizar)
 
-        self.lblFacultades = QLabel(Departamento)
+        self.lblFacultades = QLabel(DepartamentoPage)
         self.lblFacultades.setObjectName(u"lblFacultades")
         self.lblFacultades.setGeometry(QRect(170, 0, 61, 21))
-        self.lblDepartamento = QLabel(Departamento)
+        self.lblDepartamento = QLabel(DepartamentoPage)
         self.lblDepartamento.setObjectName(u"lblDepartamento")
         self.lblDepartamento.setGeometry(QRect(620, 0, 81, 20))
-        self.formLayoutWidget = QWidget(Departamento)
+        self.formLayoutWidget = QWidget(DepartamentoPage)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
         self.formLayoutWidget.setGeometry(QRect(10, 360, 431, 251))
         self.formularioInformacion = QFormLayout(self.formLayoutWidget)
@@ -104,13 +104,13 @@ class Ui_Departamento(object):
         self.formularioInformacion.setWidget(1, QFormLayout.ItemRole.FieldRole, self.comboBoxFacultad)
 
 
-        self.retranslateUi(Departamento)
+        self.retranslateUi(DepartamentoPage)
 
-        QMetaObject.connectSlotsByName(Departamento)
+        QMetaObject.connectSlotsByName(DepartamentoPage)
     # setupUi
 
-    def retranslateUi(self, Departamento):
-        Departamento.setWindowTitle(QCoreApplication.translate("Departamento", u"Form", None))
+    def retranslateUi(self, DepartamentoPage):
+        DepartamentoPage.setWindowTitle(QCoreApplication.translate("Departamento", u"Form", None))
         self.btnAgregar.setText(QCoreApplication.translate("Departamento", u"Agregar", None))
         self.btnEliminar.setText(QCoreApplication.translate("Departamento", u"Eliminar", None))
         self.btnEditar.setText(QCoreApplication.translate("Departamento", u"Editar", None))

@@ -1,7 +1,7 @@
 from app.controller.homewindow import HomeWindow
 from app.controller.universidadpage import UniversidadPage
 from app.controller.profesorpage import ProfesorPage
-
+from app.controller.departamentopage import DepartamentoPage
 
 class AppController:
     """Controlador principal de la aplicación."""
@@ -22,14 +22,17 @@ class AppController:
         #creamos las paginas y las añadimos al contenedor stacked widget
         universidad = UniversidadPage(self.home)
         profesor = ProfesorPage(self.home)
+        departamento = DepartamentoPage(self.home)
 
 
         self.pages["universidad"] = universidad
         self.pages["profesor"] = profesor
+        self.pages["departamento"] = departamento
 
         stacked = self.home.ui.stackedWidget
         stacked.addWidget(universidad)
         stacked.addWidget(profesor)
+        stacked.addWidget(departamento)
 
         #ponemos que se muestre al iniciar la primera pagina
         stacked.setCurrentWidget(universidad)
@@ -38,6 +41,7 @@ class AppController:
     def setup_connections(self):
         self.home.ui.btnUniversidad.clicked.connect(self.go_to_universidadPage)
         self.home.ui.btnProfesor.clicked.connect(self.go_to_profesor)
+        self.home.ui.btnDepartamento.clicked.connect(self.go_to_departamento)
 
     #funcion generica para ir a cada pagina
     def go_to_universidadPage(self):
@@ -46,6 +50,8 @@ class AppController:
     def go_to_profesor(self):
         self.show_page("profesor")
 
+    def go_to_departamento(self):
+        self.show_page("departamento")
     #mostramos la ventana
     def show_page(self, name: str):
         widget = self.pages[name]

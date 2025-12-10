@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from app.view.DepartamentoPage.ui import Ui_DepartamentoPage
+from app.view.DepartamentoPage_ui import Ui_DepartamentoPage
 
 class DepartamentoPage(QWidget):
     def __init__(self, parent=None):

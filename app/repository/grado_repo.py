@@ -5,9 +5,7 @@ from models.grado import Grado
 
 class GradoRepository:
 
-    # -----------------------------
     # CONSULTAS
-    # -----------------------------
 
     def find_all_by_facultad(self, id_facultad):
         conn = get_connection()
@@ -47,9 +45,8 @@ class GradoRepository:
             return self._row_to_grado(row)
         return None
 
-    # -----------------------------
+
     # INSERT
-    # -----------------------------
 
     def insert(self, grado: Grado):
         conn = get_connection()
@@ -78,9 +75,8 @@ class GradoRepository:
 
         return grado
 
-    # -----------------------------
+    
     # UPDATE
-    # -----------------------------
 
     def update(self, grado: Grado):
         conn = get_connection()
@@ -114,9 +110,9 @@ class GradoRepository:
 
         return grado
 
-    # -----------------------------
+
     # DELETE
-    # -----------------------------
+
 
     def delete(self, id_grado):
         conn = get_connection()
@@ -132,9 +128,8 @@ class GradoRepository:
 
         return True
 
-    # -----------------------------
+  
     # UTILIDAD PRIVADA
-    # -----------------------------
 
     def _row_to_grado(self, row):
         return Grado(

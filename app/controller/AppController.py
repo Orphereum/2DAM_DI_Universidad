@@ -32,7 +32,7 @@ class AppController:
         stacked.addWidget(universidad)
         stacked.addWidget(profesor)
         stacked.addWidget(departamento)
-        stacked.addWidget(grado)   # 👈 ESTA FALTABA
+        stacked.addWidget(grado)   
 
         stacked.setCurrentWidget(universidad)
 

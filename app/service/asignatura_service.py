@@ -1,60 +1,54 @@
 from app.models.asignatura import Asignatura
-from app.models.grado import Grado
 
 
 class AsignaturaService:
     """
-    Servicio de negocio para Asignaturas.
-
-    NOTA:
-    - Actualmente usa datos simulados (fake) para Grados
-    - Esto permite avanzar el desarrollo sin depender de la BD
-    - Preparado para conectar a repositorio real más adelante
+    Lógica de negocio del módulo Asignaturas.
+    No contiene SQL.
+    Valida datos y coordina repositorios.
     """
 
-    def __init__(self, grado_repo=None):
-        # El repositorio se inyectará cuando la BD esté lista
+    def __init__(self, asignatura_repo, grado_repo):
+        self.asignatura_repo = asignatura_repo
         self.grado_repo = grado_repo
 
-        # Datos FAKE de grados (temporal)
-        self._grados_fake = [
-            Grado(
-                id_grado=1,
-                nombre="Grado en Informática",
-                codigo="GINF",
-                duracion_anios=4,
-                creditos_totales=240,
-                tipo="Oficial",
-                estado="Activo",
-                fecha_creacion=None,
-                id_facultad=1
-            ),
-            Grado(
-                id_grado=2,
-                nombre="Grado en Matemáticas",
-                codigo="GMAT",
-                duracion_anios=4,
-                creditos_totales=240,
-                tipo="Oficial",
-                estado="Activo",
-                fecha_creacion=None,
-                id_facultad=1
-            )
-        ]
+        # Contexto actual (grado seleccionado)
+        self.id_grado_actual = None
 
-    # -------------------------
-    # GRADOS PARA EL DIÁLOGO
-    # -------------------------
+    # -------------------------------------------------
+    # CONTEXTO
+    # -------------------------------------------------
+    def set_grado_actual(self, id_grado: int):
+        """
+        Establece el grado activo sobre el que se trabaja.
+        """
+        self.id_grado_actual = id_grado
+
+    # -------------------------------------------------
+    # CONSULTAS
+    # -------------------------------------------------
+    def obtener_asignaturas(self):
+        """
+        Devuelve las asignaturas del grado actual.
+        """
+        if not self.id_grado_actual:
+            return []
+
+        return self.asignatura_repo.find_all_by_grado(
+            self.id_grado_actual
+        )
+
     def obtener_grados(self):
         """
         Devuelve los grados disponibles.
-        Actualmente usa datos simulados.
+        SOLO lectura (no responsabilidad del módulo).
         """
-        return self._grados_fake
+        # Uso mínimo del repositorio de grado
+        return self.grado_repo.find_all_by_facultad(1)
 
-    # -------------------------
-    # VALIDACIÓN DE NEGOCIO
-    # -------------------------
+    # -------------------------------------------------
+    # VALIDACIÓN
+    # -------------------------------------------------
     def validar_asignatura(self, asignatura: Asignatura):
         if not asignatura.nombre:
             raise ValueError("El nombre es obligatorio")
@@ -68,17 +62,57 @@ class AsignaturaService:
         if asignatura.cuatrimestre not in (1, 2):
             raise ValueError("El cuatrimestre debe ser 1 o 2")
 
-        # Validar grado contra datos fake
-        if not any(g.id_grado == asignatura.grado_fk for g in self._grados_fake):
+        if asignatura.grado_fk is None:
+            raise ValueError("Debe seleccionar un grado")
+
+        # Validación cruzada (solo lectura)
+        grado = self.grado_repo.find_by_id(asignatura.grado_fk)
+        if not grado:
             raise ValueError("El grado seleccionado no existe")
 
-    # -------------------------
-    # CREAR ASIGNATURA
-    # -------------------------
+    # -------------------------------------------------
+    # CRUD
+    # -------------------------------------------------
     def crear_asignatura(self, asignatura: Asignatura):
         """
-        Valida y devuelve la asignatura.
-        La persistencia se añadirá más adelante.
+        Valida y guarda una nueva asignatura.
         """
         self.validar_asignatura(asignatura)
-        return asignatura
+        return self.asignatura_repo.insert(asignatura)
+
+    def actualizar_asignatura(self, asignatura: Asignatura):
+        """
+        Valida y actualiza una asignatura existente.
+        """
+        if not asignatura.id_asignatura:
+            raise ValueError("La asignatura no tiene ID")
+
+        self.validar_asignatura(asignatura)
+        return self.asignatura_repo.update(asignatura)
+
+    def eliminar_asignatura(self, id_asignatura: int):
+        """
+        Elimina una asignatura por ID.
+        """
+        return self.asignatura_repo.delete(id_asignatura)
+    
+    
+    def obtener_grados(self):
+     try:
+        return self.grado_repo.find_all_by_facultad(1)
+     except Exception:
+        # Fallback temporal mientras no exista la tabla
+        from app.models.grado import Grado
+        return [
+            Grado(
+                id_grado=1,
+                nombre="Grado de prueba",
+                codigo="G-TEST",
+                duracion_anios=4,
+                creditos_totales=240,
+                tipo="Grado",
+                estado=1,
+                fecha_creacion=None,
+                id_facultad=1
+            )
+        ]

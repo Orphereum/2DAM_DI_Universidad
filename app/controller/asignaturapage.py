@@ -19,7 +19,7 @@ class AsignaturaPage(QWidget):
         self._conectar_eventos()
 
         # Lista en memoria (hasta tener repository)
-        self.asignaturas = []
+   
 
     # -------------------------
     # CONFIGURACIÓN DE LA TABLA
@@ -56,65 +56,82 @@ class AsignaturaPage(QWidget):
     # NUEVA ASIGNATURA
     # -------------------------
     def nueva_asignatura(self):
-        dialog = AsignaturaDialog(self.service, parent=self)
+     dialog = AsignaturaDialog(self.service, parent=self)
 
-        if dialog.exec():
-            asignatura = dialog.resultado
+     if dialog.exec():
+        try:
+            self.service.crear_asignatura(dialog.resultado)
+            self.refrescar_tabla()
+            self.ui.lbl_estado.setText("Asignatura creada correctamente")
 
-            try:
-                self.service.crear_asignatura(asignatura)
-                self.asignaturas.append(asignatura)
-                self._añadir_a_tabla(asignatura)
-                self.ui.lbl_estado.setText("Asignatura creada correctamente")
-
-            except ValueError as e:
-                QMessageBox.warning(self, "Error", str(e))
+        except ValueError as e:
+            QMessageBox.warning(self, "Error", str(e))
 
     # -------------------------
     # EDITAR ASIGNATURA
     # -------------------------
     def editar_asignatura(self):
-        fila = self.ui.tbl_asignaturas.currentRow()
-        if fila < 0:
-            self.ui.lbl_estado.setText("Selecciona una asignatura para editar")
-            return
+     fila = self.ui.tbl_asignaturas.currentRow()
+     if fila < 0:
+        self.ui.lbl_estado.setText("Selecciona una asignatura para editar")
+        return
 
-        asignatura = self.asignaturas[fila]
+     asignaturas = self.service.obtener_asignaturas()
+     asignatura = asignaturas[fila]
 
-        dialog = AsignaturaDialog(
-            self.service,
-            asignatura=asignatura,
-            parent=self
-        )
+     dialog = AsignaturaDialog(
+        self.service,
+        asignatura=asignatura,
+        parent=self
+     )
 
-        if dialog.exec():
-            asignatura_editada = dialog.resultado
-            self.asignaturas[fila] = asignatura_editada
-            self._actualizar_fila(fila, asignatura_editada)
+     if dialog.exec():
+        try:
+            self.service.actualizar_asignatura(dialog.resultado)
+            self.refrescar_tabla()
             self.ui.lbl_estado.setText("Asignatura editada correctamente")
+        except ValueError as e:
+            QMessageBox.warning(self, "Error", str(e))
+
 
     # -------------------------
     # ELIMINAR ASIGNATURA
     # -------------------------
     def eliminar_asignatura(self):
-        fila = self.ui.tbl_asignaturas.currentRow()
-        if fila < 0:
-            self.ui.lbl_estado.setText("Selecciona una asignatura para eliminar")
-            return
+     fila = self.ui.tbl_asignaturas.currentRow()
+     if fila < 0:
+        self.ui.lbl_estado.setText("Selecciona una asignatura para eliminar")
+        return
 
-        self.ui.tbl_asignaturas.removeRow(fila)
-        self.asignaturas.pop(fila)
+     asignaturas = self.service.obtener_asignaturas()
+     asignatura = asignaturas[fila]
+
+     confirm = QMessageBox.question(
+        self,
+        "Confirmar",
+        f"¿Eliminar la asignatura '{asignatura.nombre}'?",
+        QMessageBox.Yes | QMessageBox.No
+     )
+
+     if confirm == QMessageBox.Yes:
+        self.service.eliminar_asignatura(asignatura.id_asignatura)
+        self.refrescar_tabla()
         self.ui.lbl_estado.setText("Asignatura eliminada")
+
 
     # -------------------------
     # REFRESCAR
     # -------------------------
     def refrescar_tabla(self):
-        self.ui.tbl_asignaturas.setRowCount(0)
-        for asignatura in self.asignaturas:
-            self._añadir_a_tabla(asignatura)
+     asignaturas = self.service.obtener_asignaturas()
+     tabla = self.ui.tbl_asignaturas
 
-        self.ui.lbl_estado.setText("Tabla actualizada")
+     tabla.setRowCount(0)
+
+     for asignatura in asignaturas:
+        self._añadir_a_tabla(asignatura)
+
+     self.ui.lbl_estado.setText("Tabla actualizada")
 
     # -------------------------
     # UTILIDADES DE TABLA

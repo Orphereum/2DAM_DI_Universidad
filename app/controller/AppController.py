@@ -5,15 +5,19 @@ from app.controller.departamentopage import DepartamentoPage
 from app.controller.gradopage import GradoPage
 from app.controller.asignaturapage import AsignaturaPage
 
+from app.service.asignatura_service import AsignaturaService
+from app.repository.grado_repo import GradoRepository
+
 
 class AppController:
     """Controlador principal de la aplicación."""
+
     def __init__(self):
         self.home = HomeWindow()
         self.pages = {}
 
         self._setup_pages()
-        self.setup_connections()
+        self._setup_connections()
 
         self.home.show()
 
@@ -23,53 +27,52 @@ class AppController:
     def _setup_pages(self):
         stacked = self.home.ui.stackedWidget
 
+        # PÁGINAS SIN SERVICE
         universidad = UniversidadPage(stacked)
         profesor = ProfesorPage(stacked)
         departamento = DepartamentoPage(stacked)
         grado = GradoPage(stacked)
-        asignatura = AsignaturaPage(stacked)
 
-        self.pages["universidad"] = universidad
-        self.pages["profesor"] = profesor
-        self.pages["departamento"] = departamento
-        self.pages["grado"] = grado
-        self.pages["asignatura"] = asignatura
+        # DEPENDENCIAS DE ASIGNATURA
+        grado_repo = GradoRepository()
+        asignatura_service = AsignaturaService(grado_repo)
+        asignatura = AsignaturaPage(asignatura_service, stacked)
 
-        stacked.addWidget(universidad)
-        stacked.addWidget(profesor)
-        stacked.addWidget(departamento)
-        stacked.addWidget(grado)
-        stacked.addWidget(asignatura)
+        # REGISTRO DE PÁGINAS
+        self.pages = {
+            "universidad": universidad,
+            "profesor": profesor,
+            "departamento": departamento,
+            "grado": grado,
+            "asignatura": asignatura
+        }
 
+        # AÑADIR AL STACK
+        for page in self.pages.values():
+            stacked.addWidget(page)
+
+        # PÁGINA INICIAL
         stacked.setCurrentWidget(universidad)
 
     # -------------------------
     # CONEXIONES DE MENÚ
     # -------------------------
-    def setup_connections(self):
-        self.home.ui.btnUniversidad.clicked.connect(self.go_to_universidad)
-        self.home.ui.btnProfesor.clicked.connect(self.go_to_profesor)
-        self.home.ui.btnDepartamento.clicked.connect(self.go_to_departamento)
-        self.home.ui.btnGrado.clicked.connect(self.go_to_grado)
-        self.home.ui.btnAsignatura.clicked.connect(self.go_to_asignatura)
-
-    # -------------------------
-    # MÉTODOS DE NAVEGACIÓN
-    # -------------------------
-    def go_to_universidad(self):
-        self.show_page("universidad")
-
-    def go_to_profesor(self):
-        self.show_page("profesor")
-
-    def go_to_departamento(self):
-        self.show_page("departamento")
-
-    def go_to_grado(self):
-        self.show_page("grado")
-
-    def go_to_asignatura(self):
-        self.show_page("asignatura")
+    def _setup_connections(self):
+        self.home.ui.btnUniversidad.clicked.connect(
+            lambda: self.show_page("universidad")
+        )
+        self.home.ui.btnProfesor.clicked.connect(
+            lambda: self.show_page("profesor")
+        )
+        self.home.ui.btnDepartamento.clicked.connect(
+            lambda: self.show_page("departamento")
+        )
+        self.home.ui.btnGrado.clicked.connect(
+            lambda: self.show_page("grado")
+        )
+        self.home.ui.btnAsignatura.clicked.connect(
+            lambda: self.show_page("asignatura")
+        )
 
     # -------------------------
     # CAMBIO DE PÁGINA

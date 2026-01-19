@@ -20,7 +20,7 @@ class AsignaturaDialog(QDialog):
         self.ui.setupUi(self)
 
         # 👇 AQUÍ SE APLICA EL ESTILO
-        self._aplicar_estilo()
+       
 
         self._configurar_dialogo()
         self._cargar_grados()
@@ -30,52 +30,7 @@ class AsignaturaDialog(QDialog):
     # -------------------------
     # ESTILO DEL DIÁLOGO
     # -------------------------
-    def _aplicar_estilo(self):
-        self.setStyleSheet("""
-        QDialog {
-            background-color: #ffffff;
-        }
-
-        QLabel {
-            color: #1f2937;
-            font-size: 13px;
-        }
-
-        QLineEdit, QSpinBox, QComboBox {
-            background-color: #ffffff;
-            color: #111827;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            padding: 4px 6px;
-        }
-
-        QCheckBox {
-            color: #1f2937;
-        }
-
-        QPushButton {
-            padding: 6px 14px;
-            border-radius: 6px;
-        }
-
-        QPushButton#btn_guardar {
-            background-color: #11676a;
-            color: white;
-        }
-
-        QPushButton#btn_guardar:hover {
-            background-color: #168a8f;
-        }
-
-        QPushButton#btn_cancelar {
-            background-color: #e5e7eb;
-            color: #111827;
-        }
-
-        QPushButton#btn_cancelar:hover {
-            background-color: #d1d5db;
-        }
-        """)
+   
 
     # -------------------------
     # CONFIGURACIÓN INICIAL

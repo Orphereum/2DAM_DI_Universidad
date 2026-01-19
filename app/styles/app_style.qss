@@ -88,3 +88,96 @@ QScrollBar::sub-page:vertical {
     padding: 4px 10px;
     text-transform: uppercase;
 }
+
+/* ============================= */
+/*        QDIALOG GENERAL        */
+/* ============================= */
+
+QDialog {
+    background-color: #20252B;
+    border: 1px solid #303337;
+}
+
+/* ============================= */
+/*            LABELS             */
+/* ============================= */
+
+QDialog QLabel {
+    color: #E5E7EB;
+    font-size: 13px;
+}
+
+/* Título del diálogo */
+QDialog QLabel#lblTitulo {
+    font-size: 22px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+/* ============================= */
+/*       CAMPOS DE ENTRADA       */
+/* ============================= */
+
+QDialog QLineEdit,
+QDialog QSpinBox,
+QDialog QComboBox {
+    background-color: #18191C;
+    color: #F9FAFB;
+    border: 1px solid #3A3F44;
+    border-radius: 6px;
+    padding: 6px 8px;
+}
+
+/* Hover / Focus */
+QDialog QLineEdit:focus,
+QDialog QSpinBox:focus,
+QDialog QComboBox:focus {
+    border-color: #168A8F;
+    background-color: #1F2227;
+}
+
+/* ============================= */
+/*           CHECKBOX            */
+/* ============================= */
+
+QDialog QCheckBox {
+    color: #E5E7EB;
+}
+
+QDialog QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QDialog QCheckBox::indicator:unchecked {
+    border: 1px solid #6B7280;
+    background-color: #18191C;
+}
+
+QDialog QCheckBox::indicator:checked {
+    background-color: #11676A;
+    border: 1px solid #168A8F;
+}
+
+/* ============================= */
+/*            BOTONES            */
+/* ============================= */
+
+QDialog QPushButton {
+    background-color: #2B2F33;
+    color: #FFFFFF;
+    border: 2px solid #2B2F33;
+    border-radius: 8px;
+    padding: 8px 18px;
+    min-width: 90px;
+}
+
+QDialog QPushButton:hover {
+    background-color: #11676A;
+    border-color: #168A8F;
+}
+
+QDialog QPushButton:pressed {
+    background-color: #0D4C4F;
+    border-color: #0D4C
+}

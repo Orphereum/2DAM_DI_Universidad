@@ -11,9 +11,31 @@ class DepartamentoPage(QWidget):
     #función de los botones
 
     #agregar
-    
+        self.ui.btnAgregar.clicked.connect(self.Agregar)
     #eliminar
-
+        self.ui.btnEliminar
     #editar
-
+        self.ui.btnEditar
     #actualizar
+        self.ui.btnActualizar
+    #exportar PDF
+        self.ui.btnInforme
+    #line edit text nombre departamento
+        self.ui.LineEditDepartamento
+    #comboBox facultad
+        self.ui.comboBoxFacultad
+    #ventana izquierda
+        self.ui.tablaFacultades
+    #ventana derecha
+        self.ui.tablaDepartamentos
+
+
+    #metodos
+    def Agregar(self):
+        #Agarra el nombre del LineEdit y lo añade a la tabla departamentos
+        #Agarra el combobox y lo añade a la tabla  facultades.
+        nombre = self.ui.LineEditDepartamento.text()
+        facultad = self.ui.comboBoxFacultad.currentText()
+
+        #comprobacion que el nombre no este vacio
+        

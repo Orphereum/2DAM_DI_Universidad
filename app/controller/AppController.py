@@ -4,10 +4,13 @@ from app.controller.profesorpage import ProfesorPage
 from app.controller.departamentopage import DepartamentoPage
 from app.controller.gradopage import GradoPage
 from app.controller.asignaturapage import AsignaturaPage
+from app.controller.clasepage import ClasePage
 from app.repository.asignatura_repo import AsignaturaRepository
 from app.repository.grado_repo import GradoRepository
+from app.repository.clase_repo import ClaseRepository
+from app.repository.edificio_repo import EdificioRepository
 from app.service.asignatura_service import AsignaturaService
-
+from app.service.clase_service import ClaseService
 
 
 class AppController:
@@ -26,44 +29,58 @@ class AppController:
     # CREACIÓN DE PÁGINAS
     # -------------------------
     def _setup_pages(self):
-     stacked = self.home.ui.stackedWidget
+        stacked = self.home.ui.stackedWidget
 
-    # PÁGINAS SIN SERVICE
-     universidad = UniversidadPage(stacked)
-     profesor = ProfesorPage(stacked)
-     departamento = DepartamentoPage(stacked)
-     grado = GradoPage(stacked)
+        # PÁGINAS SIN SERVICE
+        universidad = UniversidadPage(stacked)
+        profesor = ProfesorPage(stacked)
+        departamento = DepartamentoPage(stacked)
+        grado = GradoPage(stacked)
 
-    # -------------------------
-    # DEPENDENCIAS ASIGNATURA
-    # -------------------------
-    
+        # -------------------------
+        # DEPENDENCIAS ASIGNATURA
+        # -------------------------
 
-     asignatura_repo = AsignaturaRepository()
-     grado_repo = GradoRepository()
+        asignatura_repo = AsignaturaRepository()
+        grado_repo = GradoRepository()
 
-     asignatura_service = AsignaturaService(
-        asignatura_repo,
-        grado_repo
-     )
+        asignatura_service = AsignaturaService(
+            asignatura_repo,
+            grado_repo
+        )
 
-     asignatura = AsignaturaPage(asignatura_service, stacked)
+        asignatura = AsignaturaPage(asignatura_service, stacked)
 
-    # REGISTRO DE PÁGINAS
-     self.pages = {
-        "universidad": universidad,
-        "profesor": profesor,
-        "departamento": departamento,
-        "grado": grado,
-        "asignatura": asignatura
-     }
+        # -------------------------
+        # DEPENDENCIAS CLASE
+        # -------------------------
 
-    # AÑADIR AL STACK
-     for page in self.pages.values():
-        stacked.addWidget(page)
+        clase_repo = ClaseRepository()
+        edificio_repo = EdificioRepository()
 
-    # PÁGINA INICIAL
-     stacked.setCurrentWidget(universidad)
+        clase_service = ClaseService(
+            clase_repo,
+            edificio_repo
+        )
+
+        clase = ClasePage(clase_service, stacked)
+
+        # REGISTRO DE PÁGINAS
+        self.pages = {
+            "universidad": universidad,
+            "profesor": profesor,
+            "departamento": departamento,
+            "grado": grado,
+            "asignatura": asignatura,
+            "clase": clase
+        }
+
+        # AÑADIR AL STACK
+        for page in self.pages.values():
+            stacked.addWidget(page)
+
+        # PÁGINA INICIAL
+        stacked.setCurrentWidget(universidad)
 
 
     # -------------------------
@@ -84,6 +101,9 @@ class AppController:
         )
         self.home.ui.btnAsignatura.clicked.connect(
             lambda: self.show_page("asignatura")
+        )
+        self.home.ui.btnClase.clicked.connect(
+            lambda: self.show_page("clase")
         )
 
     # -------------------------

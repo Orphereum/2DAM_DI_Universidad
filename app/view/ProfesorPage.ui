@@ -39,7 +39,7 @@
     <string>Profesores</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QWidget" name="formLayoutWidget">
@@ -286,6 +286,38 @@
      <width>861</width>
      <height>321</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lnBusqueda">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>20</y>
+     <width>451</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBusqueda">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>20</y>
+     <width>79</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white
+</string>
+   </property>
+   <property name="text">
+    <string>Buscar</string>
    </property>
   </widget>
  </widget>

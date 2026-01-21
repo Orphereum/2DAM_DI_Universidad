@@ -35,7 +35,7 @@ class Ui_ProfesorPage(object):
         font.setBold(True)
         self.pageTitle.setFont(font)
         self.pageTitle.setStyleSheet(u"color:white")
-        self.pageTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self.formLayoutWidget = QWidget(ProfesorPage)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
         self.formLayoutWidget.setGeometry(QRect(10, 70, 501, 211))
@@ -167,6 +167,15 @@ class Ui_ProfesorPage(object):
         self.tblProfesores = QTableWidget(ProfesorPage)
         self.tblProfesores.setObjectName(u"tblProfesores")
         self.tblProfesores.setGeometry(QRect(10, 300, 861, 321))
+        self.lnBusqueda = QLineEdit(ProfesorPage)
+        self.lnBusqueda.setObjectName(u"lnBusqueda")
+        self.lnBusqueda.setGeometry(QRect(210, 20, 451, 21))
+        self.btnBusqueda = QPushButton(ProfesorPage)
+        self.btnBusqueda.setObjectName(u"btnBusqueda")
+        self.btnBusqueda.setGeometry(QRect(670, 20, 79, 24))
+        self.btnBusqueda.setFont(font3)
+        self.btnBusqueda.setStyleSheet(u"color: white\n"
+"")
 
         self.retranslateUi(ProfesorPage)
 
@@ -190,5 +199,6 @@ class Ui_ProfesorPage(object):
         self.btbGuardar.setText(QCoreApplication.translate("ProfesorPage", u"Guardar", None))
         self.btnEliminar.setText(QCoreApplication.translate("ProfesorPage", u"Eliminar", None))
         self.btnLimpiar.setText(QCoreApplication.translate("ProfesorPage", u"Limpiar", None))
+        self.btnBusqueda.setText(QCoreApplication.translate("ProfesorPage", u"Buscar", None))
     # retranslateUi
 

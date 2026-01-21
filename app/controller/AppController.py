@@ -15,7 +15,7 @@ from app.controller.edificiopage import EdificioPage
 from app.repository.edificio_repo import EdificioRepository
 from app.repository.facultad_repo import FacultadRepo
 from app.service.edificio_service import EdificioService
-
+from app.controller.proyectopage import ProyectoPage
 
 class AppController:
     """Controlador principal de la aplicación."""
@@ -40,6 +40,7 @@ class AppController:
         profesor = ProfesorPage(stacked)
         departamento = DepartamentoPage(stacked)
         grado = GradoPage(stacked)
+        proyecto = ProyectoPage(stacked)
 
         # -------------------------
         # DEPENDENCIAS ASIGNATURA
@@ -93,7 +94,8 @@ class AppController:
             "grado": grado,
             "asignatura": asignatura,
             "clase": clase,
-            "edificio": edificio
+            "edificio": edificio,
+            "proyecto": proyecto
         }
 
         # AÑADIR AL STACK
@@ -128,6 +130,9 @@ class AppController:
         )
         self.home.ui.btnEdificio.clicked.connect(
             lambda: self.show_page("edificio")
+        )
+        self.home.ui.btnProyecto.clicked.connect(
+            lambda: self.show_page("proyecto")
         )
 
     # -------------------------

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Proyecto_page</class>
+ <widget class="QWidget" name="Proyecto_page">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>864</width>
+    <height>590</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit {
+	font: 300 14pt &quot;Poppins&quot;;
+}
+QPlainTextEdit {
+	font: 300 14pt &quot;Poppins&quot;;
+}
+QLabel {
+	
+	font: 600 16pt &quot;Poppins&quot;;
+}
+QPushButton {
+	font: 600 14pt &quot;Poppins&quot;;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,1,2,2">
+   <item>
+    <widget class="QLabel" name="pageTitle">
+     <property name="font">
+      <font>
+       <family>Poppins</family>
+       <pointsize>24</pointsize>
+       <italic>false</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 700 24pt &quot;Poppins&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Proyectos</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="styleSheet">
+      <string notr="true">QWidget {
+	border: 0.5px solid gray;
+	border-radius: 5px
+}</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Grupos de Investigación</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QComboBox" name="comboBox"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Subvenciones</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QComboBox" name="comboBox_2"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>Informes</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:white</string>
+           </property>
+           <property name="text">
+            <string>Guardar datos</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,0,1">
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblNombre">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>16</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Nombre:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="nombre_txt">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblCorreo">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>16</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Descripción</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPlainTextEdit" name="descripcion_txt">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>3</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
+       <property name="rightMargin">
+        <number>3</number>
+       </property>
+       <property name="bottomMargin">
+        <number>3</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="btnActualizar">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>14</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Editar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btbGuardar">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>14</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Guardar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnEliminar">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>14</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnLimpiar">
+         <property name="font">
+          <font>
+           <family>Poppins</family>
+           <pointsize>14</pointsize>
+           <italic>false</italic>
+           <fontweight>DemiBold</fontweight>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Limpiar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidget"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

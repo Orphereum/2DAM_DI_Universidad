@@ -47,7 +47,7 @@ class Ui_HomeWindow(object):
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.menuWidget = QWidget()
         self.menuWidget.setObjectName(u"menuWidget")
-        self.menuWidget.setGeometry(QRect(0, 0, 217, 1200))
+        self.menuWidget.setGeometry(QRect(0, -326, 217, 1200))
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(2)
@@ -187,6 +187,9 @@ class Ui_HomeWindow(object):
         HomeWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(HomeWindow)
+
+        self.stackedWidget.setCurrentIndex(1)
+
 
         QMetaObject.connectSlotsByName(HomeWindow)
     # setupUi

@@ -30,6 +30,9 @@
       <height>621</height>
      </rect>
     </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
     <widget class="QWidget" name="page"/>
     <widget class="QWidget" name="page_2"/>
    </widget>
@@ -52,7 +55,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-326</y>
        <width>217</width>
        <height>1200</height>
       </rect>

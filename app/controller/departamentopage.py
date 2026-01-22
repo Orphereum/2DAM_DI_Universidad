@@ -17,9 +17,9 @@ class DepartamentoPage(QWidget):
     #editar
         self.ui.btnEditar.clicked.connect(self.Editar)
     #actualizar
-        self.ui.btnActualizar
+        self.ui.btnActualizar.clicked.connect(self.Actualizar)
     #exportar PDF
-        self.ui.btnInforme
+        self.ui.btnInforme.clicked.connect(self.exportarPDF)
     #line edit text nombre departamento
         self.ui.LineEditDepartamento
     #comboBox facultad
@@ -58,7 +58,13 @@ class DepartamentoPage(QWidget):
         #por hacer.
         
     def Eliminar(self):
-            asd
+            print()
 
     def Editar(self):
-         asd
+            print()
+    
+    def Actualizar(self):
+            print()
+            
+    def ExportarPDF(self):
+            print()

@@ -37,11 +37,20 @@ class DepartamentoPage(QWidget):
         nombre = self.ui.LineEditDepartamento.text()
         facultad = self.ui.comboBoxFacultad.currentText()
         
-        fila = self.ui.tablaDepartamentos.rowsInserted(self, 0)
+        fila_dpts = self.ui.tablaDepartamentos.rowCount()
+        fila_fac = self.ui.tablaFacultades.rowCount()
+
+        #insertamos fila pre-texto
+        self.ui.tablaDepartamentos.insertRow(fila_dpts)
+        self.ui.tablaFacultades.insertRow(fila_fac)
+
         #comprobacion que el nombre no este vacio
         if nombre:
-            self.ui.tablaDepartamentos.setItem(fila, 0, QTableWidgetItem(nombre))
-            self.ui.tablaFacultades.setItem(fila, 0, QTableWidgetItem(facultad))
+            self.ui.tablaDepartamentos.setItem(fila_dpts, 0, QTableWidgetItem(nombre))
+            self.ui.tablaFacultades.setItem(fila_fac, 0, QTableWidgetItem(facultad))
+        else: 
+            #Mensaje de alerta indicando que falta el nombre: 
+            print("Flata introducir nombre")    
             
         #por hacer.
         

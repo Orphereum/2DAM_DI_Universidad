@@ -17,7 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QHBoxLayout,
     QHeaderView, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QTableView, QWidget)
+    QSizePolicy, QSpacerItem, QTableView, QWidget)
 
 class Ui_DepartamentoPage(object):
     def setupUi(self, DepartamentoPage):
@@ -103,6 +103,21 @@ class Ui_DepartamentoPage(object):
 
         self.formularioInformacion.setWidget(1, QFormLayout.ItemRole.FieldRole, self.comboBoxFacultad)
 
+        self.horizontalLayoutWidget_3 = QWidget(DepartamentoPage)
+        self.horizontalLayoutWidget_3.setObjectName(u"horizontalLayoutWidget_3")
+        self.horizontalLayoutWidget_3.setGeometry(QRect(450, 410, 421, 41))
+        self.horizontalBotones_2 = QHBoxLayout(self.horizontalLayoutWidget_3)
+        self.horizontalBotones_2.setObjectName(u"horizontalBotones_2")
+        self.horizontalBotones_2.setContentsMargins(0, 0, 0, 0)
+        self.btnInforme = QPushButton(self.horizontalLayoutWidget_3)
+        self.btnInforme.setObjectName(u"btnInforme")
+
+        self.horizontalBotones_2.addWidget(self.btnInforme)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalBotones_2.addItem(self.horizontalSpacer)
+
 
         self.retranslateUi(DepartamentoPage)
 
@@ -128,5 +143,6 @@ class Ui_DepartamentoPage(object):
         self.comboBoxFacultad.setItemText(3, QCoreApplication.translate("DepartamentoPage", u"Facultad_4", None))
         self.comboBoxFacultad.setItemText(4, QCoreApplication.translate("DepartamentoPage", u"Facultad_5", None))
 
+        self.btnInforme.setText(QCoreApplication.translate("DepartamentoPage", u"Exportar PDF", None))
     # retranslateUi
 

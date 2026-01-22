@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>icons/icono_buscar.png</file>
+  </qresource>
+</RCC>

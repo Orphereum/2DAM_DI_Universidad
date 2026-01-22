@@ -22,7 +22,7 @@
      <x>10</x>
      <y>10</y>
      <width>201</width>
-     <height>41</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>70</y>
+     <y>80</y>
      <width>501</width>
-     <height>211</height>
+     <height>227</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -209,7 +209,7 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>520</x>
      <y>70</y>
      <width>331</width>
      <height>211</height>
@@ -282,29 +282,19 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>310</y>
      <width>861</width>
-     <height>321</height>
+     <height>311</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lnBusqueda">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>740</x>
      <y>20</y>
-     <width>451</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnBusqueda">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>20</y>
-     <width>79</width>
-     <height>24</height>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -313,14 +303,61 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white
+    <string notr="true">color:white
 </string>
    </property>
    <property name="text">
-    <string>Buscar</string>
+    <string>Exportar a PDF</string>
    </property>
   </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>10</y>
+     <width>491</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLineEdit" name="lnBusqueda">
+      <property name="placeholderText">
+       <string>Buscar...</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnBusqueda">
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: white
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../resources/resources.qrc">
+        <normaloff>:/icons/icons/icono_buscar.png</normaloff>:/icons/icons/icono_buscar.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>19</width>
+        <height>19</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

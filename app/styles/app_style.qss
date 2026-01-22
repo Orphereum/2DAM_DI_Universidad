@@ -181,3 +181,21 @@ QDialog QPushButton:pressed {
     background-color: #0D4C4F;
     border-color: #0D4C
 }
+
+QPushButton#btnBusqueda {
+    background-color: transparent;    
+    border: 1px solid #168A8F;          
+    border-radius: 22px;                
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0px;
+}
+
+QPushButton#btnBusqueda:hover {
+    border-color: #1ECAD3;
+}
+
+QPushButton#btnBusqueda:pressed {
+    border-color: #0D4C4F;
+}
+

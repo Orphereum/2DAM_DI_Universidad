@@ -32,30 +32,15 @@ class Ui_Form(object):
 
         self.verticalLayout.addItem(self.verticalSpacer_4)
 
-        self.frame = QFrame(Form)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_2 = QGridLayout(self.frame)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.label = QLabel(self.frame)
-        self.label.setObjectName(u"label")
+        self.lblgrado = QLabel(Form)
+        self.lblgrado.setObjectName(u"lblgrado")
         font = QFont()
-        font.setPointSize(26)
-        self.label.setFont(font)
+        font.setPointSize(48)
+        font.setBold(True)
+        self.lblgrado.setFont(font)
+        self.lblgrado.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.label, 0, 1, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer_2, 0, 2, 1, 1)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer, 0, 0, 1, 1)
-
-
-        self.verticalLayout.addWidget(self.frame)
+        self.verticalLayout.addWidget(self.lblgrado)
 
         self.frame_2 = QFrame(Form)
         self.frame_2.setObjectName(u"frame_2")
@@ -170,12 +155,12 @@ class Ui_Form(object):
         self.btn_guardar = QPushButton(self.grp_formulario)
         self.btn_guardar.setObjectName(u"btn_guardar")
 
-        self.formLayout_2.setWidget(6, QFormLayout.ItemRole.LabelRole, self.btn_guardar)
+        self.formLayout_2.setWidget(7, QFormLayout.ItemRole.FieldRole, self.btn_guardar)
 
         self.btn_cancelar = QPushButton(self.grp_formulario)
         self.btn_cancelar.setObjectName(u"btn_cancelar")
 
-        self.formLayout_2.setWidget(6, QFormLayout.ItemRole.FieldRole, self.btn_cancelar)
+        self.formLayout_2.setWidget(7, QFormLayout.ItemRole.LabelRole, self.btn_cancelar)
 
 
         self.gridLayout.addWidget(self.grp_formulario, 1, 1, 2, 1)
@@ -234,7 +219,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label.setText(QCoreApplication.translate("Form", u"GRADO", None))
+        self.lblgrado.setText(QCoreApplication.translate("Form", u"GRADO", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Facultad:", None))
         self.btn_editar.setText(QCoreApplication.translate("Form", u"Editar", None))
         self.btn_eliminar.setText(QCoreApplication.translate("Form", u"Eliminar", None))

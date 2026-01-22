@@ -23,7 +23,7 @@ class Ui_HomeWindow(object):
     def setupUi(self, HomeWindow):
         if not HomeWindow.objectName():
             HomeWindow.setObjectName(u"HomeWindow")
-        HomeWindow.resize(1139, 732)
+        HomeWindow.resize(1139, 731)
         font = QFont()
         font.setFamilies([u"Dubai"])
         font.setPointSize(24)

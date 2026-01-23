@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QAbstractItemView
-
 from app.view.GradoPage_ui import Ui_Form
 from app.service.grado_service import GradoService
 from app.models.grado import Grado

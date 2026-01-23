@@ -42,34 +42,35 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.lblgrado)
 
-        self.frame_2 = QFrame(Form)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMaximumSize(QSize(1000, 1000))
-        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
-        self.gridLayout_4 = QGridLayout(self.frame_2)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_4.addItem(self.horizontalSpacer_6, 0, 0, 1, 1)
-
-        self.label_2 = QLabel(self.frame_2)
+        self.widget = QWidget(Form)
+        self.widget.setObjectName(u"widget")
+        self.gridLayout_2 = QGridLayout(self.widget)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
+        font1 = QFont()
+        font1.setPointSize(12)
+        font1.setBold(True)
+        self.label_2.setFont(font1)
 
-        self.gridLayout_4.addWidget(self.label_2, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_2, 0, 1, 1, 1)
 
-        self.cb_facultad = QComboBox(self.frame_2)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer, 0, 0, 1, 1)
+
+        self.cb_facultad = QComboBox(self.widget)
         self.cb_facultad.setObjectName(u"cb_facultad")
         self.cb_facultad.setMaximumSize(QSize(200, 200))
 
-        self.gridLayout_4.addWidget(self.cb_facultad, 0, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.cb_facultad, 0, 2, 1, 1)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addItem(self.horizontalSpacer_5, 0, 3, 1, 1)
+        self.gridLayout_2.addItem(self.horizontalSpacer_2, 0, 3, 1, 1)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.widget)
 
         self.frame_3 = QFrame(Form)
         self.frame_3.setObjectName(u"frame_3")
@@ -77,15 +78,37 @@ class Ui_Form(object):
         self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.frame_3)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.btn_editar = QPushButton(self.frame_3)
-        self.btn_editar.setObjectName(u"btn_editar")
+        self.btn_nuevo = QPushButton(self.frame_3)
+        self.btn_nuevo.setObjectName(u"btn_nuevo")
+        self.btn_nuevo.setMaximumSize(QSize(100000, 16777215))
 
-        self.gridLayout.addWidget(self.btn_editar, 3, 5, 1, 1)
+        self.gridLayout.addWidget(self.btn_nuevo, 2, 5, 1, 1)
 
         self.btn_eliminar = QPushButton(self.frame_3)
         self.btn_eliminar.setObjectName(u"btn_eliminar")
 
         self.gridLayout.addWidget(self.btn_eliminar, 4, 5, 1, 1)
+
+        self.tbl_grados = QTableWidget(self.frame_3)
+        if (self.tbl_grados.columnCount() < 7):
+            self.tbl_grados.setColumnCount(7)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.tbl_grados.setHorizontalHeaderItem(6, __qtablewidgetitem6)
+        self.tbl_grados.setObjectName(u"tbl_grados")
+
+        self.gridLayout.addWidget(self.tbl_grados, 1, 5, 1, 1)
 
         self.grp_formulario = QGroupBox(self.frame_3)
         self.grp_formulario.setObjectName(u"grp_formulario")
@@ -165,44 +188,30 @@ class Ui_Form(object):
 
         self.gridLayout.addWidget(self.grp_formulario, 1, 1, 2, 1)
 
-        self.btn_nuevo = QPushButton(self.frame_3)
-        self.btn_nuevo.setObjectName(u"btn_nuevo")
-        self.btn_nuevo.setMaximumSize(QSize(100000, 16777215))
-
-        self.gridLayout.addWidget(self.btn_nuevo, 2, 5, 1, 1)
-
         self.btn_refrescar = QPushButton(self.frame_3)
         self.btn_refrescar.setObjectName(u"btn_refrescar")
 
         self.gridLayout.addWidget(self.btn_refrescar, 5, 5, 1, 1)
 
-        self.tbl_grados = QTableWidget(self.frame_3)
-        if (self.tbl_grados.columnCount() < 7):
-            self.tbl_grados.setColumnCount(7)
-        __qtablewidgetitem = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(5, __qtablewidgetitem5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.tbl_grados.setHorizontalHeaderItem(6, __qtablewidgetitem6)
-        self.tbl_grados.setObjectName(u"tbl_grados")
+        self.btn_editar = QPushButton(self.frame_3)
+        self.btn_editar.setObjectName(u"btn_editar")
 
-        self.gridLayout.addWidget(self.tbl_grados, 1, 5, 1, 1)
+        self.gridLayout.addWidget(self.btn_editar, 3, 5, 1, 1)
 
-        self.label_3 = QLabel(self.frame_3)
+        self.widget_2 = QWidget(self.frame_3)
+        self.widget_2.setObjectName(u"widget_2")
+        self.gridLayout_3 = QGridLayout(self.widget_2)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.label_3 = QLabel(self.widget_2)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMaximumSize(QSize(100, 16777215))
-        self.label_3.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.label_3.setFont(font1)
+        self.label_3.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
-        self.gridLayout.addWidget(self.label_3, 0, 5, 1, 1)
+        self.gridLayout_3.addWidget(self.label_3, 0, 0, 1, 1)
+
+
+        self.gridLayout.addWidget(self.widget_2, 0, 5, 1, 1)
 
 
         self.verticalLayout.addWidget(self.frame_3)
@@ -221,20 +230,8 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblgrado.setText(QCoreApplication.translate("Form", u"GRADO", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Facultad:", None))
-        self.btn_editar.setText(QCoreApplication.translate("Form", u"Editar", None))
-        self.btn_eliminar.setText(QCoreApplication.translate("Form", u"Eliminar", None))
-        self.grp_formulario.setTitle(QCoreApplication.translate("Form", u"Campos", None))
-        self.label_4.setText(QCoreApplication.translate("Form", u"Nombre:", None))
-        self.label_5.setText(QCoreApplication.translate("Form", u"C\u00f3digo:", None))
-        self.label_7.setText(QCoreApplication.translate("Form", u"Duraci\u00f3n:", None))
-        self.label_8.setText(QCoreApplication.translate("Form", u"Cr\u00e9ditos:", None))
-        self.label_6.setText(QCoreApplication.translate("Form", u"Tipo:", None))
-        self.label_9.setText(QCoreApplication.translate("Form", u"Estado:", None))
-        self.chk_activo.setText(QCoreApplication.translate("Form", u"Activo", None))
-        self.btn_guardar.setText(QCoreApplication.translate("Form", u"Guardar", None))
-        self.btn_cancelar.setText(QCoreApplication.translate("Form", u"Cancelar", None))
         self.btn_nuevo.setText(QCoreApplication.translate("Form", u"Nuevo", None))
-        self.btn_refrescar.setText(QCoreApplication.translate("Form", u"Refrescar", None))
+        self.btn_eliminar.setText(QCoreApplication.translate("Form", u"Eliminar", None))
         ___qtablewidgetitem = self.tbl_grados.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"id_grado", None));
         ___qtablewidgetitem1 = self.tbl_grados.horizontalHeaderItem(1)
@@ -249,6 +246,18 @@ class Ui_Form(object):
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"tipo", None));
         ___qtablewidgetitem6 = self.tbl_grados.horizontalHeaderItem(6)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"estado", None));
+        self.grp_formulario.setTitle(QCoreApplication.translate("Form", u"Campos", None))
+        self.label_4.setText(QCoreApplication.translate("Form", u"Nombre:", None))
+        self.label_5.setText(QCoreApplication.translate("Form", u"C\u00f3digo:", None))
+        self.label_7.setText(QCoreApplication.translate("Form", u"Duraci\u00f3n:", None))
+        self.label_8.setText(QCoreApplication.translate("Form", u"Cr\u00e9ditos:", None))
+        self.label_6.setText(QCoreApplication.translate("Form", u"Tipo:", None))
+        self.label_9.setText(QCoreApplication.translate("Form", u"Estado:", None))
+        self.chk_activo.setText(QCoreApplication.translate("Form", u"Activo", None))
+        self.btn_guardar.setText(QCoreApplication.translate("Form", u"Guardar", None))
+        self.btn_cancelar.setText(QCoreApplication.translate("Form", u"Cancelar", None))
+        self.btn_refrescar.setText(QCoreApplication.translate("Form", u"Refrescar", None))
+        self.btn_editar.setText(QCoreApplication.translate("Form", u"Editar", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Grados:", None))
     # retranslateUi
 

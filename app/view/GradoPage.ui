@@ -44,22 +44,23 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_2">
-     <property name="maximumSize">
-      <size>
-       <width>1000</width>
-       <height>1000</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Shape::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Shadow::Raised</enum>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_4">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Facultad:</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
-       <spacer name="horizontalSpacer_6">
+       <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
@@ -70,13 +71,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Facultad:</string>
-        </property>
-       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QComboBox" name="cb_facultad">
@@ -89,7 +83,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <spacer name="horizontalSpacer_5">
+       <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
@@ -113,10 +107,16 @@
       <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="5">
-       <widget class="QPushButton" name="btn_editar">
+      <item row="2" column="5">
+       <widget class="QPushButton" name="btn_nuevo">
+        <property name="maximumSize">
+         <size>
+          <width>100000</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
-         <string>Editar</string>
+         <string>Nuevo</string>
         </property>
        </widget>
       </item>
@@ -125,6 +125,45 @@
         <property name="text">
          <string>Eliminar</string>
         </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QTableWidget" name="tbl_grados">
+        <column>
+         <property name="text">
+          <string>id_grado</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>nombre</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>código</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>duracion (años)</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>créditos</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>tipo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>estado</string>
+         </property>
+        </column>
        </widget>
       </item>
       <item row="1" column="1" rowspan="2">
@@ -220,19 +259,6 @@
         </layout>
        </widget>
       </item>
-      <item row="2" column="5">
-       <widget class="QPushButton" name="btn_nuevo">
-        <property name="maximumSize">
-         <size>
-          <width>100000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Nuevo</string>
-        </property>
-       </widget>
-      </item>
       <item row="5" column="5">
        <widget class="QPushButton" name="btn_refrescar">
         <property name="text">
@@ -240,59 +266,39 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="5">
-       <widget class="QTableWidget" name="tbl_grados">
-        <column>
-         <property name="text">
-          <string>id_grado</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>nombre</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>código</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>duracion (años)</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>créditos</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>tipo</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>estado</string>
-         </property>
-        </column>
+      <item row="3" column="5">
+       <widget class="QPushButton" name="btn_editar">
+        <property name="text">
+         <string>Editar</string>
+        </property>
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLabel" name="label_3">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Grados:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-        </property>
+       <widget class="QWidget" name="widget_2" native="true">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Grados:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

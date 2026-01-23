@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit,
     QPushButton, QSizePolicy, QTableWidget, QTableWidgetItem,
     QVBoxLayout, QWidget)
-import resources_rc
+from app.resources import resources_rc
 
 class Ui_ProfesorPage(object):
     def setupUi(self, ProfesorPage):

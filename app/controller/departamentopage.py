@@ -19,7 +19,7 @@ class DepartamentoPage(QWidget):
     #actualizar
         self.ui.btnActualizar.clicked.connect(self.Actualizar)
     #exportar PDF
-        self.ui.btnInforme.clicked.connect(self.exportarPDF)
+        self.ui.btnInforme.clicked.connect(self.ExportarPDF)
     #line edit text nombre departamento
         self.ui.LineEditDepartamento
     #comboBox facultad

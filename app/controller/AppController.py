@@ -17,18 +17,31 @@ from app.repository.facultad_repo import FacultadRepo
 from app.service.edificio_service import EdificioService
 from app.controller.proyectopage import ProyectoPage
 
+from app.data.db import get_connection   
 class AppController:
     """Controlador principal de la aplicación."""
 
     def __init__(self):
         self.home = HomeWindow()
         self.pages = {}
-
+        self._test_db() # PRUEBA
         self._setup_pages()
         self._setup_connections()
 
         self.home.show()
+        
+    def _test_db(self):
+        conn = get_connection()
+        cursor = conn.cursor()
 
+        cursor.execute("SELECT COUNT(*) as total FROM universidad;")
+        total = cursor.fetchone()["total"]
+
+        print("================================")
+        print("Total universidades en BD:", total)
+        print("================================")
+
+        conn.close()
     # -------------------------
     # CREACIÓN DE PÁGINAS
     # -------------------------

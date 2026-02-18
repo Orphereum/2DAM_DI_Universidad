@@ -16,6 +16,12 @@ from app.repository.edificio_repo import EdificioRepository
 from app.repository.facultad_repo import FacultadRepo
 from app.service.edificio_service import EdificioService
 from app.controller.proyectopage import ProyectoPage
+from app.repository.proyecto_repo import ProyectoRepository
+from app.service.proyecto_service import ProyectoService
+from app.repository.grupoInv_repo import GrupoInvRepository
+from app.service.grupoInv_service import GrupoInvService 
+
+
 
 from app.data.db import get_connection   
 class AppController:
@@ -53,7 +59,6 @@ class AppController:
         profesor = ProfesorPage(stacked)
         departamento = DepartamentoPage(stacked)
         grado = GradoPage(stacked)
-        proyecto = ProyectoPage(stacked)
 
         # -------------------------
         # DEPENDENCIAS ASIGNATURA
@@ -96,6 +101,28 @@ class AppController:
         )
 
         edificio = EdificioPage(edificio_service, stacked)
+        
+        # -------------------------
+        # DEPENDENCIAS GRUPO INVESTIGACIÓN
+        # -------------------------
+        grupoInv_repo = GrupoInvRepository()
+
+        grupoInv_service = GrupoInvService(
+            grupoInv_repo
+        )
+
+        #grupoInv = GrupoInvPage(grupoInv_service, stacked)
+        
+        # -------------------------
+        # DEPENDENCIAS PROYECTO
+        # -------------------------
+        proyecto_repo = ProyectoRepository()
+
+        proyecto_service = ProyectoService(
+            proyecto_repo
+        )
+
+        proyecto = ProyectoPage(proyecto_service, grupoInv_service, stacked)
             
         
 

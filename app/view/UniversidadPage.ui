@@ -6,99 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>881</width>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Universidad</string>
+   <string>Form</string>
   </property>
-
-  <layout class="QVBoxLayout" name="verticalLayout">
-
-   <!-- Título -->
-   <item>
-    <widget class="QLabel" name="labelTitulo">
-     <property name="text">
-      <string>Gestión de Universidades</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-
-   <!-- Formulario -->
-   <item>
-    <layout class="QHBoxLayout" name="formLayout">
-     <item>
-      <widget class="QLabel" name="labelNombre">
-       <property name="text">
-        <string>Nombre:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="inputNombre"/>
-     </item>
-    </layout>
-   </item>
-
-   <!-- Botones -->
-   <item>
-    <layout class="QHBoxLayout" name="buttonLayout">
-     <item>
-      <widget class="QPushButton" name="btnCrear">
-       <property name="text">
-        <string>Crear</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnEditar">
-       <property name="text">
-        <string>Editar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnEliminar">
-       <property name="text">
-        <string>Eliminar</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnLimpiar">
-       <property name="text">
-        <string>Limpiar</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-
-   <!-- Tabla -->
-   <item>
-    <widget class="QTableWidget" name="tablaUniversidades">
-     <property name="columnCount">
-      <number>2</number>
-     </property>
-     <column>
-      <property name="text">
-       <string>ID</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Nombre</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-
-  </layout>
-
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>100</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ventana universidad</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

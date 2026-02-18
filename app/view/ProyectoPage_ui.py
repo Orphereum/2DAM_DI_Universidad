@@ -65,10 +65,10 @@ class Ui_Proyecto_page(object):
         self.groupBox.setObjectName(u"groupBox")
         self.verticalLayout_3 = QVBoxLayout(self.groupBox)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.comboBox_gruposInv = QComboBox(self.groupBox)
-        self.comboBox_gruposInv.setObjectName(u"comboBox_gruposInv")
+        self.comboBox = QComboBox(self.groupBox)
+        self.comboBox.setObjectName(u"comboBox")
 
-        self.verticalLayout_3.addWidget(self.comboBox_gruposInv)
+        self.verticalLayout_3.addWidget(self.comboBox)
 
 
         self.horizontalLayout.addWidget(self.groupBox)
@@ -208,25 +208,22 @@ class Ui_Proyecto_page(object):
 
         self.horizontalLayout_3.addWidget(self.tabla_proyectos)
 
-        self.tabla_subvenciones = QTableWidget(Proyecto_page)
-        if (self.tabla_subvenciones.columnCount() < 2):
-            self.tabla_subvenciones.setColumnCount(2)
+        self.tableWidget = QTableWidget(Proyecto_page)
+        if (self.tableWidget.columnCount() < 2):
+            self.tableWidget.setColumnCount(2)
         __qtablewidgetitem3 = QTableWidgetItem()
-        self.tabla_subvenciones.setHorizontalHeaderItem(0, __qtablewidgetitem3)
+        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
-        self.tabla_subvenciones.setHorizontalHeaderItem(1, __qtablewidgetitem4)
-        self.tabla_subvenciones.setObjectName(u"tabla_subvenciones")
-        self.tabla_subvenciones.horizontalHeader().setStretchLastSection(True)
-        self.tabla_subvenciones.verticalHeader().setStretchLastSection(True)
+        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem4)
+        self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
 
-        self.horizontalLayout_3.addWidget(self.tabla_subvenciones)
+        self.horizontalLayout_3.addWidget(self.tableWidget)
 
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
 
-        self.verticalLayout_5.setStretch(1, 1)
-        self.verticalLayout_5.setStretch(2, 2)
-        self.verticalLayout_5.setStretch(3, 3)
 
         self.retranslateUi(Proyecto_page)
 
@@ -252,9 +249,9 @@ class Ui_Proyecto_page(object):
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Proyecto_page", u"Nombre", None));
         ___qtablewidgetitem2 = self.tabla_proyectos.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None));
-        ___qtablewidgetitem3 = self.tabla_subvenciones.horizontalHeaderItem(0)
+        ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Proyecto_page", u"Subvenci\u00f3n", None));
-        ___qtablewidgetitem4 = self.tabla_subvenciones.horizontalHeaderItem(1)
+        ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado", None));
     # retranslateUi
 

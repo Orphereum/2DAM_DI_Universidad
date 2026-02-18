@@ -6,10 +6,8 @@ class ProyectoRepository:
     def obtener_todos(self):
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM proyecto ORDER BY nombre ASC")
+        cursor.execute("SELECT * FROM proyecto ORDER BY nombre")
         datos = cursor.fetchall()
         cursor.close()
         return datos
-
-    
         

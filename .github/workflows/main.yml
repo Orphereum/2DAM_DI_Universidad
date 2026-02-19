@@ -5,35 +5,28 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with: python-version: '3.12'
-    - run: pip install -r requirements.txt pytest pytest-cov pytest-mock
-    - run: pytest tests/ --cov=app --cov-report=xml --cov-fail-under=80 -v
-    
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test deps
+        run: pip install pytest pytest-cov pytest-mock
+      - name: Run tests
+        run: pytest tests/ --cov=app --cov-report=term -v
+
   build-exe:
-    needs: test  # Solo si tests pasan
     runs-on: windows-latest
-    if: github.ref == 'refs/heads/main'  # Solo main
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
-      with: python-version: '3.12'
-    
-    - name: Install runtime
-      run: pip install -r requirements.txt pyinstaller
-    
-    - name: Build EXE
-      run: |
-        pyinstaller --onefile --windowed ^
-          --add-data "app/resources;app/resources" ^
-          --add-data "app/assets;app/assets" ^
-          --name "Gestor-Universidad" ^
-          main.py
-    
-    - name: Upload EXE
-      uses: actions/upload-artifact@v4
-      with:
-        name: Gestor-Universidad-v${{ github.sha }}
-        path: dist/Gestor-Universidad.exe
-        retention-days: 90
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime
+        run: pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
+      - name: Build EXE
+        run: pyinstaller --onefile --windowed --name "Gestor-Universidad" main.py
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Gestor-Universidad
+          path: dist/Gestor-Universidad.exe

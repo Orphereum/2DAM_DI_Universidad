@@ -24,11 +24,7 @@ jobs:
         run: dir app\styles\app_style.qss
       
       - name: Build EXE completo
-        run: |
-          pyinstaller --onefile --windowed ^
-            --add-data "app/data/universidad.db;app/data" ^
-            --add-data "app/styles/app_style.qss;app/styles" ^
-            --name "Gestor-Universidad" main.py
+        run: pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --add-data "app/styles/app_style.qss;app/styles" --name "Gestor-Universidad" main.py
       
       - name: Upload EXE
         uses: actions/upload-artifact@v4

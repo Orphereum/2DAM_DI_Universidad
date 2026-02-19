@@ -23,16 +23,10 @@ jobs:
           python-version: '3.12'
       - name: Install runtime
         run: pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
-      - name: Build EXE with DB
-        run: |
-          pyinstaller --onefile --windowed ^
-            --add-data "app/data/universidad.db;app/data" ^
-            --add-data "app/resources;app/resources" ^
-            --add-data "app/assets;app/assets" ^
-            --name "Gestor-Universidad" ^
-            main.py
+      - name: Build EXE
+        run: pyinstaller --onefile --windowed --name "Gestor-Universidad" main.py
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
-          name: Gestor-Universidad-v${{ github.sha }}
+          name: Gestor-Universidad
           path: dist/Gestor-Universidad.exe

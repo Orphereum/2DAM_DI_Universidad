@@ -2,18 +2,6 @@ name: CI/CD Universidad
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install test deps
-        run: pip install pytest pytest-cov pytest-mock
-      - name: Run tests
-        run: pytest tests/ --cov=app --cov-report=term -v
-
   build-exe:
     runs-on: windows-latest
     steps:

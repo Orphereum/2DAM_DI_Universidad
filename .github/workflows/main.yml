@@ -6,18 +6,25 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install runtime
-        run: pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
+          
+      - name: Install runtime deps
+        run: |
+          pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
+      
+      - name: Verify BD exists
+        run: dir app\data\universidad.db
+      
       - name: Build EXE con BD
         run: |
-          pyinstaller --onefile --windowed --add-data "univer.db;." --name "Gestor-Universidad" main.py
-      - name: Upload EXE + BD
+          pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --name "Gestor-Universidad" main.py
+      
+      - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
-          name: Gestor-Universidad
-          path: |
-            dist/Gestor-Universidad.exe
-            dist/univer.db
+          name: Gestor-Universidad-v${{ github.run_number }}
+          path: dist/Gestor-Universidad.exe
+          retention-days: 30

@@ -1,34 +1,27 @@
-name: Build EXE
-
-on:
-  push:
-    branches:
-      - main
+name: CI/CD Universidad
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  build:
+  build-exe:
     runs-on: windows-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-
-      - name: Install dependencies
+          python-version: '3.12'
+          
+      - name: Install runtime deps
         run: |
-          python -m pip install --upgrade pip
-          pip install pyinstaller
-
+          pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
+      
       - name: Verify BD exists
         run: dir app\data\universidad.db
-
+      
       - name: Build EXE con BD
-        run: pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --name "Gestor-Universidad" main.py
-
+        run: |
+          pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --name "Gestor-Universidad" main.py
+      
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:

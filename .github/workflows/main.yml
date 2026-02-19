@@ -4,6 +4,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build-exe:
     runs-on: windows-latest
+
     steps:
       - uses: actions/checkout@v4
       
@@ -13,14 +14,21 @@ jobs:
           
       - name: Install runtime deps
         run: |
+          python -m pip install --upgrade pip
           pip install PySide6 PySide6_Addons PySide6_Essentials shiboken6 Pillow pyinstaller reportlab PyYAML
       
       - name: Verify BD exists
         run: dir app\data\universidad.db
+
+      - name: Verify QSS exists
+        run: dir app\styles\app_style.qss
       
-      - name: Build EXE con BD
+      - name: Build EXE completo
         run: |
-          pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --name "Gestor-Universidad" main.py
+          pyinstaller --onefile --windowed ^
+            --add-data "app/data/universidad.db;app/data" ^
+            --add-data "app/styles/app_style.qss;app/styles" ^
+            --name "Gestor-Universidad" main.py
       
       - name: Upload EXE
         uses: actions/upload-artifact@v4

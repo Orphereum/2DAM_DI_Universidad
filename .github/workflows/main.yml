@@ -1,30 +1,39 @@
-name: Build EXE Universidad
-on: 
-  push:
-    branches: [ main ]
-  workflow_dispatch:  # Botón manual
+name: CI/CD Universidad
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  build:
-    runs-on: windows-latest
+  test:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with: python-version: '3.12'
+    - run: pip install -r requirements.txt pytest pytest-cov pytest-mock
+    - run: pytest tests/ --cov=app --cov-report=xml --cov-fail-under=80 -v
     
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
+  build-exe:
+    needs: test  # Solo si tests pasan
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main'  # Solo main
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with: python-version: '3.12'
     
-    - name: Install dependencies
-      run: |
-        pip install PySide6==6.10.0 PySide6_Addons==6.10.0 PySide6_Essentials==6.10.0 shiboken6==6.10.0 Pillow==12.1.0 pyinstaller==6.10.0
+    - name: Install runtime
+      run: pip install -r requirements.txt pyinstaller
     
     - name: Build EXE
-      run: pyinstaller main.spec
+      run: |
+        pyinstaller --onefile --windowed ^
+          --add-data "app/resources;app/resources" ^
+          --add-data "app/assets;app/assets" ^
+          --name "Gestor-Universidad" ^
+          main.py
     
     - name: Upload EXE
       uses: actions/upload-artifact@v4
       with:
         name: Gestor-Universidad-v${{ github.sha }}
-        path: dist/GestorUniversidad.exe
-        retention-days: 30
+        path: dist/Gestor-Universidad.exe
+        retention-days: 90

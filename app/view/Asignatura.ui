@@ -6,169 +6,235 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>650</height>
+    <width>900</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Asignaturas</string>
   </property>
+
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>10</number>
-   </property>
-   <property name="leftMargin">
-    <number>12</number>
-   </property>
-   <property name="topMargin">
-    <number>12</number>
-   </property>
-   <property name="rightMargin">
-    <number>12</number>
-   </property>
-   <property name="bottomMargin">
-    <number>12</number>
-   </property>
+
+   <!-- Spacer superior -->
    <item>
-    <widget class="QFrame" name="frameHeader">
-     <layout class="QHBoxLayout">
-      <item>
-       <widget class="QLabel" name="lblTitulo">
-        <property name="font">
-         <font>
-          <family>Dubai</family>
-          <pointsize>24</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>ASIGNATURAS</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <spacer name="verticalSpacerTop">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
+   <!-- TÍTULO -->
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="font">
+      <font>
+       <pointsize>42</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>ASIGNATURAS</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
+
+   <!-- CONTEXTO (GRADO SELECCIONADO) -->
    <item>
-    <widget class="QFrame" name="frameContexto">
+    <widget class="QWidget" name="widgetContexto" native="true">
      <layout class="QHBoxLayout">
+      <item>
+       <spacer name="horizontalSpacerLeft">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </spacer>
+      </item>
+
       <item>
        <widget class="QLabel" name="lblContexto">
         <property name="font">
          <font>
-          <family>Segoe UI</family>
-          <pointsize>11</pointsize>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
          <string>Grado seleccionado:</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
+       </widget>
+      </item>
+
+      <item>
+       <widget class="QComboBox" name="cb_grado_filtro">
+        <property name="minimumWidth">
+         <number>250</number>
         </property>
        </widget>
+      </item>
+
+      <item>
+       <spacer name="horizontalSpacerRight">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
    </item>
+
+   <!-- FRAME PRINCIPAL -->
    <item>
     <widget class="QFrame" name="frameMain">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+
      <layout class="QGridLayout" name="gridLayoutMain">
-      <item row="0" column="0" colspan="2">
-       <layout class="QHBoxLayout">
-        <item>
-         <widget class="QLineEdit" name="txt_buscar">
-          <property name="placeholderText">
-           <string>Buscar asignatura...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Curso:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cb_curso"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Cuatrimestre:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cb_cuatrimestre"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Tipo:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cb_obligatoria"/>
-        </item>
-       </layout>
+
+      <!-- FORMULARIO IZQUIERDA -->
+      <item row="0" column="0" rowspan="3">
+       <widget class="QGroupBox" name="grp_formulario">
+        <property name="title">
+         <string>Datos de la asignatura</string>
+        </property>
+
+        <layout class="QFormLayout" name="formLayout">
+
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelNombre">
+           <property name="text">
+            <string>Nombre:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="txt_nombre"/>
+         </item>
+
+         <item row="1" column="0">
+          <widget class="QLabel" name="labelCreditos">
+           <property name="text">
+            <string>Créditos:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSpinBox" name="sp_creditos"/>
+         </item>
+
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelCurso">
+           <property name="text">
+            <string>Curso:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="cb_curso"/>
+         </item>
+
+         <item row="3" column="0">
+          <widget class="QLabel" name="labelCuatrimestre">
+           <property name="text">
+            <string>Cuatrimestre:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="cb_cuatrimestre"/>
+         </item>
+
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelTipo">
+           <property name="text">
+            <string>Obligatoria:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="chk_obligatoria"/>
+         </item>
+
+         <item row="6" column="0">
+          <widget class="QPushButton" name="btn_guardar">
+           <property name="text">
+            <string>Guardar</string>
+           </property>
+          </widget>
+         </item>
+
+         <item row="6" column="1">
+          <widget class="QPushButton" name="btn_cancelar">
+           <property name="text">
+            <string>Cancelar</string>
+           </property>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
       </item>
-      <item row="1" column="0" rowspan="4">
+
+      <!-- TÍTULO TABLA -->
+      <item row="0" column="1">
+       <widget class="QLabel" name="lblTablaTitulo">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Listado de asignaturas</string>
+        </property>
+       </widget>
+      </item>
+
+      <!-- TABLA -->
+      <item row="1" column="1">
        <widget class="QTableWidget" name="tbl_asignaturas"/>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="btn_nueva">
-        <property name="text">
-         <string>Nueva</string>
-        </property>
-       </widget>
-      </item>
+
+      <!-- BOTONES CRUD -->
       <item row="2" column="1">
-       <widget class="QPushButton" name="btn_editar">
-        <property name="text">
-         <string>Editar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="btn_eliminar">
-        <property name="text">
-         <string>Eliminar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="btn_refrescar">
-        <property name="text">
-         <string>Refrescar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="2">
        <layout class="QHBoxLayout">
         <item>
-         <widget class="QPushButton" name="btn_profesores">
+         <widget class="QPushButton" name="btn_nueva">
           <property name="text">
-           <string>Profesores</string>
+           <string>Nueva</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btn_alumnos">
+         <widget class="QPushButton" name="btn_editar">
           <property name="text">
-           <string>Alumnos</string>
+           <string>Editar</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btn_clases">
+         <widget class="QPushButton" name="btn_eliminar">
           <property name="text">
-           <string>Clases</string>
+           <string>Eliminar</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_refrescar">
+          <property name="text">
+           <string>Refrescar</string>
           </property>
          </widget>
         </item>
@@ -181,16 +247,26 @@
         </item>
        </layout>
       </item>
-      <item row="6" column="0" colspan="2">
-       <widget class="QLabel" name="lbl_estado">
-        <property name="text">
-         <string>Listo</string>
-        </property>
-       </widget>
-      </item>
+
      </layout>
     </widget>
    </item>
+
+   <!-- Spacer inferior -->
+   <item>
+    <spacer name="verticalSpacerBottom">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
   </layout>
  </widget>
  <resources/>

@@ -4,7 +4,7 @@ from app.models.profesor import Profesor
 
 class ProfesorRepository:
 
-    #obtenemos todos los profesores
+    # obtenemos todos los profesores
     def find_all(self):
         conn = get_connection()
         cursor = conn.cursor()
@@ -19,8 +19,8 @@ class ProfesorRepository:
         conn.close()
         return [self._row_to_model(row) for row in rows]
 
-   
-    def find_by_id(self, id_profesor): #encontrar un profesor por id
+    # encontrar un profesor por id
+    def find_by_id(self, id_profesor):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -50,7 +50,7 @@ class ProfesorRepository:
         conn.close()
         return [self._row_to_model(row) for row in rows]
 
-    #  nuevo profesor
+    # nuevo profesor
     def insert(self, profesor: Profesor):
         conn = get_connection()
         cursor = conn.cursor()
@@ -72,7 +72,7 @@ class ProfesorRepository:
         conn.close()
         return profesor
 
-    # update d profesor existente
+    # update de profesor existente
     def update(self, profesor: Profesor):
         conn = get_connection()
         cursor = conn.cursor()
@@ -114,7 +114,7 @@ class ProfesorRepository:
         conn.close()
         return True
 
-    # esto para desmarcar jefes del departamento
+    # esto para desmarcar jefes del departamento (lo puedes dejar aunque no lo uses)
     def desmarcar_jefes_del_departamento(self, id_departamento):
         conn = get_connection()
         cursor = conn.cursor()

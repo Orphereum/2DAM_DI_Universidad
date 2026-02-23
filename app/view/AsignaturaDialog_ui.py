@@ -16,65 +16,73 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDialog,
-    QFormLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QSpinBox,
-    QVBoxLayout, QWidget)
+    QFormLayout, QFrame, QGroupBox, QHBoxLayout,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QSpinBox, QVBoxLayout, QWidget)
 
 class Ui_AsignaturaDialog(object):
     def setupUi(self, AsignaturaDialog):
         if not AsignaturaDialog.objectName():
             AsignaturaDialog.setObjectName(u"AsignaturaDialog")
-        AsignaturaDialog.resize(420, 360)
+        AsignaturaDialog.resize(480, 420)
         AsignaturaDialog.setModal(True)
         self.verticalLayout = QVBoxLayout(AsignaturaDialog)
-        self.verticalLayout.setSpacing(10)
+        self.verticalLayout.setSpacing(15)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(12, 12, 12, 12)
+        self.verticalLayout.setContentsMargins(20, 20, 20, 20)
         self.lblTitulo = QLabel(AsignaturaDialog)
         self.lblTitulo.setObjectName(u"lblTitulo")
         font = QFont()
         font.setFamilies([u"Dubai"])
-        font.setPointSize(18)
+        font.setPointSize(22)
         font.setBold(True)
         self.lblTitulo.setFont(font)
         self.lblTitulo.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout.addWidget(self.lblTitulo)
 
-        self.formLayout = QFormLayout()
+        self.lineSeparator = QFrame(AsignaturaDialog)
+        self.lineSeparator.setObjectName(u"lineSeparator")
+        self.lineSeparator.setFrameShape(QFrame.HLine)
+        self.lineSeparator.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout.addWidget(self.lineSeparator)
+
+        self.groupDatos = QGroupBox(AsignaturaDialog)
+        self.groupDatos.setObjectName(u"groupDatos")
+        self.formLayout = QFormLayout(self.groupDatos)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setLabelAlignment(Qt.AlignRight)
-        self.formLayout.setFormAlignment(Qt.AlignHCenter|Qt.AlignTop)
-        self.formLayout.setHorizontalSpacing(10)
-        self.formLayout.setVerticalSpacing(8)
-        self.lblNombre = QLabel(AsignaturaDialog)
+        self.formLayout.setHorizontalSpacing(12)
+        self.formLayout.setVerticalSpacing(10)
+        self.lblNombre = QLabel(self.groupDatos)
         self.lblNombre.setObjectName(u"lblNombre")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.lblNombre)
 
-        self.txt_nombre = QLineEdit(AsignaturaDialog)
+        self.txt_nombre = QLineEdit(self.groupDatos)
         self.txt_nombre.setObjectName(u"txt_nombre")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txt_nombre)
 
-        self.lblCreditos = QLabel(AsignaturaDialog)
+        self.lblCreditos = QLabel(self.groupDatos)
         self.lblCreditos.setObjectName(u"lblCreditos")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.lblCreditos)
 
-        self.sp_creditos = QSpinBox(AsignaturaDialog)
+        self.sp_creditos = QSpinBox(self.groupDatos)
         self.sp_creditos.setObjectName(u"sp_creditos")
         self.sp_creditos.setMinimum(1)
         self.sp_creditos.setMaximum(30)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.sp_creditos)
 
-        self.lblCurso = QLabel(AsignaturaDialog)
+        self.lblCurso = QLabel(self.groupDatos)
         self.lblCurso.setObjectName(u"lblCurso")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.lblCurso)
 
-        self.cb_curso = QComboBox(AsignaturaDialog)
+        self.cb_curso = QComboBox(self.groupDatos)
         self.cb_curso.addItem("")
         self.cb_curso.addItem("")
         self.cb_curso.addItem("")
@@ -83,55 +91,57 @@ class Ui_AsignaturaDialog(object):
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.cb_curso)
 
-        self.lblCuatrimestre = QLabel(AsignaturaDialog)
+        self.lblCuatrimestre = QLabel(self.groupDatos)
         self.lblCuatrimestre.setObjectName(u"lblCuatrimestre")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.lblCuatrimestre)
 
-        self.cb_cuatrimestre = QComboBox(AsignaturaDialog)
+        self.cb_cuatrimestre = QComboBox(self.groupDatos)
         self.cb_cuatrimestre.addItem("")
         self.cb_cuatrimestre.addItem("")
         self.cb_cuatrimestre.setObjectName(u"cb_cuatrimestre")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.cb_cuatrimestre)
 
-        self.lblGrado = QLabel(AsignaturaDialog)
+        self.lblGrado = QLabel(self.groupDatos)
         self.lblGrado.setObjectName(u"lblGrado")
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.lblGrado)
 
-        self.cb_grado = QComboBox(AsignaturaDialog)
+        self.cb_grado = QComboBox(self.groupDatos)
         self.cb_grado.setObjectName(u"cb_grado")
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.cb_grado)
 
-        self.lblObligatoria = QLabel(AsignaturaDialog)
+        self.lblObligatoria = QLabel(self.groupDatos)
         self.lblObligatoria.setObjectName(u"lblObligatoria")
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.lblObligatoria)
 
-        self.chk_obligatoria = QCheckBox(AsignaturaDialog)
+        self.chk_obligatoria = QCheckBox(self.groupDatos)
         self.chk_obligatoria.setObjectName(u"chk_obligatoria")
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.chk_obligatoria)
 
 
-        self.verticalLayout.addLayout(self.formLayout)
+        self.verticalLayout.addWidget(self.groupDatos)
 
         self.buttonsLayout = QHBoxLayout()
-        self.buttonsLayout.setSpacing(10)
+        self.buttonsLayout.setSpacing(12)
         self.buttonsLayout.setObjectName(u"buttonsLayout")
-        self.spacerButtons = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.spacerButtons = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.buttonsLayout.addItem(self.spacerButtons)
 
         self.btn_guardar = QPushButton(AsignaturaDialog)
         self.btn_guardar.setObjectName(u"btn_guardar")
+        self.btn_guardar.setMinimumWidth(100)
 
         self.buttonsLayout.addWidget(self.btn_guardar)
 
         self.btn_cancelar = QPushButton(AsignaturaDialog)
         self.btn_cancelar.setObjectName(u"btn_cancelar")
+        self.btn_cancelar.setMinimumWidth(100)
 
         self.buttonsLayout.addWidget(self.btn_cancelar)
 
@@ -146,7 +156,8 @@ class Ui_AsignaturaDialog(object):
 
     def retranslateUi(self, AsignaturaDialog):
         AsignaturaDialog.setWindowTitle(QCoreApplication.translate("AsignaturaDialog", u"Asignatura", None))
-        self.lblTitulo.setText(QCoreApplication.translate("AsignaturaDialog", u"Asignatura", None))
+        self.lblTitulo.setText(QCoreApplication.translate("AsignaturaDialog", u"ASIGNATURA", None))
+        self.groupDatos.setTitle(QCoreApplication.translate("AsignaturaDialog", u"Datos de la asignatura", None))
         self.lblNombre.setText(QCoreApplication.translate("AsignaturaDialog", u"Nombre:", None))
         self.lblCreditos.setText(QCoreApplication.translate("AsignaturaDialog", u"Cr\u00e9ditos:", None))
         self.lblCurso.setText(QCoreApplication.translate("AsignaturaDialog", u"Curso:", None))

@@ -38,19 +38,28 @@ class ProfesorService:
         if not profesor.titulo or not profesor.titulo.strip():
             raise ValueError("El título es obligatorio")
 
-        # sin repo de departamento: hasta qeu lo hagan
+        # sin repo de departamento por ahora:
         if profesor.id_departamento is None:
             raise ValueError("Debe seleccionar un departamento")
 
     # CRUD
     def crear_profesor(self, profesor: Profesor):
         self.validar_profesor(profesor)
+
+        if profesor.jefe_dtp:
+            self.profesor_repo.desmarcar_jefes_del_departamento(profesor.id_departamento)
+
         return self.profesor_repo.insert(profesor)
 
     def actualizar_profesor(self, profesor: Profesor):
         if not profesor.id:
             raise ValueError("El profesor no tiene ID")
+
         self.validar_profesor(profesor)
+
+        if profesor.jefe_dtp:
+            self.profesor_repo.desmarcar_jefes_del_departamento(profesor.id_departamento)
+
         return self.profesor_repo.update(profesor)
 
     def eliminar_profesor(self, id_profesor: int):

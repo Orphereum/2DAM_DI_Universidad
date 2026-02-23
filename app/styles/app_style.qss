@@ -42,7 +42,10 @@ QMainWindow {
 /* Fondo por defecto de las páginas del stackedWidget */
 #stackedWidget {
     background-color: #20252B;
+    /*border: 2px solid red; */
 }
+
+
 
 /* SCROLLBAR */
 
@@ -76,6 +79,28 @@ QScrollBar::sub-line:vertical {
 QScrollBar::add-page:vertical,
 QScrollBar::sub-page:vertical {
     background: none;
+}
+
+/* ============================= */
+/*         QTABLEWIDGET          */
+/* ============================= */
+
+QTableWidget {
+    background-color: #20252B;
+    color: #FFFFFF;            
+    gridline-color: #303337;
+    border: 1px solid #303337;
+}
+
+QTableWidget::item {
+    color: #FFFFFF;       
+}
+
+QHeaderView::section {
+    background-color: #2B2F33;
+    color: #FFFFFF;           
+    border: 1px solid #303337;
+    padding: 4px;
 }
 
 /* para los bloques de botones*/
@@ -179,7 +204,8 @@ QDialog QPushButton:hover {
 
 QDialog QPushButton:pressed {
     background-color: #0D4C4F;
-    border-color: #0D4C
+    border-color: #0D4C4F;
+
 }
 
 QPushButton#btnBusqueda {

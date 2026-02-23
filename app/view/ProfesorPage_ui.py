@@ -17,19 +17,28 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 from app.resources import resources_rc
 
 class Ui_ProfesorPage(object):
     def setupUi(self, ProfesorPage):
         if not ProfesorPage.objectName():
             ProfesorPage.setObjectName(u"ProfesorPage")
-        ProfesorPage.resize(881, 621)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(ProfesorPage.sizePolicy().hasHeightForWidth())
+        ProfesorPage.setSizePolicy(sizePolicy)
         ProfesorPage.setStyleSheet(u"color:black")
+        self.mainLayout = QVBoxLayout(ProfesorPage)
+        self.mainLayout.setSpacing(12)
+        self.mainLayout.setObjectName(u"mainLayout")
+        self.topBar = QHBoxLayout()
+        self.topBar.setSpacing(12)
+        self.topBar.setObjectName(u"topBar")
         self.pageTitle = QLabel(ProfesorPage)
         self.pageTitle.setObjectName(u"pageTitle")
-        self.pageTitle.setGeometry(QRect(10, 10, 201, 51))
         font = QFont()
         font.setFamilies([u"Segoe UI"])
         font.setPointSize(26)
@@ -37,77 +46,116 @@ class Ui_ProfesorPage(object):
         self.pageTitle.setFont(font)
         self.pageTitle.setStyleSheet(u"color:white")
         self.pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
-        self.formLayoutWidget = QWidget(ProfesorPage)
-        self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(10, 80, 501, 227))
-        self.formLayout = QFormLayout(self.formLayoutWidget)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.lblNombre = QLabel(self.formLayoutWidget)
-        self.lblNombre.setObjectName(u"lblNombre")
+
+        self.topBar.addWidget(self.pageTitle)
+
+        self.topSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.topBar.addItem(self.topSpacer)
+
+        self.searchLayout = QHBoxLayout()
+        self.searchLayout.setSpacing(8)
+        self.searchLayout.setObjectName(u"searchLayout")
+        self.lnBusqueda = QLineEdit(ProfesorPage)
+        self.lnBusqueda.setObjectName(u"lnBusqueda")
+
+        self.searchLayout.addWidget(self.lnBusqueda)
+
+        self.btnBusqueda = QPushButton(ProfesorPage)
+        self.btnBusqueda.setObjectName(u"btnBusqueda")
         font1 = QFont()
-        font1.setPointSize(16)
-        font1.setBold(False)
-        self.lblNombre.setFont(font1)
+        font1.setPointSize(12)
+        self.btnBusqueda.setFont(font1)
+        self.btnBusqueda.setStyleSheet(u"color:white")
+        icon = QIcon()
+        icon.addFile(u":/icons/icons/icono_buscar.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.btnBusqueda.setIcon(icon)
+        self.btnBusqueda.setIconSize(QSize(19, 19))
+
+        self.searchLayout.addWidget(self.btnBusqueda)
+
+
+        self.topBar.addLayout(self.searchLayout)
+
+        self.pushButton = QPushButton(ProfesorPage)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setFont(font1)
+        self.pushButton.setStyleSheet(u"color:white")
+
+        self.topBar.addWidget(self.pushButton)
+
+
+        self.mainLayout.addLayout(self.topBar)
+
+        self.midLayout = QHBoxLayout()
+        self.midLayout.setSpacing(16)
+        self.midLayout.setObjectName(u"midLayout")
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setHorizontalSpacing(12)
+        self.formLayout.setVerticalSpacing(10)
+        self.lblNombre = QLabel(ProfesorPage)
+        self.lblNombre.setObjectName(u"lblNombre")
+        font2 = QFont()
+        font2.setPointSize(16)
+        self.lblNombre.setFont(font2)
         self.lblNombre.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.lblNombre)
 
-        self.txtNombre = QLineEdit(self.formLayoutWidget)
+        self.txtNombre = QLineEdit(ProfesorPage)
         self.txtNombre.setObjectName(u"txtNombre")
         self.txtNombre.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txtNombre)
 
-        self.lblCorreo = QLabel(self.formLayoutWidget)
+        self.lblCorreo = QLabel(ProfesorPage)
         self.lblCorreo.setObjectName(u"lblCorreo")
-        self.lblCorreo.setFont(font1)
+        self.lblCorreo.setFont(font2)
         self.lblCorreo.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.lblCorreo)
 
-        self.txtCorreo = QLineEdit(self.formLayoutWidget)
+        self.txtCorreo = QLineEdit(ProfesorPage)
         self.txtCorreo.setObjectName(u"txtCorreo")
         self.txtCorreo.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.txtCorreo)
 
-        self.lblTlf = QLabel(self.formLayoutWidget)
+        self.lblTlf = QLabel(ProfesorPage)
         self.lblTlf.setObjectName(u"lblTlf")
-        font2 = QFont()
-        font2.setPointSize(16)
         self.lblTlf.setFont(font2)
         self.lblTlf.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.lblTlf)
 
-        self.txtTlf = QLineEdit(self.formLayoutWidget)
+        self.txtTlf = QLineEdit(ProfesorPage)
         self.txtTlf.setObjectName(u"txtTlf")
         self.txtTlf.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.txtTlf)
 
-        self.label = QLabel(self.formLayoutWidget)
+        self.label = QLabel(ProfesorPage)
         self.label.setObjectName(u"label")
         self.label.setFont(font2)
         self.label.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label)
 
-        self.txtTitulo = QLineEdit(self.formLayoutWidget)
+        self.txtTitulo = QLineEdit(ProfesorPage)
         self.txtTitulo.setObjectName(u"txtTitulo")
         self.txtTitulo.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.txtTitulo)
 
-        self.lblDpto = QLabel(self.formLayoutWidget)
+        self.lblDpto = QLabel(ProfesorPage)
         self.lblDpto.setObjectName(u"lblDpto")
         self.lblDpto.setFont(font2)
         self.lblDpto.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.lblDpto)
 
-        self.cbDpto = QComboBox(self.formLayoutWidget)
+        self.cbDpto = QComboBox(ProfesorPage)
         self.cbDpto.addItem("")
         self.cbDpto.addItem("")
         self.cbDpto.setObjectName(u"cbDpto")
@@ -115,87 +163,73 @@ class Ui_ProfesorPage(object):
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.cbDpto)
 
-        self.lblJefeDpto = QLabel(self.formLayoutWidget)
+        self.lblJefeDpto = QLabel(ProfesorPage)
         self.lblJefeDpto.setObjectName(u"lblJefeDpto")
         self.lblJefeDpto.setFont(font2)
         self.lblJefeDpto.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.LabelRole, self.lblJefeDpto)
 
-        self.checkJefe = QCheckBox(self.formLayoutWidget)
+        self.checkJefe = QCheckBox(ProfesorPage)
         self.checkJefe.setObjectName(u"checkJefe")
-        font3 = QFont()
-        font3.setPointSize(12)
-        self.checkJefe.setFont(font3)
+        self.checkJefe.setFont(font1)
         self.checkJefe.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.checkJefe)
 
-        self.verticalLayoutWidget = QWidget(ProfesorPage)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(520, 70, 331, 211))
-        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+
+        self.midLayout.addLayout(self.formLayout)
+
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setSpacing(10)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.btnActualizar = QPushButton(self.verticalLayoutWidget)
+        self.btnActualizar = QPushButton(ProfesorPage)
         self.btnActualizar.setObjectName(u"btnActualizar")
         self.btnActualizar.setFont(font2)
         self.btnActualizar.setStyleSheet(u"color:white")
 
         self.verticalLayout.addWidget(self.btnActualizar)
 
-        self.btbGuardar = QPushButton(self.verticalLayoutWidget)
+        self.btbGuardar = QPushButton(ProfesorPage)
         self.btbGuardar.setObjectName(u"btbGuardar")
         self.btbGuardar.setFont(font2)
         self.btbGuardar.setStyleSheet(u"color:white")
 
         self.verticalLayout.addWidget(self.btbGuardar)
 
-        self.btnEliminar = QPushButton(self.verticalLayoutWidget)
+        self.btnEliminar = QPushButton(ProfesorPage)
         self.btnEliminar.setObjectName(u"btnEliminar")
         self.btnEliminar.setFont(font2)
         self.btnEliminar.setStyleSheet(u"color:white")
 
         self.verticalLayout.addWidget(self.btnEliminar)
 
-        self.btnLimpiar = QPushButton(self.verticalLayoutWidget)
+        self.btnLimpiar = QPushButton(ProfesorPage)
         self.btnLimpiar.setObjectName(u"btnLimpiar")
         self.btnLimpiar.setFont(font2)
         self.btnLimpiar.setStyleSheet(u"color:white")
 
         self.verticalLayout.addWidget(self.btnLimpiar)
 
+        self.buttonsSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout.addItem(self.buttonsSpacer)
+
+
+        self.midLayout.addLayout(self.verticalLayout)
+
+
+        self.mainLayout.addLayout(self.midLayout)
+
         self.tblProfesores = QTableWidget(ProfesorPage)
         self.tblProfesores.setObjectName(u"tblProfesores")
-        self.tblProfesores.setGeometry(QRect(10, 310, 861, 311))
-        self.pushButton = QPushButton(ProfesorPage)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(740, 20, 121, 31))
-        self.pushButton.setFont(font3)
-        self.pushButton.setStyleSheet(u"color:white\n"
-"")
-        self.horizontalLayoutWidget = QWidget(ProfesorPage)
-        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
-        self.horizontalLayoutWidget.setGeometry(QRect(230, 10, 491, 61))
-        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.lnBusqueda = QLineEdit(self.horizontalLayoutWidget)
-        self.lnBusqueda.setObjectName(u"lnBusqueda")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(1)
+        sizePolicy1.setHeightForWidth(self.tblProfesores.sizePolicy().hasHeightForWidth())
+        self.tblProfesores.setSizePolicy(sizePolicy1)
 
-        self.horizontalLayout.addWidget(self.lnBusqueda)
-
-        self.btnBusqueda = QPushButton(self.horizontalLayoutWidget)
-        self.btnBusqueda.setObjectName(u"btnBusqueda")
-        self.btnBusqueda.setFont(font3)
-        self.btnBusqueda.setStyleSheet(u"color: white\n"
-"")
-        icon = QIcon()
-        icon.addFile(u":/icons/icons/icono_buscar.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.btnBusqueda.setIcon(icon)
-        self.btnBusqueda.setIconSize(QSize(19, 19))
-
-        self.horizontalLayout.addWidget(self.btnBusqueda)
+        self.mainLayout.addWidget(self.tblProfesores)
 
 
         self.retranslateUi(ProfesorPage)
@@ -206,9 +240,12 @@ class Ui_ProfesorPage(object):
     def retranslateUi(self, ProfesorPage):
         ProfesorPage.setWindowTitle(QCoreApplication.translate("ProfesorPage", u"Form", None))
         self.pageTitle.setText(QCoreApplication.translate("ProfesorPage", u"Profesores", None))
+        self.lnBusqueda.setPlaceholderText(QCoreApplication.translate("ProfesorPage", u"Buscar...", None))
+        self.btnBusqueda.setText("")
+        self.pushButton.setText(QCoreApplication.translate("ProfesorPage", u"Exportar a PDF", None))
         self.lblNombre.setText(QCoreApplication.translate("ProfesorPage", u"Nombre:", None))
         self.lblCorreo.setText(QCoreApplication.translate("ProfesorPage", u"Correo:", None))
-        self.lblTlf.setText(QCoreApplication.translate("ProfesorPage", u"Tel\u00e9fono: ", None))
+        self.lblTlf.setText(QCoreApplication.translate("ProfesorPage", u"Tel\u00e9fono:", None))
         self.label.setText(QCoreApplication.translate("ProfesorPage", u"T\u00edtulo:", None))
         self.lblDpto.setText(QCoreApplication.translate("ProfesorPage", u"Departamento:", None))
         self.cbDpto.setItemText(0, QCoreApplication.translate("ProfesorPage", u"Ciencias", None))
@@ -220,8 +257,5 @@ class Ui_ProfesorPage(object):
         self.btbGuardar.setText(QCoreApplication.translate("ProfesorPage", u"Guardar", None))
         self.btnEliminar.setText(QCoreApplication.translate("ProfesorPage", u"Eliminar", None))
         self.btnLimpiar.setText(QCoreApplication.translate("ProfesorPage", u"Limpiar", None))
-        self.pushButton.setText(QCoreApplication.translate("ProfesorPage", u"Exportar a PDF", None))
-        self.lnBusqueda.setPlaceholderText(QCoreApplication.translate("ProfesorPage", u"Buscar...", None))
-        self.btnBusqueda.setText("")
     # retranslateUi
 

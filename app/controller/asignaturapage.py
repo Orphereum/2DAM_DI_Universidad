@@ -2,7 +2,7 @@ from PySide6.QtWidgets import (
     QWidget, QHeaderView, QAbstractItemView, QMessageBox, QTableWidgetItem
 )
 
-from app.view.Asignaturas_ui import Ui_AsignaturasView
+from app.view.Asignatura_ui import Ui_AsignaturasView
 from app.controller.asignaturadialog import AsignaturaDialog
 from app.models.asignatura import Asignatura
 

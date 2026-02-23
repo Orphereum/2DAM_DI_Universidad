@@ -2,10 +2,10 @@ from dataclasses import dataclass
 
 @dataclass
 class Profesor:
-    id_profesor: int
-    nombre: str
-    correo: str
-    telefono: str
-    titulo: str
-    id_departamento: int #clave foránea de la entidad departamento
-    jefe_dtp: bool #es jefe o lider  de departamento o no
+    id: int = None
+    nombre: str = None
+    correo: str = None
+    telefono: str = None
+    titulo: str = None
+    id_departamento: int = None
+    jefe_dtp: bool = False

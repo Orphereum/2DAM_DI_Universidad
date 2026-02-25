@@ -91,4 +91,4 @@ class ProyectoPage(QWidget):
         self.descrip_proyecto = self.tabla_proyectos.item(fila, 2).text()      
         self.ui.descripcion_txt.setPlainText(self.descrip_proyecto)
         
-    
+        # cargar subvenciones

@@ -330,7 +330,7 @@ QPushButton {
        </column>
        <column>
         <property name="text">
-         <string>Importe asignado</string>
+         <string>Importe asignado (€)</string>
         </property>
        </column>
       </widget>

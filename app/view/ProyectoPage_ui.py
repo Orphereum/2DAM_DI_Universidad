@@ -255,6 +255,6 @@ class Ui_Proyecto_page(object):
         ___qtablewidgetitem3 = self.tabla_subvenciones.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Proyecto_page", u"Subvenci\u00f3n", None));
         ___qtablewidgetitem4 = self.tabla_subvenciones.horizontalHeaderItem(1)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado (\u20ac)", None));
     # retranslateUi
 

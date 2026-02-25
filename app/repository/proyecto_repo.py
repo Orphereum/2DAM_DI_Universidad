@@ -27,4 +27,19 @@ class ProyectoRepository:
         datos = cursor.fetchall()
         conn.close()
         return datos
+    
+    def obtener_subvenciones(self, id_proyecto):
+        conn = get_connection()
+        cursor = conn.cursor()
         
+        cursor.execute("""
+                    SELECT s.nombre_subvencion, ps.importe_asignado
+                    FROM subvencion s
+                    JOIN proyecto_subvencion ps
+                        ON s.id_subvencion = ps.id_subvencion
+                    WHERE ps.id_proyecto = ?
+                    ORDER BY s.nombre_subvencion
+                       """, (id_proyecto,))
+        datos = cursor.fetchall()
+        conn.close()
+        return datos

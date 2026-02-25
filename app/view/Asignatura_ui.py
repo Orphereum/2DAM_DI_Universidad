@@ -15,11 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
-    QFrame, QGridLayout, QGroupBox, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QSpacerItem, QSpinBox, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QPushButton, QSizePolicy,
+    QSpacerItem, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_AsignaturasView(object):
     def setupUi(self, AsignaturasView):
@@ -75,85 +74,18 @@ class Ui_AsignaturasView(object):
         self.frameMain = QFrame(AsignaturasView)
         self.frameMain.setObjectName(u"frameMain")
         self.frameMain.setFrameShape(QFrame.StyledPanel)
-        self.gridLayoutMain = QGridLayout(self.frameMain)
-        self.gridLayoutMain.setObjectName(u"gridLayoutMain")
-        self.grp_formulario = QGroupBox(self.frameMain)
-        self.grp_formulario.setObjectName(u"grp_formulario")
-        self.formLayout = QFormLayout(self.grp_formulario)
-        self.formLayout.setObjectName(u"formLayout")
-        self.labelNombre = QLabel(self.grp_formulario)
-        self.labelNombre.setObjectName(u"labelNombre")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.labelNombre)
-
-        self.txt_nombre = QLineEdit(self.grp_formulario)
-        self.txt_nombre.setObjectName(u"txt_nombre")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.txt_nombre)
-
-        self.labelCreditos = QLabel(self.grp_formulario)
-        self.labelCreditos.setObjectName(u"labelCreditos")
-
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.labelCreditos)
-
-        self.sp_creditos = QSpinBox(self.grp_formulario)
-        self.sp_creditos.setObjectName(u"sp_creditos")
-
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.sp_creditos)
-
-        self.labelCurso = QLabel(self.grp_formulario)
-        self.labelCurso.setObjectName(u"labelCurso")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.labelCurso)
-
-        self.cb_curso = QComboBox(self.grp_formulario)
-        self.cb_curso.setObjectName(u"cb_curso")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.cb_curso)
-
-        self.labelCuatrimestre = QLabel(self.grp_formulario)
-        self.labelCuatrimestre.setObjectName(u"labelCuatrimestre")
-
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.labelCuatrimestre)
-
-        self.cb_cuatrimestre = QComboBox(self.grp_formulario)
-        self.cb_cuatrimestre.setObjectName(u"cb_cuatrimestre")
-
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.cb_cuatrimestre)
-
-        self.labelTipo = QLabel(self.grp_formulario)
-        self.labelTipo.setObjectName(u"labelTipo")
-
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.labelTipo)
-
-        self.chk_obligatoria = QCheckBox(self.grp_formulario)
-        self.chk_obligatoria.setObjectName(u"chk_obligatoria")
-
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.chk_obligatoria)
-
-        self.btn_guardar = QPushButton(self.grp_formulario)
-        self.btn_guardar.setObjectName(u"btn_guardar")
-
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.btn_guardar)
-
-        self.btn_cancelar = QPushButton(self.grp_formulario)
-        self.btn_cancelar.setObjectName(u"btn_cancelar")
-
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.btn_cancelar)
-
-
-        self.gridLayoutMain.addWidget(self.grp_formulario, 0, 0, 3, 1)
-
+        self.vboxLayout = QVBoxLayout(self.frameMain)
+        self.vboxLayout.setObjectName(u"vboxLayout")
         self.lblTablaTitulo = QLabel(self.frameMain)
         self.lblTablaTitulo.setObjectName(u"lblTablaTitulo")
         self.lblTablaTitulo.setFont(font1)
 
-        self.gridLayoutMain.addWidget(self.lblTablaTitulo, 0, 1, 1, 1)
+        self.vboxLayout.addWidget(self.lblTablaTitulo)
 
         self.tbl_asignaturas = QTableWidget(self.frameMain)
         self.tbl_asignaturas.setObjectName(u"tbl_asignaturas")
 
-        self.gridLayoutMain.addWidget(self.tbl_asignaturas, 1, 1, 1, 1)
+        self.vboxLayout.addWidget(self.tbl_asignaturas)
 
         self.hboxLayout1 = QHBoxLayout()
         self.hboxLayout1.setObjectName(u"hboxLayout1")
@@ -182,11 +114,22 @@ class Ui_AsignaturasView(object):
 
         self.hboxLayout1.addWidget(self.btnExportarPdf)
 
+        self.spacerButtons = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayoutMain.addLayout(self.hboxLayout1, 2, 1, 1, 1)
+        self.hboxLayout1.addItem(self.spacerButtons)
+
+
+        self.vboxLayout.addLayout(self.hboxLayout1)
 
 
         self.verticalLayout.addWidget(self.frameMain)
+
+        self.lbl_estado = QLabel(AsignaturasView)
+        self.lbl_estado.setObjectName(u"lbl_estado")
+        self.lbl_estado.setMinimumHeight(24)
+        self.lbl_estado.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.verticalLayout.addWidget(self.lbl_estado)
 
         self.verticalSpacerBottom = QSpacerItem(20, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -202,19 +145,12 @@ class Ui_AsignaturasView(object):
         AsignaturasView.setWindowTitle(QCoreApplication.translate("AsignaturasView", u"Asignaturas", None))
         self.lblTitulo.setText(QCoreApplication.translate("AsignaturasView", u"ASIGNATURAS", None))
         self.lblContexto.setText(QCoreApplication.translate("AsignaturasView", u"Grado seleccionado:", None))
-        self.grp_formulario.setTitle(QCoreApplication.translate("AsignaturasView", u"Datos de la asignatura", None))
-        self.labelNombre.setText(QCoreApplication.translate("AsignaturasView", u"Nombre:", None))
-        self.labelCreditos.setText(QCoreApplication.translate("AsignaturasView", u"Cr\u00e9ditos:", None))
-        self.labelCurso.setText(QCoreApplication.translate("AsignaturasView", u"Curso:", None))
-        self.labelCuatrimestre.setText(QCoreApplication.translate("AsignaturasView", u"Cuatrimestre:", None))
-        self.labelTipo.setText(QCoreApplication.translate("AsignaturasView", u"Obligatoria:", None))
-        self.btn_guardar.setText(QCoreApplication.translate("AsignaturasView", u"Guardar", None))
-        self.btn_cancelar.setText(QCoreApplication.translate("AsignaturasView", u"Cancelar", None))
         self.lblTablaTitulo.setText(QCoreApplication.translate("AsignaturasView", u"Listado de asignaturas", None))
         self.btn_nueva.setText(QCoreApplication.translate("AsignaturasView", u"Nueva", None))
         self.btn_editar.setText(QCoreApplication.translate("AsignaturasView", u"Editar", None))
         self.btn_eliminar.setText(QCoreApplication.translate("AsignaturasView", u"Eliminar", None))
         self.btn_refrescar.setText(QCoreApplication.translate("AsignaturasView", u"Refrescar", None))
         self.btnExportarPdf.setText(QCoreApplication.translate("AsignaturasView", u"Exportar PDF", None))
+        self.lbl_estado.setText(QCoreApplication.translate("AsignaturasView", u"Listo", None))
     # retranslateUi
 

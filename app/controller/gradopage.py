@@ -3,6 +3,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QAbstractItemView
 from app.view.GradoPage_ui import Ui_Form
 from app.service.grado_service import GradoService
+from app.service.facultad_service import FacultadService
 from app.models.grado import Grado
 
 
@@ -14,7 +15,9 @@ class GradoPage(QWidget):
         self.ui.setupUi(self)
 
         self.service = GradoService()
-        self.grado_seleccionado_id = None
+        self.facultad = FacultadService()
+        datos = self.facultad.obtener_facultades()
+        print(datos)
 
         self._configurar_tabla()
         self._conectar_eventos()

@@ -1,5 +1,5 @@
-from repository.facultad_repo import FacultadRepo
-from models.facultad import Facultad
+from app.repository.facultad_repo import FacultadRepo
+from app.models.facultad import Facultad
 
 class FacultadService:
     def __init__(self):

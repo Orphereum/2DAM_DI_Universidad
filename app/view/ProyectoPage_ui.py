@@ -208,6 +208,19 @@ class Ui_Proyecto_page(object):
 
         self.horizontalLayout_3.addWidget(self.tabla_proyectos)
 
+        self.tabla_subvenciones = QTableWidget(Proyecto_page)
+        if (self.tabla_subvenciones.columnCount() < 2):
+            self.tabla_subvenciones.setColumnCount(2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tabla_subvenciones.setHorizontalHeaderItem(0, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tabla_subvenciones.setHorizontalHeaderItem(1, __qtablewidgetitem4)
+        self.tabla_subvenciones.setObjectName(u"tabla_subvenciones")
+        self.tabla_subvenciones.horizontalHeader().setStretchLastSection(True)
+        self.tabla_subvenciones.verticalHeader().setStretchLastSection(True)
+
+        self.horizontalLayout_3.addWidget(self.tabla_subvenciones)
+
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
 
@@ -239,5 +252,9 @@ class Ui_Proyecto_page(object):
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Proyecto_page", u"Nombre", None));
         ___qtablewidgetitem2 = self.tabla_proyectos.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None));
+        ___qtablewidgetitem3 = self.tabla_subvenciones.horizontalHeaderItem(0)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Proyecto_page", u"Subvenci\u00f3n", None));
+        ___qtablewidgetitem4 = self.tabla_subvenciones.horizontalHeaderItem(1)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado", None));
     # retranslateUi
 

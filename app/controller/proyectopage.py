@@ -91,11 +91,4 @@ class ProyectoPage(QWidget):
         self.descrip_proyecto = self.tabla_proyectos.item(fila, 2).text()      
         self.ui.descripcion_txt.setPlainText(self.descrip_proyecto)
         
-        # cargar tabla de subvenciones
-        self.cargar_subvenciones_proyecto(self.id_proyecto)
     
-    def cargar_subvenciones_proyecto(self, id_proyecto):
-        datos = self.proyecto_service.obtener_subvenciones(id_proyecto)
-        
-        self.generar_tabla(self.tabla_subvenciones, datos)
-        

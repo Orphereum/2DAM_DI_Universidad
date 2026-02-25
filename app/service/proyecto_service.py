@@ -11,6 +11,3 @@ class ProyectoService:
     
     def filtrar_por_grupo(self, id_grupo):
         return self.proyecto_repo.obtener_por_grupo(id_grupo)
-    
-    def obtener_subvenciones(self, id_proyecto):
-        return self.proyecto_repo.obtener_subvenciones(id_proyecto)

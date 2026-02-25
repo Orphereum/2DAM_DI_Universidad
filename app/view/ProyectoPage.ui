@@ -15,10 +15,10 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QLineEdit {
-	font: 300 14pt &quot;Poppins&quot;;
+	font: 300 12pt &quot;Poppins&quot;;
 }
 QPlainTextEdit {
-	font: 300 14pt &quot;Poppins&quot;;
+	font: 300 12pt &quot;Poppins&quot;;
 }
 QLabel {
 	

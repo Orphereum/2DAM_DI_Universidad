@@ -26,10 +26,10 @@ class Ui_Proyecto_page(object):
             Proyecto_page.setObjectName(u"Proyecto_page")
         Proyecto_page.resize(868, 599)
         Proyecto_page.setStyleSheet(u"QLineEdit {\n"
-"	font: 300 14pt \"Poppins\";\n"
+"	font: 300 12pt \"Poppins\";\n"
 "}\n"
 "QPlainTextEdit {\n"
-"	font: 300 14pt \"Poppins\";\n"
+"	font: 300 12pt \"Poppins\";\n"
 "}\n"
 "QLabel {\n"
 "	\n"

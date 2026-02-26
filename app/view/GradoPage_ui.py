@@ -166,6 +166,10 @@ class Ui_Form(object):
         self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.sp_creditos)
 
         self.cb_tipo = QComboBox(self.grp_formulario)
+        self.cb_tipo.addItem("")
+        self.cb_tipo.addItem("")
+        self.cb_tipo.addItem("")
+        self.cb_tipo.addItem("")
         self.cb_tipo.setObjectName(u"cb_tipo")
 
         self.formLayout_2.setWidget(4, QFormLayout.ItemRole.FieldRole, self.cb_tipo)
@@ -223,6 +227,9 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
 
+        self.cb_tipo.setCurrentIndex(-1)
+
+
         QMetaObject.connectSlotsByName(Form)
     # setupUi
 
@@ -253,6 +260,11 @@ class Ui_Form(object):
         self.label_8.setText(QCoreApplication.translate("Form", u"Cr\u00e9ditos:", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"Tipo:", None))
         self.label_9.setText(QCoreApplication.translate("Form", u"Estado:", None))
+        self.cb_tipo.setItemText(0, QCoreApplication.translate("Form", u"Grado", None))
+        self.cb_tipo.setItemText(1, QCoreApplication.translate("Form", u"Doble Grado", None))
+        self.cb_tipo.setItemText(2, QCoreApplication.translate("Form", u"Master", None))
+        self.cb_tipo.setItemText(3, QCoreApplication.translate("Form", u"Doctorado", None))
+
         self.chk_activo.setText(QCoreApplication.translate("Form", u"Activo", None))
         self.btn_guardar.setText(QCoreApplication.translate("Form", u"Guardar", None))
         self.btn_cancelar.setText(QCoreApplication.translate("Form", u"Cancelar", None))

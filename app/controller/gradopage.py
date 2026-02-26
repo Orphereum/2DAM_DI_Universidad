@@ -14,11 +14,18 @@ class GradoPage(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        
         self.service = GradoService()
         self.facultad = FacultadService()
-        datos = self.facultad.obtener_facultades()
-        print(datos)
-
+        
+        dato = self.facultad.obtener_facultades()
+        for facultad in dato:
+            self.ui.cb_facultad.addItem(
+                facultad.nombre,
+                facultad.id  
+            )
+       
+            
         self._configurar_tabla()
         self._conectar_eventos()
         self._bloquear_formulario()
@@ -40,6 +47,9 @@ class GradoPage(QWidget):
         self.ui.btn_editar.clicked.connect(self.editar_grado)
         self.ui.btn_eliminar.clicked.connect(self.eliminar_grado)
         self.ui.btn_refrescar.clicked.connect(self.refrescar)
+        self.ui.cb_facultad.currentIndexChanged.connect(
+        self._facultad_cambiada
+         )
 
         self.ui.btn_guardar.clicked.connect(self.guardar)
         self.ui.btn_cancelar.clicked.connect(self.cancelar)
@@ -50,6 +60,12 @@ class GradoPage(QWidget):
 
     # CARGA DE DATOS (PREPARADO)
 
+    def _facultad_cambiada(self):
+        id_facultad = self._get_facultad_actual()
+        if id_facultad:
+            self.cargar_grados(id_facultad)
+            
+            
     def cargar_grados(self, id_facultad):
         """
         Este método lo llamará el AppController
@@ -143,18 +159,29 @@ class GradoPage(QWidget):
             self.cargar_grados(id_facultad)
 
     def _tabla_cambio_seleccion(self):
-        items = self.ui.tbl_grados.selectedItems()
-        if not items:
+        selected_rows = self.ui.tbl_grados.selectionModel().selectedRows()
+
+        if not selected_rows:
             return
 
-        self.grado_seleccionado_id = int(items[0].text())
+        row = selected_rows[0].row()
 
-        self.ui.txt_nombre.setText(items[1].text())
-        self.ui.txt_codigo.setText(items[2].text())
-        self.ui.sp_duracion.setValue(int(items[3].text()))
-        self.ui.sp_creditos.setValue(int(items[4].text()))
-        self.ui.cb_tipo.setCurrentText(items[5].text())
-        self.ui.chk_activo.setChecked(items[6].text() == "Activo")
+        id_item = self.ui.tbl_grados.item(row, 0)
+        nombre_item = self.ui.tbl_grados.item(row, 1)
+        codigo_item = self.ui.tbl_grados.item(row, 2)
+        duracion_item = self.ui.tbl_grados.item(row, 3)
+        creditos_item = self.ui.tbl_grados.item(row, 4)
+        tipo_item = self.ui.tbl_grados.item(row, 5)
+        estado_item = self.ui.tbl_grados.item(row, 6)
+
+        self.grado_seleccionado_id = int(id_item.text())
+
+        self.ui.txt_nombre.setText(nombre_item.text())
+        self.ui.txt_codigo.setText(codigo_item.text())
+        self.ui.sp_duracion.setValue(int(duracion_item.text()))
+        self.ui.sp_creditos.setValue(int(creditos_item.text()))
+        self.ui.cb_tipo.setCurrentText(tipo_item.text())
+        self.ui.chk_activo.setChecked(estado_item.text() == "Activo")
 
     def _get_facultad_actual(self):
         """

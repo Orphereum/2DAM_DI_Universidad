@@ -233,7 +233,31 @@
           <widget class="QSpinBox" name="sp_creditos"/>
          </item>
          <item row="4" column="1">
-          <widget class="QComboBox" name="cb_tipo"/>
+          <widget class="QComboBox" name="cb_tipo">
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>Grado</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Doble Grado</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Master</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Doctorado</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item row="5" column="1">
           <widget class="QCheckBox" name="chk_activo">

@@ -67,35 +67,26 @@ class Ui_Proyecto_page(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.comboBox_gruposInv = QComboBox(self.groupBox)
         self.comboBox_gruposInv.setObjectName(u"comboBox_gruposInv")
+        self.comboBox_gruposInv.setMinimumSize(QSize(0, 25))
 
         self.verticalLayout_3.addWidget(self.comboBox_gruposInv)
 
 
         self.horizontalLayout.addWidget(self.groupBox)
 
-        self.groupBox_2 = QGroupBox(self.widget)
-        self.groupBox_2.setObjectName(u"groupBox_2")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox_2)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.comboBox_2 = QComboBox(self.groupBox_2)
-        self.comboBox_2.setObjectName(u"comboBox_2")
-
-        self.verticalLayout_2.addWidget(self.comboBox_2)
-
-
-        self.horizontalLayout.addWidget(self.groupBox_2)
-
         self.groupBox_3 = QGroupBox(self.widget)
         self.groupBox_3.setObjectName(u"groupBox_3")
-        self.verticalLayout = QVBoxLayout(self.groupBox_3)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.groupBox_3.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout_4 = QHBoxLayout(self.groupBox_3)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.pushButton = QPushButton(self.groupBox_3)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setEnabled(True)
-        self.pushButton.setMaximumSize(QSize(16777215, 25))
+        self.pushButton.setMinimumSize(QSize(0, 25))
+        self.pushButton.setMaximumSize(QSize(200, 25))
         self.pushButton.setStyleSheet(u"color:white")
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.horizontalLayout_4.addWidget(self.pushButton)
 
 
         self.horizontalLayout.addWidget(self.groupBox_3)
@@ -217,7 +208,7 @@ class Ui_Proyecto_page(object):
         self.tabla_subvenciones.setHorizontalHeaderItem(1, __qtablewidgetitem4)
         self.tabla_subvenciones.setObjectName(u"tabla_subvenciones")
         self.tabla_subvenciones.horizontalHeader().setStretchLastSection(True)
-        self.tabla_subvenciones.verticalHeader().setStretchLastSection(True)
+        self.tabla_subvenciones.verticalHeader().setStretchLastSection(False)
 
         self.horizontalLayout_3.addWidget(self.tabla_subvenciones)
 
@@ -237,7 +228,6 @@ class Ui_Proyecto_page(object):
         Proyecto_page.setWindowTitle(QCoreApplication.translate("Proyecto_page", u"Form", None))
         self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectosv2", None))
         self.groupBox.setTitle(QCoreApplication.translate("Proyecto_page", u"Grupos de Investigaci\u00f3n", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("Proyecto_page", u"Subvenciones", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("Proyecto_page", u"Informes", None))
         self.pushButton.setText(QCoreApplication.translate("Proyecto_page", u"Guardar datos", None))
         self.lblNombre.setText(QCoreApplication.translate("Proyecto_page", u"Nombre:", None))

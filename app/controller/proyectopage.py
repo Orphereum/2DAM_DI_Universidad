@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QAbstractItemView
+from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
 from app.view.ProyectoPage_ui import Ui_Proyecto_page
 
 
@@ -8,6 +8,7 @@ class ProyectoPage(QWidget):
         self.ui = Ui_Proyecto_page()
         self.ui.setupUi(self)
         
+                
         # ------------------
         # variables globales
         self.id_proyecto = None
@@ -16,7 +17,29 @@ class ProyectoPage(QWidget):
         self.tabla_proyectos = self.ui.tabla_proyectos
         self.tabla_subvenciones = self.ui.tabla_subvenciones
         
+        # Tabla subvenciones
+        header = self.tabla_subvenciones.horizontalHeader()
+        # Primera columna (nombre) que se expanda
+        header.setSectionResizeMode(0, QHeaderView.Stretch)
+        # Segunda columna (importe) tamaño fijo o contenido
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        # Evitamos que se corte el texto
+        self.tabla_subvenciones.setWordWrap(True)
+        
+        # Tabla proyectos
+        header = self.tabla_proyectos.horizontalHeader()
+        # Columna 0 → ID (mínimo necesario)
+        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
+        # Columna 1 → Nombre (más importante)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
+
+        # Columna 2 → Descripción (también grande pero menos prioritaria)
+        header.setSectionResizeMode(2, QHeaderView.Stretch)
+        
+        
         # Seleccion en tablas
+        # Tabla proyectos
         self.ui.tabla_proyectos.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.ui.tabla_proyectos.setSelectionMode(QAbstractItemView.SingleSelection)
         self.tabla_proyectos.setStyleSheet("""
@@ -26,6 +49,16 @@ class ProyectoPage(QWidget):
             }
         """)      
         self.tabla_proyectos.itemSelectionChanged.connect(self.proyecto_seleccionado)
+        
+        # Tabla Subvenciones
+        self.ui.tabla_subvenciones.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.ui.tabla_subvenciones.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.tabla_subvenciones.setStyleSheet("""
+                QTableWidget::item:selected {
+                background-color: #3daee9;
+                color: black;
+            }
+        """)      
         
         # Inicialización de clases
         self.proyecto_service = proyecto_service
@@ -38,12 +71,26 @@ class ProyectoPage(QWidget):
         # FUNCIONES DE LA VENTANA
         self.ui.comboBox_gruposInv.currentIndexChanged.connect(self.filtrar_por_grupo)
         
+        # -----------------------
+        # BOTONES LÓGICA INTERACCIÓN
+        # -----------------------
+        self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
+        
+        
+    def limpiar_campos(self):
+        self.ui.nombre_txt.clear()
+        self.ui.descripcion_txt.clear()
+        
         
         
     def generar_tabla(self, tabla, datos):  
         tabla.setRowCount(len(datos))
         for linea, registro in enumerate(datos):
             for columna, valor in enumerate(registro):
+                 # Si es la tabla de subvenciones, y es la columna de importe la 1, le ponemos formato de euros en miles.
+                if tabla == self.tabla_subvenciones and columna == 1:
+                    valor = f"{valor:,.0f} €".replace(",", ".")
+
                 tabla.setItem(linea, columna, QTableWidgetItem(str(valor)))
         
     def cargar_datos(self):

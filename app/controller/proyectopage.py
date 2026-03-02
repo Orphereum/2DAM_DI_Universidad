@@ -78,9 +78,18 @@ class ProyectoPage(QWidget):
         
         
     def limpiar_campos(self):
+        nombre = self.ui.nombre_txt.text().strip()
+        descripcion = self.ui.descripcion_txt.toPlainText().strip()
+        
+        if not nombre and not descripcion:
+            QMessageBox.information(self, "Información", "Debe haber algo escrito en alguno de los campos para poder limpiarlos")
+            return
+        
+        # Si no, lo vaciamos e informamos
         self.ui.nombre_txt.clear()
         self.ui.descripcion_txt.clear()
-        
+        self.id_proyecto = None
+        QMessageBox.information(self, "Liempeza de campos", "Se han limpiado los campos")
         
         
     def generar_tabla(self, tabla, datos):  

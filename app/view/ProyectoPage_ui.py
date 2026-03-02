@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QGroupBox,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QPlainTextEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
+    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QPlainTextEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Proyecto_page(object):
     def setupUi(self, Proyecto_page):
@@ -194,6 +195,7 @@ class Ui_Proyecto_page(object):
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tabla_proyectos.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.tabla_proyectos.setObjectName(u"tabla_proyectos")
+        self.tabla_proyectos.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla_proyectos.horizontalHeader().setStretchLastSection(True)
         self.tabla_proyectos.verticalHeader().setStretchLastSection(True)
 
@@ -207,6 +209,7 @@ class Ui_Proyecto_page(object):
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tabla_subvenciones.setHorizontalHeaderItem(1, __qtablewidgetitem4)
         self.tabla_subvenciones.setObjectName(u"tabla_subvenciones")
+        self.tabla_subvenciones.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla_subvenciones.horizontalHeader().setStretchLastSection(True)
         self.tabla_subvenciones.verticalHeader().setStretchLastSection(False)
 

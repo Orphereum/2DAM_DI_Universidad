@@ -5,7 +5,10 @@ from app.view.GradoPage_ui import Ui_Form
 from app.service.grado_service import GradoService
 from app.service.facultad_service import FacultadService
 from app.models.grado import Grado
-
+from app.reports.grado_report import generar_informe_grados
+import os  
+import subprocess
+import sys
 
 class GradoPage(QWidget):
 
@@ -28,6 +31,7 @@ class GradoPage(QWidget):
             
         self._configurar_tabla()
         self._conectar_eventos()
+        self.ui.btn_generarInforme.clicked.connect(self.generar_informe_pdf) 
         self._bloquear_formulario()
 
     # CONFIGURACIÓN INICIAL
@@ -203,3 +207,30 @@ class GradoPage(QWidget):
 
     def _desbloquear_formulario(self):
         self.ui.grp_formulario.setEnabled(True)
+
+
+    def generar_informe_pdf(self):
+        try:
+            facultad_nombre = self.ui.cb_facultad.currentText()
+            id_facultad = self._get_facultad_actual()
+
+            if not id_facultad:
+                QMessageBox.warning(self, "Aviso", "Selecciona una facultad primero")
+                return
+
+            grados = self.service.obtener_grados_por_facultad(id_facultad)
+
+            if not grados:
+                QMessageBox.warning(self, "Aviso", "No hay grados para generar informe")
+                return
+
+            pdf_path = generar_informe_grados(grados, facultad_nombre)
+
+            QMessageBox.information(
+                self,
+                "Informe Generado",
+                f"PDF creado exitosamente:\n{pdf_path}"
+            )
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error generando PDF:\n{str(e)}")

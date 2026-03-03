@@ -78,16 +78,20 @@ class Ui_Form(object):
         self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
         self.gridLayout = QGridLayout(self.frame_3)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.btn_nuevo = QPushButton(self.frame_3)
-        self.btn_nuevo.setObjectName(u"btn_nuevo")
-        self.btn_nuevo.setMaximumSize(QSize(100000, 16777215))
+        self.widget_2 = QWidget(self.frame_3)
+        self.widget_2.setObjectName(u"widget_2")
+        self.gridLayout_3 = QGridLayout(self.widget_2)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.label_3 = QLabel(self.widget_2)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setMaximumSize(QSize(100, 16777215))
+        self.label_3.setFont(font1)
+        self.label_3.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
 
-        self.gridLayout.addWidget(self.btn_nuevo, 2, 5, 1, 1)
+        self.gridLayout_3.addWidget(self.label_3, 0, 0, 1, 1)
 
-        self.btn_eliminar = QPushButton(self.frame_3)
-        self.btn_eliminar.setObjectName(u"btn_eliminar")
 
-        self.gridLayout.addWidget(self.btn_eliminar, 4, 5, 1, 1)
+        self.gridLayout.addWidget(self.widget_2, 0, 5, 1, 1)
 
         self.tbl_grados = QTableWidget(self.frame_3)
         if (self.tbl_grados.columnCount() < 7):
@@ -109,6 +113,27 @@ class Ui_Form(object):
         self.tbl_grados.setObjectName(u"tbl_grados")
 
         self.gridLayout.addWidget(self.tbl_grados, 1, 5, 1, 1)
+
+        self.btn_refrescar = QPushButton(self.frame_3)
+        self.btn_refrescar.setObjectName(u"btn_refrescar")
+
+        self.gridLayout.addWidget(self.btn_refrescar, 5, 5, 1, 1)
+
+        self.btn_eliminar = QPushButton(self.frame_3)
+        self.btn_eliminar.setObjectName(u"btn_eliminar")
+
+        self.gridLayout.addWidget(self.btn_eliminar, 4, 5, 1, 1)
+
+        self.btn_editar = QPushButton(self.frame_3)
+        self.btn_editar.setObjectName(u"btn_editar")
+
+        self.gridLayout.addWidget(self.btn_editar, 3, 5, 1, 1)
+
+        self.btn_nuevo = QPushButton(self.frame_3)
+        self.btn_nuevo.setObjectName(u"btn_nuevo")
+        self.btn_nuevo.setMaximumSize(QSize(100000, 16777215))
+
+        self.gridLayout.addWidget(self.btn_nuevo, 2, 5, 1, 1)
 
         self.grp_formulario = QGroupBox(self.frame_3)
         self.grp_formulario.setObjectName(u"grp_formulario")
@@ -192,30 +217,10 @@ class Ui_Form(object):
 
         self.gridLayout.addWidget(self.grp_formulario, 1, 1, 2, 1)
 
-        self.btn_refrescar = QPushButton(self.frame_3)
-        self.btn_refrescar.setObjectName(u"btn_refrescar")
+        self.btn_generarInforme = QPushButton(self.frame_3)
+        self.btn_generarInforme.setObjectName(u"btn_generarInforme")
 
-        self.gridLayout.addWidget(self.btn_refrescar, 5, 5, 1, 1)
-
-        self.btn_editar = QPushButton(self.frame_3)
-        self.btn_editar.setObjectName(u"btn_editar")
-
-        self.gridLayout.addWidget(self.btn_editar, 3, 5, 1, 1)
-
-        self.widget_2 = QWidget(self.frame_3)
-        self.widget_2.setObjectName(u"widget_2")
-        self.gridLayout_3 = QGridLayout(self.widget_2)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.label_3 = QLabel(self.widget_2)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setMaximumSize(QSize(100, 16777215))
-        self.label_3.setFont(font1)
-        self.label_3.setAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
-
-        self.gridLayout_3.addWidget(self.label_3, 0, 0, 1, 1)
-
-
-        self.gridLayout.addWidget(self.widget_2, 0, 5, 1, 1)
+        self.gridLayout.addWidget(self.btn_generarInforme, 6, 5, 1, 1)
 
 
         self.verticalLayout.addWidget(self.frame_3)
@@ -237,8 +242,7 @@ class Ui_Form(object):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.lblgrado.setText(QCoreApplication.translate("Form", u"GRADO", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"Facultad:", None))
-        self.btn_nuevo.setText(QCoreApplication.translate("Form", u"Nuevo", None))
-        self.btn_eliminar.setText(QCoreApplication.translate("Form", u"Eliminar", None))
+        self.label_3.setText(QCoreApplication.translate("Form", u"Grados:", None))
         ___qtablewidgetitem = self.tbl_grados.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"id_grado", None));
         ___qtablewidgetitem1 = self.tbl_grados.horizontalHeaderItem(1)
@@ -253,6 +257,10 @@ class Ui_Form(object):
         ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"tipo", None));
         ___qtablewidgetitem6 = self.tbl_grados.horizontalHeaderItem(6)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"estado", None));
+        self.btn_refrescar.setText(QCoreApplication.translate("Form", u"Refrescar", None))
+        self.btn_eliminar.setText(QCoreApplication.translate("Form", u"Eliminar", None))
+        self.btn_editar.setText(QCoreApplication.translate("Form", u"Editar", None))
+        self.btn_nuevo.setText(QCoreApplication.translate("Form", u"Nuevo", None))
         self.grp_formulario.setTitle(QCoreApplication.translate("Form", u"Campos", None))
         self.label_4.setText(QCoreApplication.translate("Form", u"Nombre:", None))
         self.label_5.setText(QCoreApplication.translate("Form", u"C\u00f3digo:", None))
@@ -268,8 +276,6 @@ class Ui_Form(object):
         self.chk_activo.setText(QCoreApplication.translate("Form", u"Activo", None))
         self.btn_guardar.setText(QCoreApplication.translate("Form", u"Guardar", None))
         self.btn_cancelar.setText(QCoreApplication.translate("Form", u"Cancelar", None))
-        self.btn_refrescar.setText(QCoreApplication.translate("Form", u"Refrescar", None))
-        self.btn_editar.setText(QCoreApplication.translate("Form", u"Editar", None))
-        self.label_3.setText(QCoreApplication.translate("Form", u"Grados:", None))
+        self.btn_generarInforme.setText(QCoreApplication.translate("Form", u"Generar Informe", None))
     # retranslateUi
 

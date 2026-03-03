@@ -12,6 +12,7 @@ class ProyectoPage(QWidget):
         # ------------------
         # variables globales
         self.id_proyecto = None
+        self.nuevo_id = None
         # ------------------
         
         self.tabla_proyectos = self.ui.tabla_proyectos
@@ -74,7 +75,42 @@ class ProyectoPage(QWidget):
         # -----------------------
         # BOTONES LÓGICA INTERACCIÓN
         # -----------------------
+        # Boton editar
+        
+        # Boton guardar
+        self.ui.btn_guardar.clicked.connect(self.crear_proyecto)
+        # Boton eliminar
+        
+        # Boton limpiar
         self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
+        
+        
+    def crear_proyecto(self):
+        # primero comprobar que hay algunu grupoInv seleccionado en el comobox sino, muestrar un mensjae
+        id_grupo = self.ui.comboBox_gruposInv.currentData()
+        
+        if id_grupo is None:
+            QMessageBox.information(self, "Información", "Se necesita tener seleccionado algún grupo de investigación relacionado con el proyecto a crear")
+            return 
+        
+        # se comprueba que los dos campos estén rellenados
+        nombre = self.ui.nombre_txt.text().strip()
+        descripcion = self.ui.descripcion_txt.toPlainText().strip()
+        
+        if not nombre or not descripcion:
+            QMessageBox.warning(self, "Atención", "Todos los campos no pueden estar vacíos")
+            return
+        
+        # insertar proyecto
+        # guardar relacion N:M entre proyecto - grupoInv que esté seleccionado
+        self.nuevo_id = self.proyecto_service.crear_proyecto(nombre, descripcion, id_grupo)
+        # actualizar tabla y limpiar campos
+        self.actualizar_tabla_proyectos()
+        
+        # seleccionar nuevo proyecto que se ha creado
+        self.seleccionar_proyecto_por_id(self.nuevo_id)
+        
+        self.limpiar_campos()
         
         
     def limpiar_campos(self):
@@ -89,7 +125,18 @@ class ProyectoPage(QWidget):
         self.ui.nombre_txt.clear()
         self.ui.descripcion_txt.clear()
         self.id_proyecto = None
-        QMessageBox.information(self, "Liempeza de campos", "Se han limpiado los campos")
+        print("Campos limpios")
+        
+    def actualizar_tabla_proyectos(self):
+        id_grupo = self.ui.comboBox_gruposInv.currentData()
+
+        if id_grupo is None:
+            self.tabla_proyectos.setRowCount(0)
+            return
+
+        datos = self.proyecto_service.obtener_por_grupo(id_grupo)
+
+        self.generar_tabla(self.tabla_proyectos, datos)   
         
         
     def generar_tabla(self, tabla, datos):  
@@ -134,9 +181,28 @@ class ProyectoPage(QWidget):
         datos = self.proyecto_service.filtrar_por_grupo(id_grupo)
         self.generar_tabla(self.tabla_proyectos, datos)
         
+    # comprueba la tabla y busca el id nuevo que hemos recibido al crear un proyecto nuevo. 
+    # Cuando coincida llama a proyecto_seleccionado para mostrarlo de manera más visual         
+    def seleccionar_proyecto_por_id(self, id_proyecto):
+        for fila in range(self.tabla_proyectos.rowCount()):
+            item = self.tabla_proyectos.item(fila, 0)
+
+            if item and int(item.text()) == id_proyecto:
+                self.tabla_proyectos.selectRow(fila)
+                self.proyecto_seleccionado()
+                break
+            
     def proyecto_seleccionado(self):
         fila = self.tabla_proyectos.currentRow()
         
+        if fila == -1:
+            return
+        
+        item_id = self.tabla_proyectos.item(fila,0)
+        
+        if item_id is None:
+            return
+    
         # pos 0 = id
         self.id_proyecto = int(self.tabla_proyectos.item(fila, 0).text())
         print(f"ID PRYECTO {self.id_proyecto}")  

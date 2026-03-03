@@ -14,3 +14,9 @@ class ProyectoService:
     
     def obtener_subvenciones(self, id_proyecto):
         return self.proyecto_repo.obtener_subvenciones(id_proyecto)
+    
+    def crear_proyecto(self, nombre, descripcion, id_grupo):
+        return self.proyecto_repo.crear_proyecto(nombre, descripcion, id_grupo)
+    
+    def obtener_por_grupo(self, id_grupo):
+        return self.proyecto_repo.obtener_por_grupo(id_grupo)

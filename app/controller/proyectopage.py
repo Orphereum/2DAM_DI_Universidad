@@ -15,6 +15,18 @@ class ProyectoPage(QWidget):
         self.nuevo_id = None
         # ------------------
         
+        # ------------------
+        # etiquetas de información
+        # SOLO GUARDAR 1 proyecto seleccionado con sus subvenciones y su grupo de investigación
+        self.ui.btn_generarPDF_proyecto.setToolTip("Se genera un informe del proyecto seleccionado junto con las subvenciones asociadas")
+        self.ui.btn_generarPDF_proyecto.setToolTipDuration(5000)
+        # GUARDAR todos los proyectos diferenciándolos de sus GRUPOS DE INVESTIGACIÓN.
+        self.ui.btn_generarPDF_todos.setToolTip("Se genera un informe de todos los proyectos diferenciándolos de sus Grupos de Investigación")
+        self.ui.btn_generarPDF_todos.setToolTipDuration(5000)
+        # Tabla de proyectos vacía
+        # EN MÉTODO DE EVENTO
+        # ------------------
+        
         self.tabla_proyectos = self.ui.tabla_proyectos
         self.tabla_subvenciones = self.ui.tabla_subvenciones
         
@@ -84,6 +96,14 @@ class ProyectoPage(QWidget):
         # Boton limpiar
         self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
         
+    # Método de evento al pasar el ratón por la tabla_proyecto vacía o cuando tenga registros
+    def enterEvent(self, event):
+        if self.tabla_proyectos.rowCount() == 0:
+            self.tabla_proyectos.setToolTip("Para ver los proyectos en la tabla debes seleccionar algún grupo de Investigación \no crear algún proyecto en dicho grupo")
+        else:
+            self.tabla_proyectos.setToolTip("")
+
+        super().enterEvent(event)
         
     def crear_proyecto(self):
         # primero comprobar que hay algunu grupoInv seleccionado en el comobox sino, muestrar un mensjae
@@ -177,7 +197,7 @@ class ProyectoPage(QWidget):
         if id_grupo is None:
             self.tabla_proyectos.setRowCount(0)
             return
-
+            
         datos = self.proyecto_service.obtener_por_grupo(id_grupo)
 
         self.generar_tabla(self.tabla_proyectos, datos)   

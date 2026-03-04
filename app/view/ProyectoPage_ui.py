@@ -25,7 +25,7 @@ class Ui_Proyecto_page(object):
     def setupUi(self, Proyecto_page):
         if not Proyecto_page.objectName():
             Proyecto_page.setObjectName(u"Proyecto_page")
-        Proyecto_page.resize(868, 599)
+        Proyecto_page.resize(945, 599)
         Proyecto_page.setStyleSheet(u"QLineEdit {\n"
 "	font: 300 12pt \"Poppins\";\n"
 "}\n"
@@ -37,7 +37,7 @@ class Ui_Proyecto_page(object):
 "	font: 600 16pt \"Poppins\";\n"
 "}\n"
 "QPushButton {\n"
-"	font: 600 14pt \"Poppins\";\n"
+"	font: 600 12pt \"Poppins\";\n"
 "}")
         self.verticalLayout_5 = QVBoxLayout(Proyecto_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -80,18 +80,30 @@ class Ui_Proyecto_page(object):
         self.groupBox_3.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self.horizontalLayout_4 = QHBoxLayout(self.groupBox_3)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.pushButton = QPushButton(self.groupBox_3)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setEnabled(True)
-        self.pushButton.setMinimumSize(QSize(0, 25))
-        self.pushButton.setMaximumSize(QSize(200, 25))
-        self.pushButton.setStyleSheet(u"color:white")
+        self.btn_generarPDF_proyecto = QPushButton(self.groupBox_3)
+        self.btn_generarPDF_proyecto.setObjectName(u"btn_generarPDF_proyecto")
+        self.btn_generarPDF_proyecto.setEnabled(True)
+        self.btn_generarPDF_proyecto.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_proyecto.setMaximumSize(QSize(320, 25))
+        self.btn_generarPDF_proyecto.setStyleSheet(u"color:white")
 
-        self.horizontalLayout_4.addWidget(self.pushButton)
+        self.horizontalLayout_4.addWidget(self.btn_generarPDF_proyecto)
 
+        self.btn_generarPDF_todos = QPushButton(self.groupBox_3)
+        self.btn_generarPDF_todos.setObjectName(u"btn_generarPDF_todos")
+        self.btn_generarPDF_todos.setEnabled(True)
+        self.btn_generarPDF_todos.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_todos.setMaximumSize(QSize(230, 25))
+        self.btn_generarPDF_todos.setStyleSheet(u"color:white")
+
+        self.horizontalLayout_4.addWidget(self.btn_generarPDF_todos)
+
+        self.horizontalLayout_4.setStretch(0, 1)
 
         self.horizontalLayout.addWidget(self.groupBox_3)
 
+        self.horizontalLayout.setStretch(0, 1)
+        self.horizontalLayout.setStretch(1, 2)
 
         self.verticalLayout_5.addWidget(self.widget)
 
@@ -146,7 +158,7 @@ class Ui_Proyecto_page(object):
         self.btn_editar.setObjectName(u"btn_editar")
         font2 = QFont()
         font2.setFamilies([u"Poppins"])
-        font2.setPointSize(14)
+        font2.setPointSize(12)
         font2.setWeight(QFont.DemiBold)
         font2.setItalic(False)
         self.btn_editar.setFont(font2)
@@ -232,7 +244,8 @@ class Ui_Proyecto_page(object):
         self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectosv2", None))
         self.groupBox.setTitle(QCoreApplication.translate("Proyecto_page", u"Grupos de Investigaci\u00f3n", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("Proyecto_page", u"Informes", None))
-        self.pushButton.setText(QCoreApplication.translate("Proyecto_page", u"Guardar datos", None))
+        self.btn_generarPDF_proyecto.setText(QCoreApplication.translate("Proyecto_page", u"Guardar proyecto seleccionado", None))
+        self.btn_generarPDF_todos.setText(QCoreApplication.translate("Proyecto_page", u"Guardar todos los datos", None))
         self.lblNombre.setText(QCoreApplication.translate("Proyecto_page", u"Nombre:", None))
         self.lblCorreo.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None))
         self.btn_editar.setText(QCoreApplication.translate("Proyecto_page", u"Editar", None))

@@ -3,8 +3,9 @@ from app.models.proyecto import Proyecto
 
 class ProyectoService:
     
-    def __init__(self, proyecto_repo):
+    def __init__(self, proyecto_repo, subvencion_repo):
         self.proyecto_repo = proyecto_repo
+        self.subvencion_repo = subvencion_repo
         
     def obtener_todos(self):
         return self.proyecto_repo.obtener_todos()
@@ -27,3 +28,7 @@ class ProyectoService:
     def eliminar_proyecto(self, id_proyecto):
         self.proyecto_repo.eliminar_proyecto(id_proyecto)
     
+    def obtener_proyecto_completo(self, id_proyecto):
+        proyecto = self.proyecto_repo.obtener_por_id(id_proyecto)
+        subvenciones = self.subvencion_repo.obtener_por_proyecto(id_proyecto)
+        return proyecto, subvenciones

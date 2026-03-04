@@ -11,6 +11,22 @@ class ProyectoRepository:
         cursor.close()
         return datos
 
+    # PARA GENERAR INFORMES
+    def obtener_por_id(self, id_proyecto):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+                       SELECT p.id_proyecto, p.nombre, p.descripcion
+                       FROM proyecto p
+                       WHERE p.id_proyecto = ?
+                       """, (id_proyecto,))
+        
+        proyecto = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return proyecto         
+        
     def obtener_por_grupo(self, id_grupo):
         conn = get_connection()
         cursor = conn.cursor()

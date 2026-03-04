@@ -95,6 +95,9 @@ class ProyectoPage(QWidget):
         self.ui.btn_eliminar.clicked.connect(self.eliminar_proyecto)
         # Boton limpiar
         self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
+        # GENERACIÓN DE INFORMES
+        self.ui.btn_generarPDF_proyecto.clicked.connect(self.generar_infome_proyecto_selec)
+        
         
     # Método de evento al pasar el ratón por la tabla_proyecto vacía o cuando tenga registros
     def enterEvent(self, event):
@@ -285,3 +288,17 @@ class ProyectoPage(QWidget):
         
         self.generar_tabla(self.tabla_subvenciones, datos)
         
+    def generar_infome_proyecto_selec(self):
+        if self.id_proyecto is None:
+            QMessageBox.information(self, "Información", "Se necesita seleccionar un proyecto para poder generar el PDF")
+            return 
+        
+        # Cojo el nombre del grupo
+        grupoInv_actual = self.ui.comboBox_gruposInv.currentText()
+        
+        # Obtengo los datos del proyecto seleccionado + su(s) subvencion(es)
+        proyecto, subvenciones = self.proyecto_service.obtener_proyecto_completo(self.id_proyecto)
+        
+        print(f"Nombre grupoInv: {grupoInv_actual}")
+        print(f"Proyecto seleccionado: {proyecto}")
+        print(f"Subvenciones asociadas: {subvenciones}")

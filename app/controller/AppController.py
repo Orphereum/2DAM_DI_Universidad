@@ -17,6 +17,7 @@ from app.repository.facultad_repo import FacultadRepo
 from app.service.edificio_service import EdificioService
 from app.controller.proyectopage import ProyectoPage
 from app.repository.proyecto_repo import ProyectoRepository
+from app.repository.subvencion_repo import SubvencionRepository
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
 from app.service.grupoInv_service import GrupoInvService 
@@ -117,9 +118,11 @@ class AppController:
         # DEPENDENCIAS PROYECTO
         # -------------------------
         proyecto_repo = ProyectoRepository()
+        subvencion_repo = SubvencionRepository()
 
         proyecto_service = ProyectoService(
-            proyecto_repo
+            proyecto_repo,
+            subvencion_repo
         )
 
         proyecto = ProyectoPage(proyecto_service, grupoInv_service, stacked)

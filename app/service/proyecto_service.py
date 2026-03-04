@@ -20,3 +20,10 @@ class ProyectoService:
     
     def obtener_por_grupo(self, id_grupo):
         return self.proyecto_repo.obtener_por_grupo(id_grupo)
+    
+    def actualizar_proyecto(self, id_proyecto, nombre, descripcion):
+        self.proyecto_repo.actualizar_proyecto(id_proyecto, nombre, descripcion)
+    
+    def eliminar_proyecto(self, id_proyecto):
+        self.proyecto_repo.eliminar_proyecto(id_proyecto)
+    

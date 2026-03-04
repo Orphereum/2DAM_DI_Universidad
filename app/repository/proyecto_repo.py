@@ -83,3 +83,28 @@ class ProyectoRepository:
         datos = cursor.fetchall()
         conn.close()
         return datos
+    
+    def actualizar_proyecto(self, id_proyecto, nombre, descripcion):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+                       UPDATE proyecto
+                       SET nombre = ?, descripcion = ?
+                       WHERE id_proyecto = ?
+                       """, (nombre, descripcion, id_proyecto))
+        
+        conn.commit()
+        conn.close()
+    
+    def eliminar_proyecto(self, id_proyecto):
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+                       DELETE FROM proyecto 
+                       WHERE id_proyecto = ?
+                       """, (id_proyecto,)) # cuando va solo UNA VARIABLE se escribe despues de esta ',' para que interprete que es un TUPLA y no un tipo (int), por ejemplo 
+        
+        conn.commit()
+        conn.close()

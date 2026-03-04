@@ -76,11 +76,11 @@ class ProyectoPage(QWidget):
         # BOTONES LÓGICA INTERACCIÓN
         # -----------------------
         # Boton editar
-        
+        self.ui.btn_editar.clicked.connect(self.editar_proyecto)
         # Boton guardar
         self.ui.btn_guardar.clicked.connect(self.crear_proyecto)
         # Boton eliminar
-        
+        self.ui.btn_eliminar.clicked.connect(self.eliminar_proyecto)
         # Boton limpiar
         self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
         
@@ -111,8 +111,52 @@ class ProyectoPage(QWidget):
         self.seleccionar_proyecto_por_id(self.nuevo_id)
         
         self.limpiar_campos()
+    
+    def editar_proyecto(self):
+        if not hasattr(self, "id_proyecto") or self.id_proyecto is None:
+            QMessageBox.information(self, "Información", "Debes selccionar un proyecto para poder editarlo")
+            return
         
+        nombre_nuevo = self.ui.nombre_txt.text().strip()
+        descripcion_nueva = self.ui.descripcion_txt.toPlainText().strip()
         
+        # si esta todo igual
+        if (nombre_nuevo == self.nombre_proyecto and descripcion_nueva == self.descrip_proyecto):
+            QMessageBox.information(self, "Sin cambios", "No se ha aplicado ningún cambio")
+            return
+        
+        # si cambia algo de algún campos SÍ se actualiza
+        self.proyecto_service.actualizar_proyecto(self.id_proyecto, nombre_nuevo, descripcion_nueva)
+        
+        # actualizar la tabla
+        self.actualizar_tabla_proyectos()
+        self.limpiar_campos()
+        
+        QMessageBox.information(self, "Cambios realizados", "Los cambios se han aplicado correctamente")
+        
+        # actualizar los valores originales
+        self.nombre_proyecto = nombre_nuevo
+        self.descrip_proyecto = descripcion_nueva
+        
+    def eliminar_proyecto(self):
+        if not hasattr(self, "id_proyecto") or self.id_proyecto is None:
+           QMessageBox.information(self, "Información", "Para elimnar algún proyecto primero tienes que seleccionarlo")
+           return
+       
+        confirmacion = QMessageBox.question(self, "Confirmar eliminación", 
+                                            "¿Estás seguro de querer borrar el proyecto seleccionado?", QMessageBox.Yes | QMessageBox.No)
+        
+        if confirmacion == QMessageBox.No:
+            return
+        
+        # si es qie SI
+        self.proyecto_service.eliminar_proyecto(self.id_proyecto)
+        
+        self.actualizar_tabla_proyectos()
+        self.limpiar_campos()
+        
+        QMessageBox.information(self, "Proyecto eliminado", "El proyecto se ha eliminado correctamente")
+     
     def limpiar_campos(self):
         nombre = self.ui.nombre_txt.text().strip()
         descripcion = self.ui.descripcion_txt.toPlainText().strip()

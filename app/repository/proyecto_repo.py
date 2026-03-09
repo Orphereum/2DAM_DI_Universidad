@@ -22,7 +22,7 @@ class ProyectoRepository:
                        WHERE p.id_proyecto = ?
                        """, (id_proyecto,))
         
-        proyecto = cursor.fetchall()
+        proyecto = cursor.fetchone()
         cursor.close()
         conn.close()
         return proyecto         

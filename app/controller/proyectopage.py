@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
 from app.view.ProyectoPage_ui import Ui_Proyecto_page
 
+# Reports
+from app.reports.proyectoSelec_report import GeneradorInformeProyecto
 
 class ProyectoPage(QWidget):
     def __init__(self, proyecto_service, grupoInv_service, parent=None):
@@ -8,7 +10,7 @@ class ProyectoPage(QWidget):
         self.ui = Ui_Proyecto_page()
         self.ui.setupUi(self)
         
-                
+        
         # ------------------
         # variables globales
         self.id_proyecto = None
@@ -78,7 +80,6 @@ class ProyectoPage(QWidget):
         self.grupoInv_service = grupoInv_service
         
         # Inicializando métodos
-        #self.cargar_datos()
         self.cargar_lista_gruposInv()
         
         # FUNCIONES DE LA VENTANA
@@ -302,3 +303,8 @@ class ProyectoPage(QWidget):
         print(f"Nombre grupoInv: {grupoInv_actual}")
         print(f"Proyecto seleccionado: {proyecto}")
         print(f"Subvenciones asociadas: {subvenciones}")
+        
+        # Inicialización de clases (REPORTS)
+        self.generador_proyecto_selec = GeneradorInformeProyecto(grupoInv_actual, proyecto, subvenciones)
+        
+        self.generador_proyecto_selec.generar("app.reports.informe_proyecto.pdf")

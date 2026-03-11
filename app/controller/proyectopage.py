@@ -227,6 +227,9 @@ class ProyectoPage(QWidget):
         
     def cargar_lista_gruposInv(self):
         datos = self.grupoInv_service.cargar_lista_gruposInv()
+        # PRUEBA
+        print(f"Datos recibidos del servicio: {datos}")
+        print(f"Cantidad de grupos encontrados: {len(datos)}")
         # datos devuelve objteos de grupo Investigacion --> id_grupo y nombre
         desplegable_grupos = self.ui.comboBox_gruposInv
         desplegable_grupos.clear()
@@ -236,6 +239,7 @@ class ProyectoPage(QWidget):
         
         # demás opciones
         for grupo in datos:
+            print(f"Cargando grupo: ID={grupo['id_grupo']} | Nombre={grupo['nombre']}")
             desplegable_grupos.addItem(
                 grupo["nombre"], # nombre que se verá
                 grupo["id_grupo"] # el id oculto para posteriores acciones
@@ -309,7 +313,12 @@ class ProyectoPage(QWidget):
         # Inicialización de clases (REPORTS)
         self.generador_proyecto_selec = GeneradorInformeProyectoSelec(grupoInv_actual, proyecto, subvenciones)
         
-        self.generador_proyecto_selec.generar("app.reports.informe_proyecto.pdf")
+        ruta_pdf = self.get_ruta()
+        if ruta_pdf is None:
+            QMessageBox.warning(self, "Atención", "No se ha guardado ninguna ruta para guardar el informe, \nporfavor inténtalo de nuevo")
+            return
+        self.generador_proyecto_selec.generar(ruta_pdf)
+        print(f"Informe generado correctamente de todos los proyectos.")
     
     def generar_informe_todosProyectos(self): 
         # Estructura de datos 
@@ -323,8 +332,9 @@ class ProyectoPage(QWidget):
             id_grupo = self.ui.comboBox_gruposInv.itemData(i)
             nombre_grupo = self.ui.comboBox_gruposInv.itemText(i)
             
-            if id_grupo is None:
-                id_grupo = nombre_grupo
+            # para que no coja la primera opcion de "Seleccionar grupo"
+            if nombre_grupo == "Seleccionar grupo" or id_grupo is None:
+                continue
                 
             lista_proyectos = self.proyecto_service.obtener_por_grupo(id_grupo)
             
@@ -345,15 +355,16 @@ class ProyectoPage(QWidget):
                     "subvenciones": subvenciones # solo lo utilizaremos para contar las subvenciones de cada proyecto
                 })        
                 
-                datos_grupos.append({
-                    'nombre': nombre_grupo,
-                    "proyectos": proyectos_filtrados
-                })
+            datos_grupos.append({
+                "nombre": nombre_grupo,
+                "proyectos": proyectos_filtrados
+            })
             
             proyectos = GeneradorInformeProyectos_Grupos(datos_grupos)
         ruta_pdf = self.get_ruta()
         if ruta_pdf is None:
             QMessageBox.warning(self, "Atención", "No se ha guardado ninguna ruta para guardar el informe, \nporfavor inténtalo de nuevo")
+            return
         proyectos.generar(ruta_pdf)
         print(f"Informe generado correctamente con {num_grupos} grupos.")
             

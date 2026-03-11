@@ -5,7 +5,6 @@ from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from datetime import datetime
-import os
 
 class GeneradorInformeProyectoSelec:
 
@@ -14,7 +13,7 @@ class GeneradorInformeProyectoSelec:
         self.proyecto = proyecto
         self.subvenciones = subvenciones
         # INICIALIZACION
-        self.NOMBRE = f"INFORME DEL PROYECTO {proyecto[1]}"
+        self.NOMBRE = f"INFORME DEL PROYECTO ({proyecto[1]})"
         self.AUTOR = "Alejandro Prada Sánchez"
         self.FECHA = datetime.now().strftime("%d/%m/%y")
         self.UNIVERSIDAD = "Universidad Castilla-LaMancha UCLM"

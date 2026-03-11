@@ -1,8 +1,10 @@
 from PySide6.QtWidgets import QWidget, QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
 from app.view.ProyectoPage_ui import Ui_Proyecto_page
 
-# Reports
-from app.reports.proyectoSelec_report import GeneradorInformeProyecto
+# 
+from PySide6.QtWidgets import QFileDialog
+from app.reports.proyectoSelec_report import GeneradorInformeProyectoSelec
+from app.reports.proyectos_report import GeneradorInformeProyectos_Grupos
 
 class ProyectoPage(QWidget):
     def __init__(self, proyecto_service, grupoInv_service, parent=None):
@@ -98,7 +100,7 @@ class ProyectoPage(QWidget):
         self.ui.btn_limpiar.clicked.connect(self.limpiar_campos)
         # GENERACIÓN DE INFORMES
         self.ui.btn_generarPDF_proyecto.clicked.connect(self.generar_infome_proyecto_selec)
-        
+        self.ui.btn_generarPDF_todos.clicked.connect(self.generar_informe_todosProyectos)
         
     # Método de evento al pasar el ratón por la tabla_proyecto vacía o cuando tenga registros
     def enterEvent(self, event):
@@ -305,6 +307,65 @@ class ProyectoPage(QWidget):
         print(f"Subvenciones asociadas: {subvenciones}")
         
         # Inicialización de clases (REPORTS)
-        self.generador_proyecto_selec = GeneradorInformeProyecto(grupoInv_actual, proyecto, subvenciones)
+        self.generador_proyecto_selec = GeneradorInformeProyectoSelec(grupoInv_actual, proyecto, subvenciones)
         
         self.generador_proyecto_selec.generar("app.reports.informe_proyecto.pdf")
+    
+    def generar_informe_todosProyectos(self): 
+        # Estructura de datos 
+        datos_grupos = []
+        
+        # Sacamos el numero de grupos que hay en el comboBox
+        num_grupos = self.ui.comboBox_gruposInv.count()
+        
+        # Recorremos todos los grupos del comboBox
+        for i in range(num_grupos):
+            id_grupo = self.ui.comboBox_gruposInv.itemData(i)
+            nombre_grupo = self.ui.comboBox_gruposInv.itemText(i)
+            
+            if id_grupo is None:
+                id_grupo = nombre_grupo
+                
+            lista_proyectos = self.proyecto_service.obtener_por_grupo(id_grupo)
+            
+            proyectos_filtrados = []
+            
+            # Por cada proyecto obtenemos las subvenciones DE CADA PROYECTO
+            for proyecto in lista_proyectos:
+                self.id_proyecto = proyecto[0]
+                self.nombre_proyecto = proyecto[1]
+                self.descrip_proyecto = proyecto[2]
+                
+                _, subvenciones = self.proyecto_service.obtener_proyecto_completo(self.id_proyecto)
+                
+                # Guardamos datos en mismo formato que el generador
+                proyectos_filtrados.append({
+                    'nombre': self.nombre_proyecto,
+                    'descripcion': self.descrip_proyecto,
+                    "subvenciones": subvenciones # solo lo utilizaremos para contar las subvenciones de cada proyecto
+                })        
+                
+                datos_grupos.append({
+                    'nombre': nombre_grupo,
+                    "proyectos": proyectos_filtrados
+                })
+            
+            proyectos = GeneradorInformeProyectos_Grupos(datos_grupos)
+        ruta_pdf = self.get_ruta()
+        if ruta_pdf is None:
+            QMessageBox.warning(self, "Atención", "No se ha guardado ninguna ruta para guardar el informe, \nporfavor inténtalo de nuevo")
+        proyectos.generar(ruta_pdf)
+        print(f"Informe generado correctamente con {num_grupos} grupos.")
+            
+    def get_ruta(self):
+        ruta, filtro = QFileDialog.getSaveFileName(
+            self,
+            "Guardar PDF",
+            "proyectos_informe.pdf",
+            "PDF (*.pdf)"
+        )
+        
+        if not ruta:
+            return None
+        
+        return ruta

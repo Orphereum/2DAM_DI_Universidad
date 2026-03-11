@@ -7,7 +7,7 @@ from reportlab.lib.units import cm
 from datetime import datetime
 import os
 
-class GeneradorInformeProyecto:
+class GeneradorInformeProyectoSelec:
 
     def __init__(self, grupo, proyecto, subvenciones):
         self.grupo = grupo
@@ -90,7 +90,6 @@ class GeneradorInformeProyecto:
         # -- ENCABEZADO --
         #Logo
         # RUTA
-        ruta_logo = os.path.join(os.path.dirname(__file__), "logo_universidadUCLM.png")
         canvas.drawImage(
             "app/assets/logo_universidadUCLM.png",
             2*cm,

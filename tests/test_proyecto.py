@@ -128,4 +128,3 @@ def test_page_filtrar_por_grupo(proyecto_page):
     
     proyecto_page.proyecto_service.filtrar_por_grupo.assert_called_once_with(3)
     proyecto_page.generar_tabla.assert_called_once()
-

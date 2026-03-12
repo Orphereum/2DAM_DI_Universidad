@@ -43,7 +43,7 @@ QPushButton {
       <string notr="true">font: 700 24pt &quot;Poppins&quot;;</string>
      </property>
      <property name="text">
-      <string>Proyectosv2</string>
+      <string>Proyectos</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>

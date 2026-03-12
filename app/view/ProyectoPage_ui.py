@@ -241,7 +241,7 @@ class Ui_Proyecto_page(object):
 
     def retranslateUi(self, Proyecto_page):
         Proyecto_page.setWindowTitle(QCoreApplication.translate("Proyecto_page", u"Form", None))
-        self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectosv2", None))
+        self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectos", None))
         self.groupBox.setTitle(QCoreApplication.translate("Proyecto_page", u"Grupos de Investigaci\u00f3n", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("Proyecto_page", u"Informes", None))
         self.btn_generarPDF_proyecto.setText(QCoreApplication.translate("Proyecto_page", u"Guardar proyecto seleccionado", None))

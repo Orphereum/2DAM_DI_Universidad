@@ -191,12 +191,30 @@ class ProyectoPage(QWidget):
             QMessageBox.information(self, "Información", "Debe haber algo escrito en alguno de los campos para poder limpiarlos")
             return
         
-        # Si no, lo vaciamos e informamos
-        self.ui.nombre_txt.clear()
-        self.ui.descripcion_txt.clear()
-        self.id_proyecto = None
-        print("Campos limpios")
-        
+        # Quitar seleccion de tabla
+        retorna = self.quitar_seleccion()
+        if retorna is True:
+            # Campos 
+            self.ui.nombre_txt.clear()
+            self.ui.descripcion_txt.clear()
+            # Variable internas
+            self.id_proyecto = None
+            self.nombre_proyecto = ""
+            self.descrip_proyecto = ""
+            # Limpiar tabla subvenciones
+            # de paso quitar la seleccion y los elementos de la tabla, 
+            # ya que si ya no hay proyecto seleccionado tampoco aparecerá ninguna subvención
+            self.tabla_subvenciones.setRowCount(0)
+            
+            print("Campos limpios")
+    def quitar_seleccion(self):
+
+        if self.tabla_proyectos is None:
+             return False
+        else:
+            self.tabla_proyectos.clearSelection()
+            return True
+    
     def actualizar_tabla_proyectos(self):
         id_grupo = self.ui.comboBox_gruposInv.currentData()
 

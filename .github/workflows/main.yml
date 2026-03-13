@@ -4,6 +4,8 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build-exe:
     runs-on: windows-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +26,7 @@ jobs:
         run: dir app\styles\app_style.qss
       
       - name: Build EXE completo
-        run: pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --add-data "app/styles/app_style.qss;app/styles" --add-data "app/assets/universidad.ico;."
+        run: pyinstaller --onefile --windowed --add-data "app/data/universidad.db;app/data" --add-data "app/styles/app_style.qss;app/styles" --add-data "app/assets/universidad.ico;." \
              --name "Gestor-Universidad" --icon "app/assets/universidad.ico" main.py
       
       - name: Upload EXE

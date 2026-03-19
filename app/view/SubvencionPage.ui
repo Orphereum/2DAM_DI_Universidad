@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Subvencion_page</class>
+ <widget class="QWidget" name="Subvencion_page">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Subvenciones</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelTituloSubvenciones">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Subvenciones</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNombre">
+       <property name="text">
+        <string>Nombre:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="inputNombre"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelMin">
+       <property name="text">
+        <string>Importe mínimo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="inputImporteMin"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelMax">
+       <property name="text">
+        <string>Importe máximo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="inputImporteMax"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="LabelInicio">
+       <property name="text">
+        <string>Fecha inicio:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="inputFechaInicio"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labelFin">
+       <property name="text">
+        <string>Fecha fin:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="inputFechaFin"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="labelEstado">
+       <property name="text">
+        <string>Estado:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="inputEstado"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="layoutBotones">
+     <item>
+      <widget class="QPushButton" name="btn_guardar">
+       <property name="text">
+        <string>Guardar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_editar">
+       <property name="text">
+        <string>Editar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_eliminar">
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_limpiar">
+       <property name="text">
+        <string>Limpiar</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tabla_subvenciones">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <bold>false</bold>
+      </font>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>125</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Min</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Max</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Fecha inicio</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Fecha fin</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Estado</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

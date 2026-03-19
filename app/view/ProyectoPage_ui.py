@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ProyectoPage.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.0
+## Created by: Qt User Interface Compiler version 6.9.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,16 +15,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QGroupBox,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QPlainTextEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFormLayout,
+    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QPlainTextEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Proyecto_page(object):
     def setupUi(self, Proyecto_page):
         if not Proyecto_page.objectName():
             Proyecto_page.setObjectName(u"Proyecto_page")
-        Proyecto_page.resize(868, 599)
+        Proyecto_page.resize(945, 599)
         Proyecto_page.setStyleSheet(u"QLineEdit {\n"
 "	font: 300 12pt \"Poppins\";\n"
 "}\n"
@@ -36,7 +37,7 @@ class Ui_Proyecto_page(object):
 "	font: 600 16pt \"Poppins\";\n"
 "}\n"
 "QPushButton {\n"
-"	font: 600 14pt \"Poppins\";\n"
+"	font: 600 12pt \"Poppins\";\n"
 "}")
         self.verticalLayout_5 = QVBoxLayout(Proyecto_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -67,39 +68,42 @@ class Ui_Proyecto_page(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.comboBox_gruposInv = QComboBox(self.groupBox)
         self.comboBox_gruposInv.setObjectName(u"comboBox_gruposInv")
+        self.comboBox_gruposInv.setMinimumSize(QSize(0, 25))
 
         self.verticalLayout_3.addWidget(self.comboBox_gruposInv)
 
 
         self.horizontalLayout.addWidget(self.groupBox)
 
-        self.groupBox_2 = QGroupBox(self.widget)
-        self.groupBox_2.setObjectName(u"groupBox_2")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox_2)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.comboBox_2 = QComboBox(self.groupBox_2)
-        self.comboBox_2.setObjectName(u"comboBox_2")
-
-        self.verticalLayout_2.addWidget(self.comboBox_2)
-
-
-        self.horizontalLayout.addWidget(self.groupBox_2)
-
         self.groupBox_3 = QGroupBox(self.widget)
         self.groupBox_3.setObjectName(u"groupBox_3")
-        self.verticalLayout = QVBoxLayout(self.groupBox_3)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.pushButton = QPushButton(self.groupBox_3)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setEnabled(True)
-        self.pushButton.setMaximumSize(QSize(16777215, 25))
-        self.pushButton.setStyleSheet(u"color:white")
+        self.groupBox_3.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.horizontalLayout_4 = QHBoxLayout(self.groupBox_3)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.btn_generarPDF_proyecto = QPushButton(self.groupBox_3)
+        self.btn_generarPDF_proyecto.setObjectName(u"btn_generarPDF_proyecto")
+        self.btn_generarPDF_proyecto.setEnabled(True)
+        self.btn_generarPDF_proyecto.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_proyecto.setMaximumSize(QSize(320, 25))
+        self.btn_generarPDF_proyecto.setStyleSheet(u"color:white")
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.horizontalLayout_4.addWidget(self.btn_generarPDF_proyecto)
 
+        self.btn_generarPDF_todos = QPushButton(self.groupBox_3)
+        self.btn_generarPDF_todos.setObjectName(u"btn_generarPDF_todos")
+        self.btn_generarPDF_todos.setEnabled(True)
+        self.btn_generarPDF_todos.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_todos.setMaximumSize(QSize(230, 25))
+        self.btn_generarPDF_todos.setStyleSheet(u"color:white")
+
+        self.horizontalLayout_4.addWidget(self.btn_generarPDF_todos)
+
+        self.horizontalLayout_4.setStretch(0, 1)
 
         self.horizontalLayout.addWidget(self.groupBox_3)
 
+        self.horizontalLayout.setStretch(0, 1)
+        self.horizontalLayout.setStretch(1, 2)
 
         self.verticalLayout_5.addWidget(self.widget)
 
@@ -154,7 +158,7 @@ class Ui_Proyecto_page(object):
         self.btn_editar.setObjectName(u"btn_editar")
         font2 = QFont()
         font2.setFamilies([u"Poppins"])
-        font2.setPointSize(14)
+        font2.setPointSize(12)
         font2.setWeight(QFont.DemiBold)
         font2.setItalic(False)
         self.btn_editar.setFont(font2)
@@ -203,10 +207,18 @@ class Ui_Proyecto_page(object):
         __qtablewidgetitem2 = QTableWidgetItem()
         self.tabla_proyectos.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.tabla_proyectos.setObjectName(u"tabla_proyectos")
+        self.tabla_proyectos.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla_proyectos.horizontalHeader().setStretchLastSection(True)
         self.tabla_proyectos.verticalHeader().setStretchLastSection(True)
 
         self.horizontalLayout_3.addWidget(self.tabla_proyectos)
+
+        self.layoutSubvenciones = QVBoxLayout()
+        self.layoutSubvenciones.setObjectName(u"layoutSubvenciones")
+        self.btn_asignar_subvencion = QPushButton(Proyecto_page)
+        self.btn_asignar_subvencion.setObjectName(u"btn_asignar_subvencion")
+
+        self.layoutSubvenciones.addWidget(self.btn_asignar_subvencion)
 
         self.tabla_subvenciones = QTableWidget(Proyecto_page)
         if (self.tabla_subvenciones.columnCount() < 2):
@@ -216,10 +228,14 @@ class Ui_Proyecto_page(object):
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tabla_subvenciones.setHorizontalHeaderItem(1, __qtablewidgetitem4)
         self.tabla_subvenciones.setObjectName(u"tabla_subvenciones")
+        self.tabla_subvenciones.setStyleSheet(u"")
+        self.tabla_subvenciones.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tabla_subvenciones.horizontalHeader().setStretchLastSection(True)
-        self.tabla_subvenciones.verticalHeader().setStretchLastSection(True)
 
-        self.horizontalLayout_3.addWidget(self.tabla_subvenciones)
+        self.layoutSubvenciones.addWidget(self.tabla_subvenciones)
+
+
+        self.horizontalLayout_3.addLayout(self.layoutSubvenciones)
 
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_3)
@@ -235,11 +251,11 @@ class Ui_Proyecto_page(object):
 
     def retranslateUi(self, Proyecto_page):
         Proyecto_page.setWindowTitle(QCoreApplication.translate("Proyecto_page", u"Form", None))
-        self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectosv2", None))
+        self.pageTitle.setText(QCoreApplication.translate("Proyecto_page", u"Proyectos", None))
         self.groupBox.setTitle(QCoreApplication.translate("Proyecto_page", u"Grupos de Investigaci\u00f3n", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("Proyecto_page", u"Subvenciones", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("Proyecto_page", u"Informes", None))
-        self.pushButton.setText(QCoreApplication.translate("Proyecto_page", u"Guardar datos", None))
+        self.btn_generarPDF_proyecto.setText(QCoreApplication.translate("Proyecto_page", u"Guardar proyecto seleccionado", None))
+        self.btn_generarPDF_todos.setText(QCoreApplication.translate("Proyecto_page", u"Guardar todos los datos", None))
         self.lblNombre.setText(QCoreApplication.translate("Proyecto_page", u"Nombre:", None))
         self.lblCorreo.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None))
         self.btn_editar.setText(QCoreApplication.translate("Proyecto_page", u"Editar", None))
@@ -252,9 +268,10 @@ class Ui_Proyecto_page(object):
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Proyecto_page", u"Nombre", None));
         ___qtablewidgetitem2 = self.tabla_proyectos.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None));
+        self.btn_asignar_subvencion.setText(QCoreApplication.translate("Proyecto_page", u"Asignar Subvenci\u00f3n", None))
         ___qtablewidgetitem3 = self.tabla_subvenciones.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Proyecto_page", u"Subvenci\u00f3n", None));
         ___qtablewidgetitem4 = self.tabla_subvenciones.horizontalHeaderItem(1)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Proyecto_page", u"Importe asignado (\u20ac)", None));
     # retranslateUi
 

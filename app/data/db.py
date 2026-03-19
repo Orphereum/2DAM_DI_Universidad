@@ -30,5 +30,8 @@ def get_connection():
     db_path = _get_db_path()
     print("Usando BD:", db_path)
     conn = sqlite3.connect(db_path)
+    conn.execute("PRAGMA foreign_keys = ON")
     conn.row_factory = sqlite3.Row 
+    print(f"Conectado a: {db_path}")  # <--- AÑADE ESTO
+    print(f"Ruta absoluta: {os.path.abspath(db_path)}") 
     return conn

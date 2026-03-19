@@ -10,6 +10,18 @@
     <height>739</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1143</width>
+    <height>739</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1143</width>
+    <height>739</height>
+   </size>
+  </property>
   <property name="font">
    <font>
     <family>Dubai</family>

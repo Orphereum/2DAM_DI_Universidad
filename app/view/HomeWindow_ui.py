@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'HomeWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.0
+## Created by: Qt User Interface Compiler version 6.9.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,6 +24,8 @@ class Ui_HomeWindow(object):
         if not HomeWindow.objectName():
             HomeWindow.setObjectName(u"HomeWindow")
         HomeWindow.resize(1143, 739)
+        HomeWindow.setMinimumSize(QSize(1143, 739))
+        HomeWindow.setMaximumSize(QSize(1143, 739))
         font = QFont()
         font.setFamilies([u"Dubai"])
         font.setPointSize(24)

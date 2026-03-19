@@ -17,6 +17,9 @@ from app.repository.facultad_repo import FacultadRepo
 from app.service.edificio_service import EdificioService
 from app.controller.proyectopage import ProyectoPage
 from app.repository.proyecto_repo import ProyectoRepository
+from app.controller.subvencionpage import SubvencionPage
+from app.service.subvencion_service import SubvencionService
+from app.repository.subvencion_repo import SubvencionRepository
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
 from app.service.grupoInv_service import GrupoInvService 
@@ -117,14 +120,25 @@ class AppController:
         # DEPENDENCIAS PROYECTO
         # -------------------------
         proyecto_repo = ProyectoRepository()
+        subvencion_repo = SubvencionRepository()
 
         proyecto_service = ProyectoService(
-            proyecto_repo
+            proyecto_repo,
+            subvencion_repo
         )
 
         proyecto = ProyectoPage(proyecto_service, grupoInv_service, stacked)
             
-        
+        # -------------------------
+        # DEPENDENCIAS SUBVENCIÓN
+        # -------------------------
+        subvencion_repo = SubvencionRepository()
+
+        subvencion_service = SubvencionService(
+            subvencion_repo
+        )
+
+        subvencion = SubvencionPage(subvencion_service, stacked)
 
         # REGISTRO DE PÁGINAS
         self.pages = {
@@ -135,7 +149,8 @@ class AppController:
             "asignatura": asignatura,
             "clase": clase,
             "edificio": edificio,
-            "proyecto": proyecto
+            "proyecto": proyecto,
+            "subvencion": subvencion
         }
 
         # AÑADIR AL STACK
@@ -173,6 +188,9 @@ class AppController:
         )
         self.home.ui.btnProyecto.clicked.connect(
             lambda: self.show_page("proyecto")
+        )
+        self.home.ui.btnSubvencion.clicked.connect(
+            lambda: self.show_page("subvencion")
         )
 
     # -------------------------

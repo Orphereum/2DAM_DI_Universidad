@@ -3,8 +3,12 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QAbstractItemView
 from app.view.GradoPage_ui import Ui_Form
 from app.service.grado_service import GradoService
+from app.service.facultad_service import FacultadService
 from app.models.grado import Grado
-
+from app.reports.grado_report import generar_informe_grados
+import os  
+import subprocess
+import sys
 
 class GradoPage(QWidget):
 
@@ -13,11 +17,21 @@ class GradoPage(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        
         self.service = GradoService()
-        self.grado_seleccionado_id = None
-
+        self.facultad = FacultadService()
+        
+        dato = self.facultad.obtener_facultades()
+        for facultad in dato:
+            self.ui.cb_facultad.addItem(
+                facultad.nombre,
+                facultad.id  
+            )
+       
+            
         self._configurar_tabla()
         self._conectar_eventos()
+        self.ui.btn_generarInforme.clicked.connect(self.generar_informe_pdf) 
         self._bloquear_formulario()
 
     # CONFIGURACIÓN INICIAL
@@ -37,6 +51,9 @@ class GradoPage(QWidget):
         self.ui.btn_editar.clicked.connect(self.editar_grado)
         self.ui.btn_eliminar.clicked.connect(self.eliminar_grado)
         self.ui.btn_refrescar.clicked.connect(self.refrescar)
+        self.ui.cb_facultad.currentIndexChanged.connect(
+        self._facultad_cambiada
+         )
 
         self.ui.btn_guardar.clicked.connect(self.guardar)
         self.ui.btn_cancelar.clicked.connect(self.cancelar)
@@ -47,6 +64,12 @@ class GradoPage(QWidget):
 
     # CARGA DE DATOS (PREPARADO)
 
+    def _facultad_cambiada(self):
+        id_facultad = self._get_facultad_actual()
+        if id_facultad:
+            self.cargar_grados(id_facultad)
+            
+            
     def cargar_grados(self, id_facultad):
         """
         Este método lo llamará el AppController
@@ -140,18 +163,29 @@ class GradoPage(QWidget):
             self.cargar_grados(id_facultad)
 
     def _tabla_cambio_seleccion(self):
-        items = self.ui.tbl_grados.selectedItems()
-        if not items:
+        selected_rows = self.ui.tbl_grados.selectionModel().selectedRows()
+
+        if not selected_rows:
             return
 
-        self.grado_seleccionado_id = int(items[0].text())
+        row = selected_rows[0].row()
 
-        self.ui.txt_nombre.setText(items[1].text())
-        self.ui.txt_codigo.setText(items[2].text())
-        self.ui.sp_duracion.setValue(int(items[3].text()))
-        self.ui.sp_creditos.setValue(int(items[4].text()))
-        self.ui.cb_tipo.setCurrentText(items[5].text())
-        self.ui.chk_activo.setChecked(items[6].text() == "Activo")
+        id_item = self.ui.tbl_grados.item(row, 0)
+        nombre_item = self.ui.tbl_grados.item(row, 1)
+        codigo_item = self.ui.tbl_grados.item(row, 2)
+        duracion_item = self.ui.tbl_grados.item(row, 3)
+        creditos_item = self.ui.tbl_grados.item(row, 4)
+        tipo_item = self.ui.tbl_grados.item(row, 5)
+        estado_item = self.ui.tbl_grados.item(row, 6)
+
+        self.grado_seleccionado_id = int(id_item.text())
+
+        self.ui.txt_nombre.setText(nombre_item.text())
+        self.ui.txt_codigo.setText(codigo_item.text())
+        self.ui.sp_duracion.setValue(int(duracion_item.text()))
+        self.ui.sp_creditos.setValue(int(creditos_item.text()))
+        self.ui.cb_tipo.setCurrentText(tipo_item.text())
+        self.ui.chk_activo.setChecked(estado_item.text() == "Activo")
 
     def _get_facultad_actual(self):
         """
@@ -173,3 +207,30 @@ class GradoPage(QWidget):
 
     def _desbloquear_formulario(self):
         self.ui.grp_formulario.setEnabled(True)
+
+
+    def generar_informe_pdf(self):
+        try:
+            facultad_nombre = self.ui.cb_facultad.currentText()
+            id_facultad = self._get_facultad_actual()
+
+            if not id_facultad:
+                QMessageBox.warning(self, "Aviso", "Selecciona una facultad primero")
+                return
+
+            grados = self.service.obtener_grados_por_facultad(id_facultad)
+
+            if not grados:
+                QMessageBox.warning(self, "Aviso", "No hay grados para generar informe")
+                return
+
+            pdf_path = generar_informe_grados(grados, facultad_nombre)
+
+            QMessageBox.information(
+                self,
+                "Informe Generado",
+                f"PDF creado exitosamente:\n{pdf_path}"
+            )
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error generando PDF:\n{str(e)}")

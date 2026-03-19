@@ -107,24 +107,32 @@
       <enum>QFrame::Shadow::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="5">
-       <widget class="QPushButton" name="btn_nuevo">
-        <property name="maximumSize">
-         <size>
-          <width>100000</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Nuevo</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="5">
-       <widget class="QPushButton" name="btn_eliminar">
-        <property name="text">
-         <string>Eliminar</string>
-        </property>
+      <item row="0" column="5">
+       <widget class="QWidget" name="widget_2" native="true">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Grados:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item row="1" column="5">
@@ -164,6 +172,40 @@
           <string>estado</string>
          </property>
         </column>
+       </widget>
+      </item>
+      <item row="5" column="5">
+       <widget class="QPushButton" name="btn_refrescar">
+        <property name="text">
+         <string>Refrescar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QPushButton" name="btn_eliminar">
+        <property name="text">
+         <string>Eliminar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QPushButton" name="btn_editar">
+        <property name="text">
+         <string>Editar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5">
+       <widget class="QPushButton" name="btn_nuevo">
+        <property name="maximumSize">
+         <size>
+          <width>100000</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Nuevo</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="1" rowspan="2">
@@ -233,7 +275,31 @@
           <widget class="QSpinBox" name="sp_creditos"/>
          </item>
          <item row="4" column="1">
-          <widget class="QComboBox" name="cb_tipo"/>
+          <widget class="QComboBox" name="cb_tipo">
+           <property name="currentIndex">
+            <number>-1</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>Grado</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Doble Grado</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Master</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Doctorado</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item row="5" column="1">
           <widget class="QCheckBox" name="chk_activo">
@@ -259,46 +325,11 @@
         </layout>
        </widget>
       </item>
-      <item row="5" column="5">
-       <widget class="QPushButton" name="btn_refrescar">
+      <item row="6" column="5">
+       <widget class="QPushButton" name="btn_generarInforme">
         <property name="text">
-         <string>Refrescar</string>
+         <string>Generar Informe</string>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QPushButton" name="btn_editar">
-        <property name="text">
-         <string>Editar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QWidget" name="widget_2" native="true">
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Grados:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </item>
      </layout>

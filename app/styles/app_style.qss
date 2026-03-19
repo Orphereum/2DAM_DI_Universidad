@@ -225,3 +225,21 @@ QPushButton#btnBusqueda:pressed {
     border-color: #0D4C4F;
 }
 
+/* ESTADO INFERIOR */
+#lbl_estado {
+    color: #9CA3AF;
+    font-size: 12px;
+    padding: 6px 8px;
+}
+
+#lbl_estado[estado="ok"] {
+    color: #22c55e;
+}
+
+#lbl_estado[estado="error"] {
+    color: #ef4444;
+}
+
+#lbl_estado[estado="info"] {
+    color: #3b82f6;
+}

@@ -16,10 +16,8 @@ class AsignaturaPage(QWidget):
         self.ui.setupUi(self)
 
         self._configurar_tabla()
+        self._cargar_grados()
         self._conectar_eventos()
-
-        # Lista en memoria (hasta tener repository)
-   
 
     # -------------------------
     # CONFIGURACIÓN DE LA TABLA
@@ -44,97 +42,117 @@ class AsignaturaPage(QWidget):
         tabla.setAlternatingRowColors(True)
 
     # -------------------------
-    # CONEXIÓN DE EVENTOS
+    # CARGAR GRADOS EN EL FILTRO
+    # -------------------------
+    def _cargar_grados(self):
+        self.ui.cb_grado_filtro.clear()
+
+        grados = self.service.obtener_grados()
+
+        for grado in grados:
+            self.ui.cb_grado_filtro.addItem(grado.nombre, grado.id_grado)
+
+        if self.ui.cb_grado_filtro.count() > 0:
+            self.ui.cb_grado_filtro.setCurrentIndex(0)
+            self._grado_cambiado()
+
+    # -------------------------
+    # EVENTOS
     # -------------------------
     def _conectar_eventos(self):
+        self.ui.cb_grado_filtro.currentIndexChanged.connect(self._grado_cambiado)
         self.ui.btn_nueva.clicked.connect(self.nueva_asignatura)
         self.ui.btn_editar.clicked.connect(self.editar_asignatura)
         self.ui.btn_eliminar.clicked.connect(self.eliminar_asignatura)
         self.ui.btn_refrescar.clicked.connect(self.refrescar_tabla)
 
     # -------------------------
+    # CAMBIO DE GRADO
+    # -------------------------
+    def _grado_cambiado(self):
+        id_grado = self.ui.cb_grado_filtro.currentData()
+
+        if not id_grado:
+            return
+
+        self.service.set_grado_actual(id_grado)
+        self.refrescar_tabla()
+
+    # -------------------------
     # NUEVA ASIGNATURA
     # -------------------------
     def nueva_asignatura(self):
-     dialog = AsignaturaDialog(self.service, parent=self)
+        dialog = AsignaturaDialog(self.service, parent=self)
 
-     if dialog.exec():
-        try:
-            self.service.crear_asignatura(dialog.resultado)
-            self.refrescar_tabla()
-            self.ui.lbl_estado.setText("Asignatura creada correctamente")
-
-        except ValueError as e:
-            QMessageBox.warning(self, "Error", str(e))
+        if dialog.exec():
+            try:
+                self.service.crear_asignatura(dialog.resultado)
+                self.refrescar_tabla()
+            except ValueError as e:
+                QMessageBox.warning(self, "Error", str(e))
 
     # -------------------------
     # EDITAR ASIGNATURA
     # -------------------------
     def editar_asignatura(self):
-     fila = self.ui.tbl_asignaturas.currentRow()
-     if fila < 0:
-        self.ui.lbl_estado.setText("Selecciona una asignatura para editar")
-        return
+        fila = self.ui.tbl_asignaturas.currentRow()
+        if fila < 0:
+            QMessageBox.warning(self, "Aviso", "Selecciona una asignatura para editar")
+            return
 
-     asignaturas = self.service.obtener_asignaturas()
-     asignatura = asignaturas[fila]
+        asignaturas = self.service.obtener_asignaturas()
+        asignatura = asignaturas[fila]
 
-     dialog = AsignaturaDialog(
-        self.service,
-        asignatura=asignatura,
-        parent=self
-     )
+        dialog = AsignaturaDialog(
+            self.service,
+            asignatura=asignatura,
+            parent=self
+        )
 
-     if dialog.exec():
-        try:
-            self.service.actualizar_asignatura(dialog.resultado)
-            self.refrescar_tabla()
-            self.ui.lbl_estado.setText("Asignatura editada correctamente")
-        except ValueError as e:
-            QMessageBox.warning(self, "Error", str(e))
-
+        if dialog.exec():
+            try:
+                self.service.actualizar_asignatura(dialog.resultado)
+                self.refrescar_tabla()
+            except ValueError as e:
+                QMessageBox.warning(self, "Error", str(e))
 
     # -------------------------
     # ELIMINAR ASIGNATURA
     # -------------------------
     def eliminar_asignatura(self):
-     fila = self.ui.tbl_asignaturas.currentRow()
-     if fila < 0:
-        self.ui.lbl_estado.setText("Selecciona una asignatura para eliminar")
-        return
+        fila = self.ui.tbl_asignaturas.currentRow()
+        if fila < 0:
+            QMessageBox.warning(self, "Aviso", "Selecciona una asignatura para eliminar")
+            return
 
-     asignaturas = self.service.obtener_asignaturas()
-     asignatura = asignaturas[fila]
+        asignaturas = self.service.obtener_asignaturas()
+        asignatura = asignaturas[fila]
 
-     confirm = QMessageBox.question(
-        self,
-        "Confirmar",
-        f"¿Eliminar la asignatura '{asignatura.nombre}'?",
-        QMessageBox.Yes | QMessageBox.No
-     )
+        confirm = QMessageBox.question(
+            self,
+            "Confirmar",
+            f"¿Eliminar la asignatura '{asignatura.nombre}'?",
+            QMessageBox.Yes | QMessageBox.No
+        )
 
-     if confirm == QMessageBox.Yes:
-        self.service.eliminar_asignatura(asignatura.id_asignatura)
-        self.refrescar_tabla()
-        self.ui.lbl_estado.setText("Asignatura eliminada")
-
+        if confirm == QMessageBox.Yes:
+            self.service.eliminar_asignatura(asignatura.id_asignatura)
+            self.refrescar_tabla()
 
     # -------------------------
-    # REFRESCAR
+    # REFRESCAR TABLA
     # -------------------------
     def refrescar_tabla(self):
-     asignaturas = self.service.obtener_asignaturas()
-     tabla = self.ui.tbl_asignaturas
+        asignaturas = self.service.obtener_asignaturas()
+        tabla = self.ui.tbl_asignaturas
 
-     tabla.setRowCount(0)
+        tabla.setRowCount(0)
 
-     for asignatura in asignaturas:
-        self._añadir_a_tabla(asignatura)
-
-     self.ui.lbl_estado.setText("Tabla actualizada")
+        for asignatura in asignaturas:
+            self._añadir_a_tabla(asignatura)
 
     # -------------------------
-    # UTILIDADES DE TABLA
+    # AÑADIR FILA A TABLA
     # -------------------------
     def _añadir_a_tabla(self, asignatura: Asignatura):
         fila = self.ui.tbl_asignaturas.rowCount()
@@ -156,12 +174,9 @@ class AsignaturaPage(QWidget):
             fila, 4,
             QTableWidgetItem("Sí" if asignatura.obligatoria else "No")
         )
-
-    def _actualizar_fila(self, fila: int, asignatura: Asignatura):
-        self.ui.tbl_asignaturas.item(fila, 0).setText(asignatura.nombre)
-        self.ui.tbl_asignaturas.item(fila, 1).setText(str(asignatura.creditos))
-        self.ui.tbl_asignaturas.item(fila, 2).setText(str(asignatura.curso))
-        self.ui.tbl_asignaturas.item(fila, 3).setText(str(asignatura.cuatrimestre))
-        self.ui.tbl_asignaturas.item(
-            fila, 4
-        ).setText("Sí" if asignatura.obligatoria else "No")
+        
+    def _mostrar_estado(self, texto, tipo="info"):
+     self.ui.lbl_estado.setText(texto)
+     self.ui.lbl_estado.setProperty("estado", tipo)
+     self.ui.lbl_estado.style().unpolish(self.ui.lbl_estado)
+     self.ui.lbl_estado.style().polish(self.ui.lbl_estado)

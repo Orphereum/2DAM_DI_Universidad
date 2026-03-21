@@ -59,3 +59,17 @@ class FacultadRepo:
     
     
     
+    
+    def find_all(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM facultad")
+
+        rows = cursor.fetchall()
+        conn.close()
+
+        return rows
+    
+    
+    

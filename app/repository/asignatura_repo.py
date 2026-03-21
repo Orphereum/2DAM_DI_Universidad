@@ -6,20 +6,24 @@ class AsignaturaRepository:
 
     #Funcion para leer sql
     def find_all_by_grado(self, id_grado):
-        conn = get_connection()
-        cursor = conn.cursor()
+     print("BUSCANDO EN BD PARA GRADO:", id_grado)
 
-        cursor.execute("""
-            SELECT id_asignatura, nombre, creditos, curso,
-                   cuatrimestre, obligatoria, grado_fk
-            FROM asignatura
-            WHERE grado_fk = ?
-        """, (id_grado,))
+     conn = get_connection()
+     cursor = conn.cursor()
 
-        rows = cursor.fetchall()
-        conn.close()
+     cursor.execute("""
+        SELECT id_asignatura, nombre, creditos, curso,
+               cuatrimestre, obligatoria, grado_fk
+        FROM asignatura
+        WHERE grado_fk = ?
+     """, (id_grado,))
 
-        return [self._row_to_model(row) for row in rows]
+     rows = cursor.fetchall()
+     print("RESULTADOS EN BD:", len(rows))
+
+     conn.close()
+
+     return [self._row_to_model(row) for row in rows]
 
     def find_by_id(self, id_asignatura):
         conn = get_connection()
@@ -39,8 +43,11 @@ class AsignaturaRepository:
 
     # Funcion para insertar sql
     def insert(self, asignatura: Asignatura):
+     try:
         conn = get_connection()
         cursor = conn.cursor()
+
+        print("INSERTANDO:", asignatura.nombre, asignatura.grado_fk)
 
         cursor.execute("""
             INSERT INTO asignatura
@@ -56,10 +63,16 @@ class AsignaturaRepository:
         ))
 
         conn.commit()
+        print("COMMIT OK")
+
         asignatura.id_asignatura = cursor.lastrowid
         conn.close()
 
         return asignatura
+
+     except Exception as e:
+        print("ERROR INSERT:", e)
+        raise
 
     # Funcion de actualizar 
     def update(self, asignatura: Asignatura):

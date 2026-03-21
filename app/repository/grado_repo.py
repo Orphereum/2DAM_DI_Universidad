@@ -143,3 +143,20 @@ class GradoRepository:
             fecha_creacion=row[7],
             id_facultad=row[8]
         )
+        
+    
+    
+    def find_all(self):
+     conn = get_connection()
+     cursor = conn.cursor()
+
+     cursor.execute("""
+        SELECT id_grado, nombre, codigo, duracion_anios,
+               creditos_totales, tipo, estado, fecha_creacion, id_facultad
+        FROM grado
+     """)
+
+     rows = cursor.fetchall()
+     conn.close()
+
+     return [self._row_to_grado(row) for row in rows]

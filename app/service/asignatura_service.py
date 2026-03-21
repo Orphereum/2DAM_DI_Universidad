@@ -19,19 +19,14 @@ class AsignaturaService:
     # CONTEXTO
     # -------------------------------------------------
     def set_grado_actual(self, id_grado: int):
-        """
-        Establece el grado activo sobre el que se trabaja.
-        """
         self.id_grado_actual = id_grado
 
     # -------------------------------------------------
     # CONSULTAS
     # -------------------------------------------------
     def obtener_asignaturas(self):
-        """
-        Devuelve las asignaturas del grado actual.
-        """
-        if not self.id_grado_actual:
+        print("GRADO ACTUAL EN SERVICE:", self.id_grado_actual)
+        if self.id_grado_actual is None:
             return []
 
         return self.asignatura_repo.find_all_by_grado(
@@ -40,11 +35,9 @@ class AsignaturaService:
 
     def obtener_grados(self):
         """
-        Devuelve los grados disponibles.
-        SOLO lectura (no responsabilidad del módulo).
+        🔥 Ahora carga TODOS los grados de la BD real
         """
-        # Uso mínimo del repositorio de grado
-        return self.grado_repo.find_all_by_facultad(1)
+        return self.grado_repo.find_all()
 
     # -------------------------------------------------
     # VALIDACIÓN
@@ -65,7 +58,6 @@ class AsignaturaService:
         if asignatura.grado_fk is None:
             raise ValueError("Debe seleccionar un grado")
 
-        # Validación cruzada (solo lectura)
         grado = self.grado_repo.find_by_id(asignatura.grado_fk)
         if not grado:
             raise ValueError("El grado seleccionado no existe")
@@ -75,44 +67,32 @@ class AsignaturaService:
     # -------------------------------------------------
     def crear_asignatura(self, asignatura: Asignatura):
         """
-        Valida y guarda una nueva asignatura.
+        🔥 CLAVE: usa el grado seleccionado en la UI
         """
+        if self.id_grado_actual is None:
+            raise ValueError("No hay grado seleccionado")
+
+        asignatura.grado_fk = self.id_grado_actual
+
         self.validar_asignatura(asignatura)
         return self.asignatura_repo.insert(asignatura)
 
     def actualizar_asignatura(self, asignatura: Asignatura):
-        """
-        Valida y actualiza una asignatura existente.
-        """
         if not asignatura.id_asignatura:
             raise ValueError("La asignatura no tiene ID")
+
+        if self.id_grado_actual is None:
+            raise ValueError("No hay grado seleccionado")
+
+        asignatura.grado_fk = self.id_grado_actual
 
         self.validar_asignatura(asignatura)
         return self.asignatura_repo.update(asignatura)
 
     def eliminar_asignatura(self, id_asignatura: int):
-        """
-        Elimina una asignatura por ID.
-        """
-        return self.asignatura_repo.delete(id_asignatura)
-    
-    
-    def obtener_grados(self):
-     try:
-        return self.grado_repo.find_all_by_facultad(1)
-     except Exception:
-        # Fallback temporal mientras no exista la tabla
-        from app.models.grado import Grado
-        return [
-            Grado(
-                id_grado=1,
-                nombre="Grado de prueba",
-                codigo="G-TEST",
-                duracion_anios=4,
-                creditos_totales=240,
-                tipo="Grado",
-                estado=1,
-                fecha_creacion=None,
-                id_facultad=1
+        try:
+            return self.asignatura_repo.delete(id_asignatura)
+        except Exception:
+            raise ValueError(
+                "No se puede eliminar la asignatura (tiene relaciones)"
             )
-        ]

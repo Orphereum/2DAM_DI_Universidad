@@ -12,6 +12,9 @@ class AsignaturaPage(QWidget):
         super().__init__(parent)
         self.service = asignatura_service
 
+        # 🔥 CACHE DE DATOS (CLAVE)
+        self._asignaturas_cache = []
+
         self.ui = Ui_AsignaturasView()
         self.ui.setupUi(self)
 
@@ -72,7 +75,8 @@ class AsignaturaPage(QWidget):
     def _grado_cambiado(self):
         id_grado = self.ui.cb_grado_filtro.currentData()
 
-        if not id_grado:
+        # 🔥 CORRECCIÓN IMPORTANTE
+        if id_grado is None:
             return
 
         self.service.set_grado_actual(id_grado)
@@ -88,6 +92,7 @@ class AsignaturaPage(QWidget):
             try:
                 self.service.crear_asignatura(dialog.resultado)
                 self.refrescar_tabla()
+                self._mostrar_estado("Asignatura creada correctamente", "success")
             except ValueError as e:
                 QMessageBox.warning(self, "Error", str(e))
 
@@ -96,12 +101,12 @@ class AsignaturaPage(QWidget):
     # -------------------------
     def editar_asignatura(self):
         fila = self.ui.tbl_asignaturas.currentRow()
+
         if fila < 0:
             QMessageBox.warning(self, "Aviso", "Selecciona una asignatura para editar")
             return
 
-        asignaturas = self.service.obtener_asignaturas()
-        asignatura = asignaturas[fila]
+        asignatura = self._asignaturas_cache[fila]
 
         dialog = AsignaturaDialog(
             self.service,
@@ -113,6 +118,7 @@ class AsignaturaPage(QWidget):
             try:
                 self.service.actualizar_asignatura(dialog.resultado)
                 self.refrescar_tabla()
+                self._mostrar_estado("Asignatura actualizada correctamente", "success")
             except ValueError as e:
                 QMessageBox.warning(self, "Error", str(e))
 
@@ -121,12 +127,12 @@ class AsignaturaPage(QWidget):
     # -------------------------
     def eliminar_asignatura(self):
         fila = self.ui.tbl_asignaturas.currentRow()
+
         if fila < 0:
             QMessageBox.warning(self, "Aviso", "Selecciona una asignatura para eliminar")
             return
 
-        asignaturas = self.service.obtener_asignaturas()
-        asignatura = asignaturas[fila]
+        asignatura = self._asignaturas_cache[fila]
 
         confirm = QMessageBox.question(
             self,
@@ -136,19 +142,25 @@ class AsignaturaPage(QWidget):
         )
 
         if confirm == QMessageBox.Yes:
-            self.service.eliminar_asignatura(asignatura.id_asignatura)
-            self.refrescar_tabla()
+            try:
+                self.service.eliminar_asignatura(asignatura.id_asignatura)
+                self.refrescar_tabla()
+                self._mostrar_estado("Asignatura eliminada correctamente", "success")
+            except ValueError as e:
+                QMessageBox.warning(self, "Error", str(e))
 
     # -------------------------
     # REFRESCAR TABLA
     # -------------------------
     def refrescar_tabla(self):
-        asignaturas = self.service.obtener_asignaturas()
-        tabla = self.ui.tbl_asignaturas
+        self._asignaturas_cache = self.service.obtener_asignaturas()
 
+        print("DATOS RECIBIDOS:", len(self._asignaturas_cache))  # DEBUG
+
+        tabla = self.ui.tbl_asignaturas
         tabla.setRowCount(0)
 
-        for asignatura in asignaturas:
+        for asignatura in self._asignaturas_cache:
             self._añadir_a_tabla(asignatura)
 
     # -------------------------
@@ -174,9 +186,12 @@ class AsignaturaPage(QWidget):
             fila, 4,
             QTableWidgetItem("Sí" if asignatura.obligatoria else "No")
         )
-        
+
+    # -------------------------
+    # MENSAJES DE ESTADO
+    # -------------------------
     def _mostrar_estado(self, texto, tipo="info"):
-     self.ui.lbl_estado.setText(texto)
-     self.ui.lbl_estado.setProperty("estado", tipo)
-     self.ui.lbl_estado.style().unpolish(self.ui.lbl_estado)
-     self.ui.lbl_estado.style().polish(self.ui.lbl_estado)
+        self.ui.lbl_estado.setText(texto)
+        self.ui.lbl_estado.setProperty("estado", tipo)
+        self.ui.lbl_estado.style().unpolish(self.ui.lbl_estado)
+        self.ui.lbl_estado.style().polish(self.ui.lbl_estado)

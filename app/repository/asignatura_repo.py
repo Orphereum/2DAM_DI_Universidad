@@ -1,3 +1,5 @@
+import sqlite3
+
 from app.data.db import get_connection
 from app.models.asignatura import Asignatura
 
@@ -43,9 +45,10 @@ class AsignaturaRepository:
     # -------------------------
     # INSERT
     # -------------------------
-    def insert(self, asignatura: Asignatura):
-        print("INSERTANDO:", asignatura.nombre, asignatura.grado_fk)
+    import sqlite3
 
+    def insert(self, asignatura):
+     try:
         with get_connection() as conn:
             cursor = conn.cursor()
 
@@ -62,10 +65,13 @@ class AsignaturaRepository:
                 asignatura.grado_fk
             ))
 
+            conn.commit()
             asignatura.id_asignatura = cursor.lastrowid
 
-        print("INSERT OK ID:", asignatura.id_asignatura)
-        return asignatura
+            return asignatura
+
+     except sqlite3.IntegrityError:
+        raise ValueError("La asignatura ya existe (duplicada)")
 
     # -------------------------
     # UPDATE
@@ -124,3 +130,36 @@ class AsignaturaRepository:
             obligatoria=bool(row["obligatoria"]),
             grado_fk=row["grado_fk"]
         )
+    
+    
+    def find_filtradas(self, id_grado, curso, cuatrimestre, tipo):
+     query = """
+        SELECT id_asignatura, nombre, creditos, curso,
+               cuatrimestre, obligatoria, grado_fk
+        FROM asignatura
+        WHERE grado_fk = ?
+     """
+
+     params = [id_grado]
+
+    # FILTRO CURSO
+     if curso != "Todos":
+        query += " AND curso = ?"
+        params.append(int(curso))
+
+    # FILTRO CUATRIMESTRE
+     if cuatrimestre != "Todos":
+        query += " AND cuatrimestre = ?"
+        params.append(int(cuatrimestre))
+
+    # FILTRO TIPO (🔥 CORRECTO)
+     if tipo is not None:
+        query += " AND obligatoria = ?"
+        params.append(tipo)
+
+     with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(query, params)
+        rows = cursor.fetchall()
+
+     return [self._row_to_model(row) for row in rows]

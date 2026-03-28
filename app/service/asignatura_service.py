@@ -65,17 +65,16 @@ class AsignaturaService:
     # -------------------------------------------------
     # CRUD
     # -------------------------------------------------
-    def crear_asignatura(self, asignatura: Asignatura):
-        """
-        🔥 CLAVE: usa el grado seleccionado en la UI
-        """
-        if self.id_grado_actual is None:
-            raise ValueError("No hay grado seleccionado")
+    def crear_asignatura(self, asignatura):
+     asignatura.grado_fk = self.id_grado_actual
 
-        asignatura.grado_fk = self.id_grado_actual
+    # 🔥 VALIDACIÓN DUPLICADOS
+     if self.existe_asignatura(asignatura):
+        raise ValueError("Esta asignatura ya existe")
 
-        self.validar_asignatura(asignatura)
-        return self.asignatura_repo.insert(asignatura)
+     self.validar_asignatura(asignatura)
+ 
+     return self.asignatura_repo.insert(asignatura)
 
     def actualizar_asignatura(self, asignatura: Asignatura):
         if not asignatura.id_asignatura:
@@ -96,3 +95,22 @@ class AsignaturaService:
             raise ValueError(
                 "No se puede eliminar la asignatura (tiene relaciones)"
             )
+    
+    
+    def obtener_asignaturas_filtradas(self, id_grado, curso, cuatrimestre, tipo):
+     return self.asignatura_repo.find_filtradas(
+        id_grado, curso, cuatrimestre, tipo
+     )
+     
+    def existe_asignatura(self, asignatura):
+     asignaturas = self.asignatura_repo.find_all_by_grado(asignatura.grado_fk)
+
+     for a in asignaturas:
+        if (
+            a.nombre.strip().lower() == asignatura.nombre.strip().lower() and
+            a.curso == asignatura.curso and
+            a.cuatrimestre == asignatura.cuatrimestre
+        ):
+            return True
+
+     return False

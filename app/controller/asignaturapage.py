@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
 from app.view.Asignatura_ui import Ui_AsignaturasView
 from app.controller.asignaturadialog import AsignaturaDialog
 from app.models.asignatura import Asignatura
-
+from app.controller.InformesAsignaturasPage import InformeAsignaturasPage
 
 class AsignaturaPage(QWidget):
     def __init__(self, asignatura_service, parent=None):
@@ -68,6 +68,7 @@ class AsignaturaPage(QWidget):
         self.ui.btn_editar.clicked.connect(self.editar_asignatura)
         self.ui.btn_eliminar.clicked.connect(self.eliminar_asignatura)
         self.ui.btn_refrescar.clicked.connect(self.refrescar_tabla)
+        self.ui.btnExportarPdf.clicked.connect(self.abrir_informes)
 
     # -------------------------
     # CAMBIO DE GRADO
@@ -195,3 +196,9 @@ class AsignaturaPage(QWidget):
         self.ui.lbl_estado.setProperty("estado", tipo)
         self.ui.lbl_estado.style().unpolish(self.ui.lbl_estado)
         self.ui.lbl_estado.style().polish(self.ui.lbl_estado)
+        
+    
+    
+    def abrir_informes(self):
+     self.informe_page = InformeAsignaturasPage(self.service)
+     self.informe_page.exec()

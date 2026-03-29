@@ -33,6 +33,7 @@ env/
 .DS_Store
 Thumbs.db
 desktop.ini
+*.pdf
 
 
 # Logs

@@ -84,11 +84,11 @@ class InformeAsignaturasPage(QDialog):
             )
     def exportar_pdf(self):
      ruta, _ = QFileDialog.getSaveFileName(
-        self,
-        "Guardar informe",
-        "informe_asignaturas.pdf",
-        "PDF Files (*.pdf)"
-     )
+     self,
+     "Guardar informe",
+     "",
+     "PDF Files (*.pdf)"
+    )
 
      if not ruta:
         return

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Asignatura.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.0
+## Created by: Qt User Interface Compiler version 6.10.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -37,7 +37,7 @@ class Ui_AsignaturasView(object):
         font.setPointSize(42)
         font.setBold(True)
         self.lblTitulo.setFont(font)
-        self.lblTitulo.setAlignment(Qt.AlignCenter)
+        self.lblTitulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.lblTitulo)
 
@@ -60,7 +60,6 @@ class Ui_AsignaturasView(object):
 
         self.cb_grado_filtro = QComboBox(self.widgetContexto)
         self.cb_grado_filtro.setObjectName(u"cb_grado_filtro")
-        self.cb_grado_filtro.setMinimumWidth(250)
 
         self.hboxLayout.addWidget(self.cb_grado_filtro)
 
@@ -73,7 +72,7 @@ class Ui_AsignaturasView(object):
 
         self.frameMain = QFrame(AsignaturasView)
         self.frameMain.setObjectName(u"frameMain")
-        self.frameMain.setFrameShape(QFrame.StyledPanel)
+        self.frameMain.setFrameShape(QFrame.Shape.StyledPanel)
         self.vboxLayout = QVBoxLayout(self.frameMain)
         self.vboxLayout.setObjectName(u"vboxLayout")
         self.lblTablaTitulo = QLabel(self.frameMain)
@@ -114,6 +113,11 @@ class Ui_AsignaturasView(object):
 
         self.hboxLayout1.addWidget(self.btnExportarPdf)
 
+        self.btnGraficos = QPushButton(self.frameMain)
+        self.btnGraficos.setObjectName(u"btnGraficos")
+
+        self.hboxLayout1.addWidget(self.btnGraficos)
+
         self.spacerButtons = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.hboxLayout1.addItem(self.spacerButtons)
@@ -126,8 +130,7 @@ class Ui_AsignaturasView(object):
 
         self.lbl_estado = QLabel(AsignaturasView)
         self.lbl_estado.setObjectName(u"lbl_estado")
-        self.lbl_estado.setMinimumHeight(24)
-        self.lbl_estado.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        self.lbl_estado.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
 
         self.verticalLayout.addWidget(self.lbl_estado)
 
@@ -151,6 +154,7 @@ class Ui_AsignaturasView(object):
         self.btn_eliminar.setText(QCoreApplication.translate("AsignaturasView", u"Eliminar", None))
         self.btn_refrescar.setText(QCoreApplication.translate("AsignaturasView", u"Refrescar", None))
         self.btnExportarPdf.setText(QCoreApplication.translate("AsignaturasView", u"Exportar PDF", None))
+        self.btnGraficos.setText(QCoreApplication.translate("AsignaturasView", u"Graficos", None))
         self.lbl_estado.setText(QCoreApplication.translate("AsignaturasView", u"Listo", None))
     # retranslateUi
 

@@ -6,7 +6,7 @@ from app.view.Asignatura_ui import Ui_AsignaturasView
 from app.controller.asignaturadialog import AsignaturaDialog
 from app.models.asignatura import Asignatura
 from app.controller.InformesAsignaturasPage import InformeAsignaturasPage
-
+from app.controller.graficos_asignaturas_page import GraficosAsignaturasPage
 class AsignaturaPage(QWidget):
     def __init__(self, asignatura_service, parent=None):
         super().__init__(parent)
@@ -21,6 +21,7 @@ class AsignaturaPage(QWidget):
         self._configurar_tabla()
         self._cargar_grados()
         self._conectar_eventos()
+        self.ui.btnGraficos.clicked.connect(self.abrir_graficos)
 
     # -------------------------
     # CONFIGURACIÓN DE LA TABLA
@@ -202,3 +203,8 @@ class AsignaturaPage(QWidget):
     def abrir_informes(self):
      self.informe_page = InformeAsignaturasPage(self.service)
      self.informe_page.exec()
+    
+    
+    def abrir_graficos(self):
+     self.ventana_graficos = GraficosAsignaturasPage(self.service)
+     self.ventana_graficos.show()

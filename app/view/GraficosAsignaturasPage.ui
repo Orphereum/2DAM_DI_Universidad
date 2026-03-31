@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GraficosAsignaturasPage</class>
+ <widget class="QWidget" name="GraficosAsignaturasPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gráficos de Asignaturas</string>
+  </property>
+
+  <layout class="QVBoxLayout">
+
+   <!-- TÍTULO -->
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>Gráficos de Asignaturas</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="styleSheet">
+      <string>font-size: 20px; font-weight: bold;</string>
+     </property>
+    </widget>
+   </item>
+
+   <!-- BOTONES -->
+   <item>
+    <layout class="QHBoxLayout">
+
+     <item>
+      <widget class="QPushButton" name="btn_curso">
+       <property name="text">
+        <string>Asignaturas por Curso</string>
+       </property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QPushButton" name="btn_tipo">
+       <property name="text">
+        <string>Obligatorias vs Optativas</string>
+       </property>
+      </widget>
+     </item>
+
+    </layout>
+   </item>
+
+   <!-- ÁREA DEL GRÁFICO -->
+   <item>
+    <widget class="QFrame" name="frame_grafico">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <layout class="QVBoxLayout">
+      <item>
+       <widget class="QWidget" name="widget_grafico"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

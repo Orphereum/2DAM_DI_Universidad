@@ -15,21 +15,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QGridLayout,
-    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
-    QPushButton, QSizePolicy, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QGroupBox,
+    QHeaderView, QLabel, QPushButton, QSizePolicy,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_InformeAsignaturasPage(object):
     def setupUi(self, InformeAsignaturasPage):
         if not InformeAsignaturasPage.objectName():
             InformeAsignaturasPage.setObjectName(u"InformeAsignaturasPage")
-        InformeAsignaturasPage.resize(900, 600)
+        InformeAsignaturasPage.resize(798, 486)
         self.verticalLayout = QVBoxLayout(InformeAsignaturasPage)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.lblTitulo = QLabel(InformeAsignaturasPage)
         self.lblTitulo.setObjectName(u"lblTitulo")
-        self.lblTitulo.setAlignment(Qt.AlignCenter)
+        self.lblTitulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(self.lblTitulo)
 
@@ -125,20 +124,10 @@ class Ui_InformeAsignaturasPage(object):
 
         self.verticalLayout.addWidget(self.tbl_resultados)
 
-        self.horizontalLayoutBotones = QHBoxLayout()
-        self.horizontalLayoutBotones.setObjectName(u"horizontalLayoutBotones")
         self.btn_exportar = QPushButton(InformeAsignaturasPage)
         self.btn_exportar.setObjectName(u"btn_exportar")
 
-        self.horizontalLayoutBotones.addWidget(self.btn_exportar)
-
-        self.btn_cerrar = QPushButton(InformeAsignaturasPage)
-        self.btn_cerrar.setObjectName(u"btn_cerrar")
-
-        self.horizontalLayoutBotones.addWidget(self.btn_cerrar)
-
-
-        self.verticalLayout.addLayout(self.horizontalLayoutBotones)
+        self.verticalLayout.addWidget(self.btn_exportar)
 
 
         self.retranslateUi(InformeAsignaturasPage)
@@ -148,8 +137,8 @@ class Ui_InformeAsignaturasPage(object):
 
     def retranslateUi(self, InformeAsignaturasPage):
         InformeAsignaturasPage.setWindowTitle(QCoreApplication.translate("InformeAsignaturasPage", u"Informe de Asignaturas", None))
+        self.lblTitulo.setStyleSheet(QCoreApplication.translate("InformeAsignaturasPage", u"font-size: 18px; font-weight: bold;", None))
         self.lblTitulo.setText(QCoreApplication.translate("InformeAsignaturasPage", u"Informe de Asignaturas", None))
-        self.lblTitulo.setStyleSheet(QCoreApplication.translate("InformeAsignaturasPage", u"font-size: 20px; font-weight: bold;", None))
         self.groupFiltros.setTitle(QCoreApplication.translate("InformeAsignaturasPage", u"Filtros", None))
         self.labelTipoInforme.setText(QCoreApplication.translate("InformeAsignaturasPage", u"Tipo informe:", None))
         self.cb_tipo_informe.setItemText(0, QCoreApplication.translate("InformeAsignaturasPage", u"Asignaturas", None))
@@ -184,6 +173,5 @@ class Ui_InformeAsignaturasPage(object):
         ___qtablewidgetitem4 = self.tbl_resultados.horizontalHeaderItem(4)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("InformeAsignaturasPage", u"Obligatoria", None));
         self.btn_exportar.setText(QCoreApplication.translate("InformeAsignaturasPage", u"Exportar a PDF", None))
-        self.btn_cerrar.setText(QCoreApplication.translate("InformeAsignaturasPage", u"Cerrar", None))
     # retranslateUi
 

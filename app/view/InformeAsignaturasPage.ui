@@ -2,202 +2,127 @@
 <ui version="4.0">
  <class>InformeAsignaturasPage</class>
  <widget class="QWidget" name="InformeAsignaturasPage">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>798</width>
-    <height>486</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Informe de Asignaturas</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+
+  <layout class="QVBoxLayout">
+
+   <!-- TITULO -->
    <item>
     <widget class="QLabel" name="lblTitulo">
-     <property name="styleSheet">
-      <string>font-size: 18px; font-weight: bold;</string>
-     </property>
      <property name="text">
       <string>Informe de Asignaturas</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
+
+   <!-- FILTROS -->
    <item>
     <widget class="QGroupBox" name="groupFiltros">
      <property name="title">
       <string>Filtros</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+
+     <layout class="QGridLayout">
+
       <item row="0" column="0">
-       <widget class="QLabel" name="labelTipoInforme">
-        <property name="text">
-         <string>Tipo informe:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="cb_tipo_informe">
-        <item>
-         <property name="text">
-          <string>Asignaturas</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelGrado">
+       <widget class="QLabel">
         <property name="text">
          <string>Grado:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="0" column="1">
        <widget class="QComboBox" name="cb_grado"/>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="labelCurso">
+
+      <item row="1" column="0">
+       <widget class="QLabel">
         <property name="text">
          <string>Curso:</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="1" column="1">
        <widget class="QComboBox" name="cb_curso">
-        <item>
-         <property name="text">
-          <string>Todos</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4</string>
-         </property>
-        </item>
+        <item><property name="text"><string>Todos</string></property></item>
+        <item><property name="text"><string>1</string></property></item>
+        <item><property name="text"><string>2</string></property></item>
+        <item><property name="text"><string>3</string></property></item>
+        <item><property name="text"><string>4</string></property></item>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="labelCuatrimestre">
+
+      <item row="2" column="0">
+       <widget class="QLabel">
         <property name="text">
          <string>Cuatrimestre:</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="2" column="1">
        <widget class="QComboBox" name="cb_cuatrimestre">
-        <item>
-         <property name="text">
-          <string>Todos</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2</string>
-         </property>
-        </item>
+        <item><property name="text"><string>Todos</string></property></item>
+        <item><property name="text"><string>1</string></property></item>
+        <item><property name="text"><string>2</string></property></item>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="labelTipo">
+
+      <item row="3" column="0">
+       <widget class="QLabel">
         <property name="text">
          <string>Tipo:</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QComboBox" name="cb_tipo">
-        <item>
-         <property name="text">
-          <string>Todas</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Obligatorias</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Optativas</string>
-         </property>
-        </item>
-       </widget>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="cb_tipo"/>
       </item>
+
      </layout>
     </widget>
    </item>
+
+   <!-- TABLA -->
    <item>
-    <widget class="QPushButton" name="btn_generar">
-     <property name="text">
-      <string>Generar informe</string>
-     </property>
-    </widget>
+    <widget class="QTableWidget" name="tbl_resultados"/>
    </item>
+
+   <!-- BOTONES -->
    <item>
-    <widget class="QTableWidget" name="tbl_resultados">
-     <property name="columnCount">
-      <number>5</number>
-     </property>
-     <column>
-      <property name="text">
-       <string>Nombre</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Créditos</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Curso</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Cuatrimestre</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Obligatoria</string>
-      </property>
-     </column>
-    </widget>
+    <layout class="QHBoxLayout">
+
+     <item>
+      <widget class="QPushButton" name="btn_generar">
+       <property name="text">
+        <string>Generar informe</string>
+       </property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QPushButton" name="btn_exportar">
+       <property name="text">
+        <string>Exportar PDF</string>
+       </property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QPushButton" name="btn_cerrar">
+       <property name="text">
+        <string>Cerrar</string>
+       </property>
+      </widget>
+     </item>
+
+    </layout>
    </item>
-   <item>
-    <widget class="QPushButton" name="btn_exportar">
-     <property name="text">
-      <string>Exportar a PDF</string>
-     </property>
-    </widget>
-   </item>
+
   </layout>
  </widget>
- <resources/>
- <connections/>
 </ui>

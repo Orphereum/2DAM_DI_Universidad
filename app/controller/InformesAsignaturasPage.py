@@ -10,6 +10,7 @@ class InformeAsignaturasPage(QDialog):
 
         self.ui = Ui_InformeAsignaturasPage()
         self.ui.setupUi(self)
+        self.informe_generado = False
 
         self._configurar_tabla()
         self._cargar_grados()
@@ -56,44 +57,56 @@ class InformeAsignaturasPage(QDialog):
     # GENERAR INFORME
     # -------------------------
     def generar_informe(self):
-        id_grado = self.ui.cb_grado.currentData()
-        curso = self.ui.cb_curso.currentText()
-        cuatrimestre = self.ui.cb_cuatrimestre.currentText()
-        tipo = self.ui.cb_tipo.currentData()   # 🔥 IMPORTANTE
+     id_grado = self.ui.cb_grado.currentData()
+     curso = self.ui.cb_curso.currentText()
+     cuatrimestre = self.ui.cb_cuatrimestre.currentText()
+     tipo = self.ui.cb_tipo.currentData()
 
-        if id_grado is None:
-            return
+     if id_grado is None:
+        return
 
-        asignaturas = self.service.obtener_asignaturas_filtradas(
-            id_grado, curso, cuatrimestre, tipo
+     asignaturas = self.service.obtener_asignaturas_filtradas(
+        id_grado, curso, cuatrimestre, tipo
+     )
+
+     self.ui.tbl_resultados.setRowCount(0)
+
+     for a in asignaturas:
+        fila = self.ui.tbl_resultados.rowCount()
+        self.ui.tbl_resultados.insertRow(fila)
+
+        self.ui.tbl_resultados.setItem(fila, 0, QTableWidgetItem(a.nombre))
+        self.ui.tbl_resultados.setItem(fila, 1, QTableWidgetItem(str(a.creditos)))
+        self.ui.tbl_resultados.setItem(fila, 2, QTableWidgetItem(str(a.curso)))
+        self.ui.tbl_resultados.setItem(fila, 3, QTableWidgetItem(str(a.cuatrimestre)))
+        self.ui.tbl_resultados.setItem(
+            fila, 4,
+            QTableWidgetItem("Sí" if a.obligatoria else "No")
         )
 
-        self.ui.tbl_resultados.setRowCount(0)
-
-        for a in asignaturas:
-            fila = self.ui.tbl_resultados.rowCount()
-            self.ui.tbl_resultados.insertRow(fila)
-
-            self.ui.tbl_resultados.setItem(fila, 0, QTableWidgetItem(a.nombre))
-            self.ui.tbl_resultados.setItem(fila, 1, QTableWidgetItem(str(a.creditos)))
-            self.ui.tbl_resultados.setItem(fila, 2, QTableWidgetItem(str(a.curso)))
-            self.ui.tbl_resultados.setItem(fila, 3, QTableWidgetItem(str(a.cuatrimestre)))
-            self.ui.tbl_resultados.setItem(
-                fila, 4,
-                QTableWidgetItem("Sí" if a.obligatoria else "No")
-            )
+    # 🔥 ACTIVAR FLAG
+     self.informe_generado = True
     def exportar_pdf(self):
+
+    # 🔥 VALIDACIÓN CLAVE
+     if not self.informe_generado:
+        QMessageBox.warning(
+            self,
+            "Acción no permitida",
+            "Debes generar el informe antes de exportarlo."
+        )
+        return
+
      ruta, _ = QFileDialog.getSaveFileName(
-     self,
-     "Guardar informe",
-     "",
-     "PDF Files (*.pdf)"
-    )
+        self,
+        "Guardar informe",
+        "",
+        "PDF Files (*.pdf)"
+     )
 
      if not ruta:
         return
 
-    # 🔥 filtros actuales
      id_grado = self.ui.cb_grado.currentData()
      curso = self.ui.cb_curso.currentText()
      cuatrimestre = self.ui.cb_cuatrimestre.currentText()

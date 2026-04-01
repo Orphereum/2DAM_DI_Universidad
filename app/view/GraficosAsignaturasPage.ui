@@ -1,75 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GraficosAsignaturasPage</class>
- <widget class="QWidget" name="GraficosAsignaturasPage">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>900</width>
-    <height>600</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>Gráficos de Asignaturas</string>
-  </property>
 
+ <widget class="QWidget" name="GraficosAsignaturasPage">
   <layout class="QVBoxLayout">
 
-   <!-- TÍTULO -->
-   <item>
-    <widget class="QLabel" name="lblTitulo">
-     <property name="text">
-      <string>Gráficos de Asignaturas</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="styleSheet">
-      <string>font-size: 20px; font-weight: bold;</string>
-     </property>
-    </widget>
-   </item>
-
-   <!-- BOTONES -->
+   <!-- ===================== -->
+   <!-- HEADER (VOLVER + TITULO) -->
+   <!-- ===================== -->
    <item>
     <layout class="QHBoxLayout">
 
      <item>
-      <widget class="QPushButton" name="btn_curso">
+      <widget class="QPushButton" name="btn_volver">
        <property name="text">
-        <string>Asignaturas por Curso</string>
+        <string>← Volver</string>
        </property>
       </widget>
      </item>
 
      <item>
-      <widget class="QPushButton" name="btn_tipo">
-       <property name="text">
-        <string>Obligatorias vs Optativas</string>
+      <spacer name="spacerHeader">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+
+    </layout>
+   </item>
+
+   <!-- ===================== -->
+   <!-- TITULO -->
+   <!-- ===================== -->
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>Dashboard de Asignaturas</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+
+   <!-- ===================== -->
+   <!-- FILTROS -->
+   <!-- ===================== -->
+   <item>
+    <widget class="QFrame" name="frameFiltros">
+     <layout class="QGridLayout">
+
+      <!-- FILA 1 -->
+      <item row="0" column="0">
+       <widget class="QLabel">
+        <property name="text">
+         <string>Grado:</string>
+        </property>
+       </widget>
+      </item>
+
+      <item row="0" column="1">
+       <widget class="QComboBox" name="cb_grado"/>
+      </item>
+
+      <item row="0" column="2">
+       <widget class="QLabel">
+        <property name="text">
+         <string>Curso:</string>
+        </property>
+       </widget>
+      </item>
+
+      <item row="0" column="3">
+       <widget class="QComboBox" name="cb_curso"/>
+      </item>
+
+      <item row="0" column="4">
+       <widget class="QPushButton" name="btn_reset">
+        <property name="text">
+         <string>Vaciar campos</string>
+        </property>
+       </widget>
+      </item>
+
+      <!-- FILA 2 -->
+      <item row="1" column="0">
+       <widget class="QLabel">
+        <property name="text">
+         <string>Cuatrimestre:</string>
+        </property>
+       </widget>
+      </item>
+
+      <item row="1" column="1">
+       <widget class="QComboBox" name="cb_cuatrimestre"/>
+      </item>
+
+      <item row="1" column="2">
+       <widget class="QLabel">
+        <property name="text">
+         <string>Tipo:</string>
+        </property>
+       </widget>
+      </item>
+
+      <item row="1" column="3">
+       <widget class="QComboBox" name="cb_tipo"/>
+      </item>
+
+      <item row="1" column="4">
+       <widget class="QPushButton" name="btn_exportar">
+        <property name="text">
+         <string>Exportar</string>
+        </property>
+       </widget>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+   <!-- ===================== -->
+   <!-- RESUMEN -->
+   <!-- ===================== -->
+   <item>
+    <widget class="QLabel" name="lbl_resumen">
+     <property name="text">
+      <string>Filtros activos...</string>
+     </property>
+    </widget>
+   </item>
+
+   <!-- ===================== -->
+   <!-- GRID DE GRÁFICOS -->
+   <!-- ===================== -->
+   <item>
+    <layout class="QGridLayout">
+
+     <!-- GRAFICO 1 -->
+     <item row="0" column="0">
+      <widget class="QFrame" name="frame_grafico1">
+       <layout class="QVBoxLayout">
+
+        <item>
+         <widget class="QLabel">
+          <property name="text">
+           <string>Asignaturas por curso</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QWidget" name="grafico_curso"/>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+     <!-- GRAFICO 2 -->
+     <item row="0" column="1">
+      <widget class="QFrame" name="frame_grafico2">
+       <layout class="QVBoxLayout">
+
+        <item>
+         <widget class="QLabel">
+          <property name="text">
+           <string>Tipo de asignaturas</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QWidget" name="grafico_tipo"/>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+     <!-- GRAFICO 3 -->
+     <item row="1" column="0">
+      <widget class="QFrame" name="frame_grafico3">
+       <layout class="QVBoxLayout">
+
+        <item>
+         <widget class="QLabel">
+          <property name="text">
+           <string>Créditos por curso</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QWidget" name="grafico_creditos"/>
+        </item>
+
+       </layout>
+      </widget>
+     </item>
+
+     <!-- GRAFICO 4 -->
+     <item row="1" column="1">
+      <widget class="QFrame" name="frame_grafico4">
+       <layout class="QVBoxLayout">
+
+        <item>
+         <widget class="QLabel">
+          <property name="text">
+           <string>Distribución por cuatrimestre</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QWidget" name="grafico_cuatrimestre"/>
+        </item>
+
+       </layout>
       </widget>
      </item>
 
     </layout>
    </item>
 
-   <!-- ÁREA DEL GRÁFICO -->
-   <item>
-    <widget class="QFrame" name="frame_grafico">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <layout class="QVBoxLayout">
-      <item>
-       <widget class="QWidget" name="widget_grafico"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-
   </layout>
  </widget>
+
  <resources/>
  <connections/>
 </ui>

@@ -100,7 +100,7 @@ class InformeAsignaturasPage(QDialog):
         self.ui.btn_exportar.setEnabled(False)
 
     # -------------------------
-    # GENERAR INFORME
+    # GENERAR INFORME ASIGNATURAS
     # -------------------------
     def generar_informe(self):
         id_grado = self.ui.cb_grado.currentData()

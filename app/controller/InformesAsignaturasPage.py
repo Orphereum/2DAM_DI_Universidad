@@ -54,7 +54,7 @@ class InformeAsignaturasPage(QDialog):
         self.ui.btn_cerrar.clicked.connect(self.close)
 
     # -------------------------
-    # GENERAR INFORME
+    # GENERAR INFORME ASIGNATURAS
     # -------------------------
     def generar_informe(self):
      id_grado = self.ui.cb_grado.currentData()

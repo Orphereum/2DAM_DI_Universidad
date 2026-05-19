@@ -17,7 +17,7 @@ class EdificioService:
         return self.edificio_repo.find_all()
 
     def obtener_facultades(self):
-        return self.facultad_repo.find_all()
+        return self.facultad_repo.get_all_facultades() 
 
 
 
@@ -28,10 +28,8 @@ class EdificioService:
 
         if edificio.id_facultad is None:
             raise ValueError("Debe seleccionar una facultad")
-
-        # Verificar que la facultad existe
-        facultad = self.facultad_repo.find_by_id(edificio.id_facultad)
-        if not facultad:
+        ids_validos = [f.id for f in self.facultad_repo.get_all_facultades()]
+        if edificio.id_facultad not in ids_validos:
             raise ValueError("La facultad seleccionada no existe")
 
 

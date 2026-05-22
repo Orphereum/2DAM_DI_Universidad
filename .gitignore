@@ -1,0 +1,46 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py.class
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+
+# PySide / Qt
+*.ui.autosave
+*.qrc.autosave
+
+# Archivos temporales Qt Designer
+*.pro.user
+*.pro.user.*
+*.qmlproject.user
+*.qmlproject.user.*
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+*.pdf
+
+
+# Logs
+*.log
+
+# Build / dist (por si acaso)
+build/
+dist/
+*.spec
+.coverage

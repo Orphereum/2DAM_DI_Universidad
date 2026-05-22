@@ -116,8 +116,10 @@ class SubvencionPage(QWidget):
 
         for fila, registro in enumerate(datos):
             for col, valor in enumerate(registro):
-                self.ui.tabla_subvenciones.setItem(
-                    fila, col, QTableWidgetItem(str(valor)))
+                item = QTableWidgetItem(str(valor))
+                item.setTextAlignment(Qt.AlignCenter)
+
+                self.ui.tabla_subvenciones.setItem(fila, col, item)
 
     def seleccionar_subvencion(self):
         fila = self.ui.tabla_subvenciones.currentRow()

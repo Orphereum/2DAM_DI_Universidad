@@ -58,14 +58,20 @@ class AppController:
     # -------------------------
     def _setup_pages(self):
         stacked = self.home.ui.stackedWidget
+        
+        # LIMPIAR PÁGINAS INICIALES VACÍAS DEL DISEÑADOR
+        while stacked.count() > 0:
+            widget = stacked.widget(0)
+            stacked.removeWidget(widget)
+            widget.deleteLater()
 
     
 
         # PÁGINAS SIN SERVICE
-        universidad = UniversidadPage(stacked)
-        profesor = ProfesorPage(stacked)
-        departamento = DepartamentoPage(stacked)
-        grado = GradoPage(stacked)
+        universidad = UniversidadPage()
+        profesor = ProfesorPage()
+        departamento = DepartamentoPage()
+        grado = GradoPage()
 
         # -------------------------
         # DEPENDENCIAS ASIGNATURA
@@ -79,7 +85,7 @@ class AppController:
             grado_repo
         )
 
-        asignatura = AsignaturaPage(asignatura_service, stacked)
+        asignatura = AsignaturaPage(asignatura_service)
 
         # -------------------------
         # DEPENDENCIAS CLASE
@@ -93,14 +99,14 @@ class AppController:
             edificio_repo
         )
 
-        clase = ClasePage(clase_service, stacked)
+        clase = ClasePage(clase_service)
         
         # -------------------------
         # DEPENDENCIAS UNIVERSIDAD (¡ACTUALIZADO PARA JAIME!)
         # -------------------------
         universidad_repo = UniversidadRepository()  # O la clase que tenga tu equipo creada
         universidad_service = UniversidadService(universidad_repo)
-        universidad = UniversidadPage(stacked, universidad_service)
+        universidad = UniversidadPage(universidad_service=universidad_service)
 
 
         # -------------------------
@@ -114,7 +120,7 @@ class AppController:
             facultad_repo
         )
 
-        edificio = EdificioPage(edificio_service, stacked)
+        edificio = EdificioPage(edificio_service)
         
         # -------------------------
         # DEPENDENCIAS GRUPO INVESTIGACIÓN
@@ -138,7 +144,7 @@ class AppController:
             subvencion_repo
         )
 
-        proyecto = ProyectoPage(proyecto_service, grupoInv_service, stacked)
+        proyecto = ProyectoPage(proyecto_service, grupoInv_service)
             
         # -------------------------
         # DEPENDENCIAS SUBVENCIÓN
@@ -149,7 +155,7 @@ class AppController:
             subvencion_repo
         )
 
-        subvencion = SubvencionPage(subvencion_service, stacked)
+        subvencion = SubvencionPage(subvencion_service)
 
         # REGISTRO DE PÁGINAS
         self.pages = {

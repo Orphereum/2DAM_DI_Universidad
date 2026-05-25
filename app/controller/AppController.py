@@ -1,5 +1,7 @@
 from app.controller.homewindow import HomeWindow
 from app.controller.universidadpage import UniversidadPage
+from app.repository.universidad_repo import UniversidadRepository
+from app.service.universidad_service import UniversidadService
 from app.controller.profesorpage import ProfesorPage
 from app.controller.departamentopage import DepartamentoPage
 from app.controller.gradopage import GradoPage
@@ -57,6 +59,8 @@ class AppController:
     def _setup_pages(self):
         stacked = self.home.ui.stackedWidget
 
+    
+
         # PÁGINAS SIN SERVICE
         universidad = UniversidadPage(stacked)
         profesor = ProfesorPage(stacked)
@@ -91,7 +95,14 @@ class AppController:
 
         clase = ClasePage(clase_service, stacked)
         
-        
+        # -------------------------
+        # DEPENDENCIAS UNIVERSIDAD (¡ACTUALIZADO PARA JAIME!)
+        # -------------------------
+        universidad_repo = UniversidadRepository()  # O la clase que tenga tu equipo creada
+        universidad_service = UniversidadService(universidad_repo)
+        universidad = UniversidadPage(stacked, universidad_service)
+
+
         # -------------------------
         # DEPENDENCIAS EDIFICIO
         # -------------------------

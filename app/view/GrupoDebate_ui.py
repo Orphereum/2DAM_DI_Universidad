@@ -24,6 +24,7 @@ class Ui_GrupoDebate_page(object):
     def setupUi(self, GrupoDebate_page):
         if not GrupoDebate_page.objectName():
             GrupoDebate_page.setObjectName(u"GrupoDebate_page")
+        GrupoDebate_page.resize(900, 600)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -132,29 +133,29 @@ class Ui_GrupoDebate_page(object):
         self.buttonsLayout = QVBoxLayout()
         self.buttonsLayout.setSpacing(10)
         self.buttonsLayout.setObjectName(u"buttonsLayout")
-        self.btn_editar = QPushButton(GrupoDebate_page)
-        self.btn_editar.setObjectName(u"btn_editar")
-        self.btn_editar.setFont(font1)
-
-        self.buttonsLayout.addWidget(self.btn_editar)
-
         self.btn_guardar = QPushButton(GrupoDebate_page)
         self.btn_guardar.setObjectName(u"btn_guardar")
         self.btn_guardar.setFont(font1)
 
         self.buttonsLayout.addWidget(self.btn_guardar)
 
-        self.btn_eliminar = QPushButton(GrupoDebate_page)
-        self.btn_eliminar.setObjectName(u"btn_eliminar")
-        self.btn_eliminar.setFont(font1)
+        self.btn_editar = QPushButton(GrupoDebate_page)
+        self.btn_editar.setObjectName(u"btn_editar")
+        self.btn_editar.setFont(font1)
 
-        self.buttonsLayout.addWidget(self.btn_eliminar)
+        self.buttonsLayout.addWidget(self.btn_editar)
 
         self.btn_limpiar = QPushButton(GrupoDebate_page)
         self.btn_limpiar.setObjectName(u"btn_limpiar")
         self.btn_limpiar.setFont(font1)
 
         self.buttonsLayout.addWidget(self.btn_limpiar)
+
+        self.btn_eliminar = QPushButton(GrupoDebate_page)
+        self.btn_eliminar.setObjectName(u"btn_eliminar")
+        self.btn_eliminar.setFont(font1)
+
+        self.buttonsLayout.addWidget(self.btn_eliminar)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -187,6 +188,7 @@ class Ui_GrupoDebate_page(object):
         sizePolicy1.setVerticalStretch(1)
         sizePolicy1.setHeightForWidth(self.tabla_grupos.sizePolicy().hasHeightForWidth())
         self.tabla_grupos.setSizePolicy(sizePolicy1)
+        self.tabla_grupos.horizontalHeader().setDefaultSectionSize(146)
 
         self.mainLayout.addWidget(self.tabla_grupos)
 
@@ -204,10 +206,10 @@ class Ui_GrupoDebate_page(object):
         self.labelDescripcion.setText(QCoreApplication.translate("GrupoDebate_page", u"Descripci\u00f3n:", None))
         self.labelFechaInicio.setText(QCoreApplication.translate("GrupoDebate_page", u"Fecha inicio:", None))
         self.labelEstado.setText(QCoreApplication.translate("GrupoDebate_page", u"Estado:", None))
-        self.btn_editar.setText(QCoreApplication.translate("GrupoDebate_page", u"Editar", None))
         self.btn_guardar.setText(QCoreApplication.translate("GrupoDebate_page", u"Guardar", None))
-        self.btn_eliminar.setText(QCoreApplication.translate("GrupoDebate_page", u"Eliminar", None))
+        self.btn_editar.setText(QCoreApplication.translate("GrupoDebate_page", u"Editar", None))
         self.btn_limpiar.setText(QCoreApplication.translate("GrupoDebate_page", u"Limpiar", None))
+        self.btn_eliminar.setText(QCoreApplication.translate("GrupoDebate_page", u"Eliminar", None))
         ___qtablewidgetitem = self.tabla_grupos.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("GrupoDebate_page", u"ID", None));
         ___qtablewidgetitem1 = self.tabla_grupos.horizontalHeaderItem(1)

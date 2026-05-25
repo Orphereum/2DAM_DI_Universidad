@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-
  <class>GrupoDebate_page</class>
-
  <widget class="QWidget" name="GrupoDebate_page">
-
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-
   <property name="windowTitle">
    <string>Grupo Debate</string>
   </property>
-
   <layout class="QVBoxLayout" name="mainLayout">
-
    <property name="spacing">
     <number>12</number>
    </property>
-
-   <!-- TITULO -->
    <item>
     <layout class="QHBoxLayout" name="topBar">
-
      <item>
       <widget class="QLabel" name="pageTitle">
-
        <property name="font">
         <font>
          <family>Segoe UI</family>
@@ -36,375 +34,269 @@
          <bold>true</bold>
         </font>
        </property>
-
        <property name="styleSheet">
         <string notr="true">color:white;</string>
        </property>
-
        <property name="text">
         <string>Grupos de Debate</string>
        </property>
-
       </widget>
      </item>
-
      <item>
       <spacer name="horizontalSpacer">
-
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
-
        <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
          <height>20</height>
         </size>
        </property>
-
       </spacer>
      </item>
-
     </layout>
    </item>
-
-   <!-- ZONA CENTRAL -->
    <item>
-
     <layout class="QHBoxLayout" name="contentLayout">
-
      <property name="spacing">
       <number>18</number>
      </property>
-
-     <!-- FORMULARIO -->
      <item>
-
       <layout class="QFormLayout" name="formLayout">
-
        <property name="horizontalSpacing">
         <number>12</number>
        </property>
-
        <property name="verticalSpacing">
         <number>12</number>
        </property>
-
-       <!-- NOMBRE -->
        <item row="0" column="0">
         <widget class="QLabel" name="labelNombre">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
          <property name="text">
           <string>Nombre:</string>
          </property>
-
         </widget>
        </item>
-
        <item row="0" column="1">
         <widget class="QLineEdit" name="inputNombre">
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
         </widget>
        </item>
-
-       <!-- TEMA -->
        <item row="1" column="0">
         <widget class="QLabel" name="labelTema">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
          <property name="text">
           <string>Tema principal:</string>
          </property>
-
         </widget>
        </item>
-
        <item row="1" column="1">
         <widget class="QLineEdit" name="inputTemaPrincipal">
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
         </widget>
        </item>
-
-       <!-- DESCRIPCION -->
        <item row="2" column="0">
         <widget class="QLabel" name="labelDescripcion">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
          <property name="text">
           <string>Descripción:</string>
          </property>
-
         </widget>
        </item>
-
        <item row="2" column="1">
         <widget class="QLineEdit" name="inputDescripcion">
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
         </widget>
        </item>
-
-       <!-- FECHA -->
        <item row="3" column="0">
         <widget class="QLabel" name="labelFechaInicio">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
          <property name="text">
           <string>Fecha inicio:</string>
          </property>
-
         </widget>
        </item>
-
        <item row="3" column="1">
         <widget class="QLineEdit" name="inputFechaInicio">
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
         </widget>
        </item>
-
-       <!-- ESTADO -->
        <item row="4" column="0">
         <widget class="QLabel" name="labelEstado">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
          <property name="text">
           <string>Estado:</string>
          </property>
-
         </widget>
        </item>
-
        <item row="4" column="1">
         <widget class="QLineEdit" name="inputEstado">
-
          <property name="styleSheet">
           <string notr="true">color:white;</string>
          </property>
-
         </widget>
        </item>
-
       </layout>
-
      </item>
-
-     <!-- BOTONES -->
      <item>
-
       <layout class="QVBoxLayout" name="buttonsLayout">
-
        <property name="spacing">
         <number>10</number>
        </property>
-
-       <item>
-        <widget class="QPushButton" name="btn_editar">
-
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-
-         <property name="text">
-          <string>Editar</string>
-         </property>
-
-        </widget>
-       </item>
-
        <item>
         <widget class="QPushButton" name="btn_guardar">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="text">
           <string>Guardar</string>
          </property>
-
         </widget>
        </item>
-
        <item>
-        <widget class="QPushButton" name="btn_eliminar">
-
+        <widget class="QPushButton" name="btn_editar">
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="text">
-          <string>Eliminar</string>
+          <string>Editar</string>
          </property>
-
         </widget>
        </item>
-
        <item>
         <widget class="QPushButton" name="btn_limpiar">
-
          <property name="font">
           <font>
            <pointsize>14</pointsize>
           </font>
          </property>
-
          <property name="text">
           <string>Limpiar</string>
          </property>
-
         </widget>
        </item>
-
+       <item>
+        <widget class="QPushButton" name="btn_eliminar">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <spacer name="verticalSpacer">
-
          <property name="orientation">
           <enum>Qt::Orientation::Vertical</enum>
          </property>
-
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
           </size>
          </property>
-
         </spacer>
        </item>
-
       </layout>
-
      </item>
-
     </layout>
-
    </item>
-
-   <!-- TABLA -->
    <item>
-
     <widget class="QTableWidget" name="tabla_grupos">
-
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>1</verstretch>
       </sizepolicy>
      </property>
-
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>146</number>
+     </attribute>
      <column>
       <property name="text">
        <string>ID</string>
       </property>
      </column>
-
      <column>
       <property name="text">
        <string>Nombre</string>
       </property>
      </column>
-
      <column>
       <property name="text">
        <string>Tema principal</string>
       </property>
      </column>
-
      <column>
       <property name="text">
        <string>Descripción</string>
       </property>
      </column>
-
      <column>
       <property name="text">
        <string>Fecha inicio</string>
       </property>
      </column>
-
      <column>
       <property name="text">
        <string>Estado</string>
       </property>
      </column>
-
     </widget>
-
    </item>
-
   </layout>
-
  </widget>
-
  <resources/>
-
  <connections/>
-
 </ui>

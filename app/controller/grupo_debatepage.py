@@ -96,7 +96,7 @@ class GrupoDebatePage(QWidget):
 
         tabla.setColumnWidth(0, 50)
         tabla.setColumnWidth(1, 180)
-        tabla.setColumnWidth(2, 180)
+        tabla.setColumnWidth(2, 160)
         tabla.setColumnWidth(3, 250)
         tabla.setColumnWidth(4, 120)
         tabla.setColumnWidth(5, 100)

@@ -22,6 +22,9 @@ from app.repository.proyecto_repo import ProyectoRepository
 from app.controller.subvencionpage import SubvencionPage
 from app.service.subvencion_service import SubvencionService
 from app.repository.subvencion_repo import SubvencionRepository
+from app.controller.grupo_debatepage import GrupoDebatePage
+from app.repository.grupo_debate_repo import GrupoDebateRepository
+from app.service.grupo_debate_service import GrupoDebateService
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
 from app.service.grupoInv_service import GrupoInvService 
@@ -156,6 +159,12 @@ class AppController:
         )
 
         subvencion = SubvencionPage(subvencion_service)
+        
+        # -------------------------
+        # DEPENDENCIAS GRUPO DEBATE
+        # -------------------------
+
+        grupo_debate = GrupoDebatePage()
 
         # REGISTRO DE PÁGINAS
         self.pages = {
@@ -167,7 +176,8 @@ class AppController:
             "clase": clase,
             "edificio": edificio,
             "proyecto": proyecto,
-            "subvencion": subvencion
+            "subvencion": subvencion,
+            "grupo_debate": grupo_debate
         }
 
         # AÑADIR AL STACK
@@ -209,6 +219,9 @@ class AppController:
         self.home.ui.btnSubvencion.clicked.connect(
             lambda: self.show_page("subvencion")
         )
+        self.home.ui.btnDebate.clicked.connect(
+            lambda: self.show_page("grupo_debate")
+)
 
     # -------------------------
     # CAMBIO DE PÁGINA

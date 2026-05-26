@@ -28,7 +28,7 @@ from app.service.grupo_debate_service import GrupoDebateService
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
 from app.service.grupoInv_service import GrupoInvService 
-
+from app.controller.premiopage import PremioPage
 
 
 from app.data.db import get_connection   
@@ -166,6 +166,11 @@ class AppController:
 
         grupo_debate = GrupoDebatePage()
 
+        # -------------------------
+        # DEPENDENCIAS PREMIO EXCELENCIA
+        # -------------------------
+        premio = PremioPage()
+
         # REGISTRO DE PÁGINAS
         self.pages = {
             "universidad": universidad,
@@ -177,7 +182,8 @@ class AppController:
             "edificio": edificio,
             "proyecto": proyecto,
             "subvencion": subvencion,
-            "grupo_debate": grupo_debate
+            "grupo_debate": grupo_debate,
+            "premio": premio
         }
 
         # AÑADIR AL STACK
@@ -221,7 +227,10 @@ class AppController:
         )
         self.home.ui.btnDebate.clicked.connect(
             lambda: self.show_page("grupo_debate")
-)
+        )
+        self.home.ui.btnPremio.clicked.connect(
+            lambda: self.show_page("premio")
+        )
 
     # -------------------------
     # CAMBIO DE PÁGINA

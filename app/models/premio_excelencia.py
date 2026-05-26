@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class Premio:
-    id_precio: int
+class PremioExcelencia:
+    id_premio: int
     nombre_premio: str
-    descripcion_precio: str
+    descripcion_premio: str

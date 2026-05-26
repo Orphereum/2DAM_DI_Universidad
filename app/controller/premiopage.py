@@ -1,8 +1,9 @@
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QAbstractItemView
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QAbstractItemView, QFileDialog
 from PySide6.QtCore import Qt
 from app.view.PremioEx_ui import Ui_PremioPage
 from app.service.premio_service import PremioService
 from app.controller.premiodialog import PremioDialog
+from app.reports.premio_report import PremioReportGenerator
 
 class PremioPage(QWidget):
     def __init__(self, parent=None):
@@ -22,6 +23,7 @@ class PremioPage(QWidget):
         self.ui.btnNuevo.clicked.connect(self.nuevo_premio)
         self.ui.btnEditar.clicked.connect(self.editar_premio)
         self.ui.btnEliminar.clicked.connect(self.eliminar_premio)
+        self.ui.btnExportar.clicked.connect(self.exportar_pdf)
         
         # Cargar datos al iniciar
         self.cargar_premios()
@@ -102,3 +104,24 @@ class PremioPage(QWidget):
                 self.cargar_premios()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"No se pudo eliminar: {e}")
+
+    def exportar_pdf(self):
+        premios = self.service.obtener_premios()
+        if not premios:
+            QMessageBox.warning(self, "Aviso", "No hay premios para exportar")
+            return
+
+        ruta, _ = QFileDialog.getSaveFileName(
+            self, "Guardar informe PDF",
+            "informe_premios.pdf",
+            "PDF Files (*.pdf)"
+        )
+        if not ruta:
+            return
+
+        try:
+            report = PremioReportGenerator(premios, ruta)
+            report.generar_informe()
+            QMessageBox.information(self, "Informe Generado", f"PDF creado exitosamente:\n{ruta}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"No se pudo generar el PDF: {e}")

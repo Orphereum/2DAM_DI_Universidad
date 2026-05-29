@@ -27,23 +27,27 @@ from app.repository.grupo_debate_repo import GrupoDebateRepository
 from app.service.grupo_debate_service import GrupoDebateService
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
-from app.service.grupoInv_service import GrupoInvService 
+from app.service.grupoInv_service import GrupoInvService
 from app.controller.premiopage import PremioPage
+from app.controller.facultadpage import FacultadPage
+from app.service.facultad_service import FacultadService
 
 
-from app.data.db import get_connection   
+from app.data.db import get_connection
+
+
 class AppController:
     """Controlador principal de la aplicación."""
 
     def __init__(self):
         self.home = HomeWindow()
         self.pages = {}
-        self._test_db() # PRUEBA
+        self._test_db()  # PRUEBA
         self._setup_pages()
         self._setup_connections()
 
         self.home.show()
-        
+
     def _test_db(self):
         conn = get_connection()
         cursor = conn.cursor()
@@ -56,19 +60,18 @@ class AppController:
         print("================================")
 
         conn.close()
+
     # -------------------------
     # CREACIÓN DE PÁGINAS
     # -------------------------
     def _setup_pages(self):
         stacked = self.home.ui.stackedWidget
-        
+
         # LIMPIAR PÁGINAS INICIALES VACÍAS DEL DISEÑADOR
         while stacked.count() > 0:
             widget = stacked.widget(0)
             stacked.removeWidget(widget)
             widget.deleteLater()
-
-    
 
         # PÁGINAS SIN SERVICE
         universidad = UniversidadPage()
@@ -83,10 +86,7 @@ class AppController:
         asignatura_repo = AsignaturaRepository()
         grado_repo = GradoRepository()
 
-        asignatura_service = AsignaturaService(
-            asignatura_repo,
-            grado_repo
-        )
+        asignatura_service = AsignaturaService(asignatura_repo, grado_repo)
 
         asignatura = AsignaturaPage(asignatura_service)
 
@@ -97,20 +97,29 @@ class AppController:
         clase_repo = ClaseRepository()
         edificio_repo = EdificioRepository()
 
-        clase_service = ClaseService(
-            clase_repo,
-            edificio_repo
-        )
+        clase_service = ClaseService(clase_repo, edificio_repo)
 
         clase = ClasePage(clase_service)
-        
+
         # -------------------------
         # DEPENDENCIAS UNIVERSIDAD (¡ACTUALIZADO PARA JAIME!)
         # -------------------------
-        universidad_repo = UniversidadRepository()  # O la clase que tenga tu equipo creada
+        universidad_repo = (
+            UniversidadRepository()
+        )  # O la clase que tenga tu equipo creada
         universidad_service = UniversidadService(universidad_repo)
         universidad = UniversidadPage(universidad_service=universidad_service)
 
+        # -------------------------
+        # DEPENDENCIAS FACULTAD
+        # -------------------------
+
+        facultad_service = FacultadService(
+            facultad_repo=FacultadRepo(),
+            universidad_repo=universidad_repo,
+        )
+
+        facultad = FacultadPage(facultad_service)
 
         # -------------------------
         # DEPENDENCIAS EDIFICIO
@@ -118,48 +127,38 @@ class AppController:
         edificio_repo = EdificioRepository()
         facultad_repo = FacultadRepo()
 
-        edificio_service = EdificioService(
-            edificio_repo,
-            facultad_repo
-        )
+        edificio_service = EdificioService(edificio_repo, facultad_repo)
 
         edificio = EdificioPage(edificio_service)
-        
+
         # -------------------------
         # DEPENDENCIAS GRUPO INVESTIGACIÓN
         # -------------------------
         grupoInv_repo = GrupoInvRepository()
 
-        grupoInv_service = GrupoInvService(
-            grupoInv_repo
-        )
+        grupoInv_service = GrupoInvService(grupoInv_repo)
 
-        #grupoInv = GrupoInvPage(grupoInv_service, stacked)
-        
+        # grupoInv = GrupoInvPage(grupoInv_service, stacked)
+
         # -------------------------
         # DEPENDENCIAS PROYECTO
         # -------------------------
         proyecto_repo = ProyectoRepository()
         subvencion_repo = SubvencionRepository()
 
-        proyecto_service = ProyectoService(
-            proyecto_repo,
-            subvencion_repo
-        )
+        proyecto_service = ProyectoService(proyecto_repo, subvencion_repo)
 
         proyecto = ProyectoPage(proyecto_service, grupoInv_service)
-            
+
         # -------------------------
         # DEPENDENCIAS SUBVENCIÓN
         # -------------------------
         subvencion_repo = SubvencionRepository()
 
-        subvencion_service = SubvencionService(
-            subvencion_repo
-        )
+        subvencion_service = SubvencionService(subvencion_repo)
 
         subvencion = SubvencionPage(subvencion_service)
-        
+
         # -------------------------
         # DEPENDENCIAS GRUPO DEBATE
         # -------------------------
@@ -180,10 +179,11 @@ class AppController:
             "asignatura": asignatura,
             "clase": clase,
             "edificio": edificio,
+            "facultad": facultad,
             "proyecto": proyecto,
             "subvencion": subvencion,
             "grupo_debate": grupo_debate,
-            "premio": premio
+            "premio": premio,
         }
 
         # AÑADIR AL STACK
@@ -193,7 +193,6 @@ class AppController:
         # PÁGINA INICIAL
         stacked.setCurrentWidget(universidad)
 
-
     # -------------------------
     # CONEXIONES DE MENÚ
     # -------------------------
@@ -201,36 +200,19 @@ class AppController:
         self.home.ui.btnUniversidad.clicked.connect(
             lambda: self.show_page("universidad")
         )
-        self.home.ui.btnProfesor.clicked.connect(
-            lambda: self.show_page("profesor")
-        )
+        self.home.ui.btnProfesor.clicked.connect(lambda: self.show_page("profesor"))
         self.home.ui.btnDepartamento.clicked.connect(
             lambda: self.show_page("departamento")
         )
-        self.home.ui.btnGrado.clicked.connect(
-            lambda: self.show_page("grado")
-        )
-        self.home.ui.btnAsignatura.clicked.connect(
-            lambda: self.show_page("asignatura")
-        )
-        self.home.ui.btnClase.clicked.connect(
-            lambda: self.show_page("clase")
-        )
-        self.home.ui.btnEdificio.clicked.connect(
-            lambda: self.show_page("edificio")
-        )
-        self.home.ui.btnProyecto.clicked.connect(
-            lambda: self.show_page("proyecto")
-        )
-        self.home.ui.btnSubvencion.clicked.connect(
-            lambda: self.show_page("subvencion")
-        )
-        self.home.ui.btnDebate.clicked.connect(
-            lambda: self.show_page("grupo_debate")
-        )
-        self.home.ui.btnPremio.clicked.connect(
-            lambda: self.show_page("premio")
-        )
+        self.home.ui.btnGrado.clicked.connect(lambda: self.show_page("grado"))
+        self.home.ui.btnAsignatura.clicked.connect(lambda: self.show_page("asignatura"))
+        self.home.ui.btnClase.clicked.connect(lambda: self.show_page("clase"))
+        self.home.ui.btnEdificio.clicked.connect(lambda: self.show_page("edificio"))
+        self.home.ui.btnFacultad.clicked.connect(lambda: self.show_page("facultad"))
+        self.home.ui.btnProyecto.clicked.connect(lambda: self.show_page("proyecto"))
+        self.home.ui.btnSubvencion.clicked.connect(lambda: self.show_page("subvencion"))
+        self.home.ui.btnDebate.clicked.connect(lambda: self.show_page("grupo_debate"))
+        self.home.ui.btnPremio.clicked.connect(lambda: self.show_page("premio"))
 
     # -------------------------
     # CAMBIO DE PÁGINA

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PremioEx.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.0
+## Created by: Qt User Interface Compiler version 6.10.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,50 +24,21 @@ class Ui_PremioPage(object):
         if not PremioPage.objectName():
             PremioPage.setObjectName(u"PremioPage")
         PremioPage.resize(929, 422)
+        self.mainLayout = QVBoxLayout(PremioPage)
+        self.mainLayout.setObjectName(u"mainLayout")
         self.labelTitulo = QLabel(PremioPage)
         self.labelTitulo.setObjectName(u"labelTitulo")
-        self.labelTitulo.setGeometry(QRect(9, 9, 227, 28))
         font = QFont()
         font.setPointSize(16)
         font.setBold(True)
         self.labelTitulo.setFont(font)
         self.labelTitulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.widget = QWidget(PremioPage)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(30, 70, 891, 311))
-        self.horizontalLayout = QHBoxLayout(self.widget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.btnNuevo = QPushButton(self.widget)
-        self.btnNuevo.setObjectName(u"btnNuevo")
 
-        self.verticalLayout.addWidget(self.btnNuevo)
+        self.mainLayout.addWidget(self.labelTitulo)
 
-        self.btnEditar = QPushButton(self.widget)
-        self.btnEditar.setObjectName(u"btnEditar")
-
-        self.verticalLayout.addWidget(self.btnEditar)
-
-        self.btnEliminar = QPushButton(self.widget)
-        self.btnEliminar.setObjectName(u"btnEliminar")
-
-        self.verticalLayout.addWidget(self.btnEliminar)
-
-        self.btnExportar = QPushButton(self.widget)
-        self.btnExportar.setObjectName(u"btnExportar")
-
-        self.verticalLayout.addWidget(self.btnExportar)
-
-
-        self.horizontalLayout.addLayout(self.verticalLayout)
-
-        self.verticalSpacer = QSpacerItem(228, 258, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.horizontalLayout.addItem(self.verticalSpacer)
-
-        self.tablePremios = QTableWidget(self.widget)
+        self.contentLayout = QHBoxLayout()
+        self.contentLayout.setObjectName(u"contentLayout")
+        self.tablePremios = QTableWidget(PremioPage)
         if (self.tablePremios.columnCount() < 3):
             self.tablePremios.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
@@ -80,7 +51,39 @@ class Ui_PremioPage(object):
         self.tablePremios.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tablePremios.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
 
-        self.horizontalLayout.addWidget(self.tablePremios)
+        self.contentLayout.addWidget(self.tablePremios)
+
+        self.buttonLayout = QVBoxLayout()
+        self.buttonLayout.setObjectName(u"buttonLayout")
+        self.btnNuevo = QPushButton(PremioPage)
+        self.btnNuevo.setObjectName(u"btnNuevo")
+
+        self.buttonLayout.addWidget(self.btnNuevo)
+
+        self.btnEditar = QPushButton(PremioPage)
+        self.btnEditar.setObjectName(u"btnEditar")
+
+        self.buttonLayout.addWidget(self.btnEditar)
+
+        self.btnEliminar = QPushButton(PremioPage)
+        self.btnEliminar.setObjectName(u"btnEliminar")
+
+        self.buttonLayout.addWidget(self.btnEliminar)
+
+        self.btnExportar = QPushButton(PremioPage)
+        self.btnExportar.setObjectName(u"btnExportar")
+
+        self.buttonLayout.addWidget(self.btnExportar)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.buttonLayout.addItem(self.verticalSpacer)
+
+
+        self.contentLayout.addLayout(self.buttonLayout)
+
+
+        self.mainLayout.addLayout(self.contentLayout)
 
 
         self.retranslateUi(PremioPage)
@@ -91,15 +94,15 @@ class Ui_PremioPage(object):
     def retranslateUi(self, PremioPage):
         PremioPage.setWindowTitle(QCoreApplication.translate("PremioPage", u"Gesti\u00f3n de Premios", None))
         self.labelTitulo.setText(QCoreApplication.translate("PremioPage", u"Premios a la Excelencia", None))
-        self.btnNuevo.setText(QCoreApplication.translate("PremioPage", u"Nuevo", None))
-        self.btnEditar.setText(QCoreApplication.translate("PremioPage", u"Editar", None))
-        self.btnEliminar.setText(QCoreApplication.translate("PremioPage", u"Eliminar", None))
-        self.btnExportar.setText(QCoreApplication.translate("PremioPage", u"Exportar PDF", None))
         ___qtablewidgetitem = self.tablePremios.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("PremioPage", u"ID", None));
         ___qtablewidgetitem1 = self.tablePremios.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("PremioPage", u"Nombre del Premio", None));
         ___qtablewidgetitem2 = self.tablePremios.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("PremioPage", u"Descripci\u00f3n", None));
+        self.btnNuevo.setText(QCoreApplication.translate("PremioPage", u"Nuevo", None))
+        self.btnEditar.setText(QCoreApplication.translate("PremioPage", u"Editar", None))
+        self.btnEliminar.setText(QCoreApplication.translate("PremioPage", u"Eliminar", None))
+        self.btnExportar.setText(QCoreApplication.translate("PremioPage", u"Exportar PDF", None))
     # retranslateUi
 

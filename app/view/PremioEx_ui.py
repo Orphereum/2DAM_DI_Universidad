@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PremioEx.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.1
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -95,11 +95,11 @@ class Ui_PremioPage(object):
         PremioPage.setWindowTitle(QCoreApplication.translate("PremioPage", u"Gesti\u00f3n de Premios", None))
         self.labelTitulo.setText(QCoreApplication.translate("PremioPage", u"Premios a la Excelencia", None))
         ___qtablewidgetitem = self.tablePremios.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("PremioPage", u"ID", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("PremioPage", u"ID", None))
         ___qtablewidgetitem1 = self.tablePremios.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("PremioPage", u"Nombre del Premio", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("PremioPage", u"Nombre del Premio", None))
         ___qtablewidgetitem2 = self.tablePremios.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("PremioPage", u"Descripci\u00f3n", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("PremioPage", u"Descripci\u00f3n", None))
         self.btnNuevo.setText(QCoreApplication.translate("PremioPage", u"Nuevo", None))
         self.btnEditar.setText(QCoreApplication.translate("PremioPage", u"Editar", None))
         self.btnEliminar.setText(QCoreApplication.translate("PremioPage", u"Eliminar", None))

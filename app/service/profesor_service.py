@@ -64,3 +64,6 @@ class ProfesorService:
 
     def eliminar_profesor(self, id_profesor: int):
         return self.profesor_repo.delete(id_profesor)
+
+    def obtener_profesores_con_asignaturas(self):
+        return self.profesor_repo.find_all_with_asignaturas()

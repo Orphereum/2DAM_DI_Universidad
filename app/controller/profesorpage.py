@@ -6,6 +6,8 @@ from app.models.profesor import Profesor
 from app.repository.profesor_repo import ProfesorRepository
 from app.service.profesor_service import ProfesorService
 from PySide6.QtWidgets import QSizePolicy
+from PySide6.QtWidgets import QFileDialog
+from app.reports.profesor_report import generar_pdf_profesores
 
 
 class ProfesorPage(QWidget):
@@ -21,7 +23,7 @@ class ProfesorPage(QWidget):
 
         # Estado: ID seleccionado (None = modo crear)
         self._selected_profesor_id: int | None = None
-
+ 
         self._configurar_tabla()
         self._configurar_signals()
 
@@ -45,6 +47,9 @@ class ProfesorPage(QWidget):
         self.ui.txtCorreo.returnPressed.connect(self.ui.txtTlf.setFocus)
         self.ui.txtTlf.returnPressed.connect(self.ui.txtTitulo.setFocus)
         self.ui.txtTitulo.returnPressed.connect(self.ui.cbDpto.setFocus)
+
+        self.ui.pushButton.clicked.connect(self.on_generar_pdf_profesores)
+
 
     def _configurar_tabla(self):
         tbl = self.ui.tblProfesores
@@ -222,3 +227,30 @@ class ProfesorPage(QWidget):
             self.ui.cbDpto.setCurrentIndex(1)
         else:
             self.ui.cbDpto.setCurrentIndex(0)
+
+    def on_generar_pdf_profesores(self):
+        ruta, _ = QFileDialog.getSaveFileName(
+            self,
+            "Guardar informe de profesores",
+            "informe_profesores.pdf",
+            "PDF Files (*.pdf)"
+        )
+
+        if not ruta:
+            return
+
+        if not ruta.lower().endswith(".pdf"):
+            ruta += ".pdf"
+
+        try:
+            profesores = self.service.obtener_profesores_con_asignaturas()
+            generar_pdf_profesores(profesores, ruta)
+
+            QMessageBox.information(
+                self,
+                "OK",
+                f"Informe guardado en:\n{ruta}"
+            )
+
+        except Exception as e:
+            QMessageBox.warning(self, "Error al generar PDF", str(e))

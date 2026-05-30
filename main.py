@@ -6,7 +6,7 @@ from app.styles.style_manager import StyleManager
 
 import app.resources.resources_rc
 
-
+ 
 def main():
     app = QApplication(sys.argv)
     app.setApplicationName("Gestor Universidad")

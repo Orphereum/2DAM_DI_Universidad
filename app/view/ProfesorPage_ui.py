@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ProfesorPage.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.0
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -19,11 +19,13 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit,
     QPushButton, QSizePolicy, QSpacerItem, QTableWidget,
     QTableWidgetItem, QVBoxLayout, QWidget)
+from app.resources import resources_rc
 
 class Ui_ProfesorPage(object):
     def setupUi(self, ProfesorPage):
         if not ProfesorPage.objectName():
             ProfesorPage.setObjectName(u"ProfesorPage")
+        ProfesorPage.resize(605, 573)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -176,6 +178,20 @@ class Ui_ProfesorPage(object):
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.checkJefe)
 
+        self.lblAsing = QLabel(ProfesorPage)
+        self.lblAsing.setObjectName(u"lblAsing")
+        font3 = QFont()
+        font3.setPointSize(16)
+        font3.setBold(False)
+        self.lblAsing.setFont(font3)
+
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.lblAsing)
+
+        self.lnAsignatura = QLineEdit(ProfesorPage)
+        self.lnAsignatura.setObjectName(u"lnAsignatura")
+
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.lnAsignatura)
+
 
         self.midLayout.addLayout(self.formLayout)
 
@@ -252,6 +268,7 @@ class Ui_ProfesorPage(object):
 
         self.lblJefeDpto.setText(QCoreApplication.translate("ProfesorPage", u"Jefe de departamento:", None))
         self.checkJefe.setText(QCoreApplication.translate("ProfesorPage", u"Es jefe de departamento", None))
+        self.lblAsing.setText(QCoreApplication.translate("ProfesorPage", u"Asignatura:", None))
         self.btnActualizar.setText(QCoreApplication.translate("ProfesorPage", u"Editar", None))
         self.btbGuardar.setText(QCoreApplication.translate("ProfesorPage", u"Guardar", None))
         self.btnEliminar.setText(QCoreApplication.translate("ProfesorPage", u"Eliminar", None))

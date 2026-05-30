@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
 
 @dataclass
 class Profesor:
@@ -9,3 +10,4 @@ class Profesor:
     titulo: str = None
     id_departamento: int = None
     jefe_dtp: bool = False
+    asignaturas: list = field(default_factory=list)

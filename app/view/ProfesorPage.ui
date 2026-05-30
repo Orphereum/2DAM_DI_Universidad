@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>ProfesorPage</class>
  <widget class="QWidget" name="ProfesorPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>605</width>
+    <height>573</height>
+   </rect>
+  </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
@@ -14,19 +22,15 @@
   <property name="styleSheet">
    <string notr="true">color:black</string>
   </property>
-
   <layout class="QVBoxLayout" name="mainLayout">
    <property name="spacing">
     <number>12</number>
    </property>
-
-   <!-- TOP BAR -->
    <item>
     <layout class="QHBoxLayout" name="topBar">
      <property name="spacing">
       <number>12</number>
      </property>
-
      <item>
       <widget class="QLabel" name="pageTitle">
        <property name="font">
@@ -47,7 +51,6 @@
        </property>
       </widget>
      </item>
-
      <item>
       <spacer name="topSpacer">
        <property name="orientation">
@@ -61,7 +64,6 @@
        </property>
       </spacer>
      </item>
-
      <item>
       <layout class="QHBoxLayout" name="searchLayout">
        <property name="spacing">
@@ -101,7 +103,6 @@
        </item>
       </layout>
      </item>
-
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="font">
@@ -117,17 +118,13 @@
        </property>
       </widget>
      </item>
-
     </layout>
    </item>
-
-   <!-- MID AREA -->
    <item>
     <layout class="QHBoxLayout" name="midLayout">
      <property name="spacing">
       <number>16</number>
      </property>
-
      <item>
       <layout class="QFormLayout" name="formLayout">
        <property name="horizontalSpacing">
@@ -136,11 +133,12 @@
        <property name="verticalSpacing">
         <number>10</number>
        </property>
-
        <item row="0" column="0">
         <widget class="QLabel" name="lblNombre">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -157,11 +155,12 @@
          </property>
         </widget>
        </item>
-
        <item row="1" column="0">
         <widget class="QLabel" name="lblCorreo">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -178,11 +177,12 @@
          </property>
         </widget>
        </item>
-
        <item row="2" column="0">
         <widget class="QLabel" name="lblTlf">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -199,11 +199,12 @@
          </property>
         </widget>
        </item>
-
        <item row="3" column="0">
         <widget class="QLabel" name="label">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -220,11 +221,12 @@
          </property>
         </widget>
        </item>
-
        <item row="4" column="0">
         <widget class="QLabel" name="lblDpto">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -239,15 +241,24 @@
          <property name="styleSheet">
           <string notr="true">color:white</string>
          </property>
-         <item><property name="text"><string>Ciencias</string></property></item>
-         <item><property name="text"><string>Ingenieria</string></property></item>
+         <item>
+          <property name="text">
+           <string>Ciencias</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ingenieria</string>
+          </property>
+         </item>
         </widget>
        </item>
-
        <item row="5" column="0">
         <widget class="QLabel" name="lblJefeDpto">
          <property name="font">
-          <font><pointsize>16</pointsize></font>
+          <font>
+           <pointsize>16</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -260,7 +271,9 @@
        <item row="5" column="1">
         <widget class="QCheckBox" name="checkJefe">
          <property name="font">
-          <font><pointsize>12</pointsize></font>
+          <font>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:white</string>
@@ -270,61 +283,106 @@
          </property>
         </widget>
        </item>
-
+       <item row="6" column="0">
+        <widget class="QLabel" name="lblAsing">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Asignatura:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="lnAsignatura"/>
+       </item>
       </layout>
      </item>
-
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="spacing">
         <number>10</number>
        </property>
-
        <item>
         <widget class="QPushButton" name="btnActualizar">
-         <property name="font"><font><pointsize>16</pointsize></font></property>
-         <property name="styleSheet"><string notr="true">color:white</string></property>
-         <property name="text"><string>Editar</string></property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Editar</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btbGuardar">
-         <property name="font"><font><pointsize>16</pointsize></font></property>
-         <property name="styleSheet"><string notr="true">color:white</string></property>
-         <property name="text"><string>Guardar</string></property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Guardar</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btnEliminar">
-         <property name="font"><font><pointsize>16</pointsize></font></property>
-         <property name="styleSheet"><string notr="true">color:white</string></property>
-         <property name="text"><string>Eliminar</string></property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btnLimpiar">
-         <property name="font"><font><pointsize>16</pointsize></font></property>
-         <property name="styleSheet"><string notr="true">color:white</string></property>
-         <property name="text"><string>Limpiar</string></property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Limpiar</string>
+         </property>
         </widget>
        </item>
-
        <item>
         <spacer name="buttonsSpacer">
-         <property name="orientation"><enum>Qt::Orientation::Vertical</enum></property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
          <property name="sizeHint" stdset="0">
-          <size><width>20</width><height>20</height></size>
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
          </property>
         </spacer>
        </item>
-
       </layout>
      </item>
-
     </layout>
    </item>
-
-   <!-- TABLE -->
    <item>
     <widget class="QTableWidget" name="tblProfesores">
      <property name="sizePolicy">
@@ -335,10 +393,8 @@
      </property>
     </widget>
    </item>
-
   </layout>
  </widget>
-
  <resources>
   <include location="../resources/resources.qrc"/>
  </resources>

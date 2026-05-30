@@ -184,11 +184,13 @@ class Ui_ProfesorPage(object):
         font3.setPointSize(16)
         font3.setBold(False)
         self.lblAsing.setFont(font3)
+        self.lblAsing.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.lblAsing)
 
         self.lnAsignatura = QLineEdit(ProfesorPage)
         self.lnAsignatura.setObjectName(u"lnAsignatura")
+        self.lnAsignatura.setStyleSheet(u"color:white")
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.lnAsignatura)
 

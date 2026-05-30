@@ -67,3 +67,10 @@ class ProfesorService:
 
     def obtener_profesores_con_asignaturas(self):
         return self.profesor_repo.find_all_with_asignaturas()
+    
+    def obtener_asignaturas(self):
+        return self.profesor_repo.find_all_asignaturas()
+
+    def asignar_asignaturas_a_profesor(self, id_profesor, ids_asignaturas):
+        return self.profesor_repo.asignar_asignaturas(id_profesor, ids_asignaturas)
+        

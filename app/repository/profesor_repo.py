@@ -241,3 +241,36 @@ class ProfesorRepository:
         print("===============================")
 
         conn.close()
+
+    def find_all_asignaturas(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT id_asignatura, nombre
+            FROM asignatura
+            ORDER BY nombre
+        """)
+
+        rows = cursor.fetchall()
+        conn.close()
+        return rows
+    
+
+    def asignar_asignaturas(self, id_profesor, ids_asignaturas):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "DELETE FROM profesor_asignatura WHERE id_profesor = ?",
+            (id_profesor,)
+        )
+
+        for id_asignatura in ids_asignaturas:
+            cursor.execute("""
+                INSERT INTO profesor_asignatura (id_profesor, id_asignatura)
+                VALUES (?, ?)
+            """, (id_profesor, id_asignatura))
+
+        conn.commit()
+        conn.close()

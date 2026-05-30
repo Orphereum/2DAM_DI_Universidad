@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>945</width>
-    <height>599</height>
+    <height>607</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,7 +95,7 @@ QPushButton {
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>35</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -120,7 +120,7 @@ QPushButton {
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>25</height>
+             <height>35</height>
             </size>
            </property>
            <property name="maximumSize">
@@ -313,6 +313,13 @@ QPushButton {
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btn_asignar_subvencion">
+         <property name="text">
+          <string>Asignar subvención (predet.)</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
@@ -349,13 +356,6 @@ QPushButton {
      </item>
      <item>
       <layout class="QVBoxLayout" name="layoutSubvenciones">
-       <item>
-        <widget class="QPushButton" name="btn_asignar_subvencion">
-         <property name="text">
-          <string>Asignar Subvención</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QTableWidget" name="tabla_subvenciones">
          <property name="styleSheet">

@@ -25,7 +25,7 @@ class Ui_Proyecto_page(object):
     def setupUi(self, Proyecto_page):
         if not Proyecto_page.objectName():
             Proyecto_page.setObjectName(u"Proyecto_page")
-        Proyecto_page.resize(945, 599)
+        Proyecto_page.resize(945, 607)
         Proyecto_page.setStyleSheet(u"QLineEdit {\n"
 "	font: 300 12pt \"Poppins\";\n"
 "}\n"
@@ -83,7 +83,7 @@ class Ui_Proyecto_page(object):
         self.btn_generarPDF_proyecto = QPushButton(self.groupBox_3)
         self.btn_generarPDF_proyecto.setObjectName(u"btn_generarPDF_proyecto")
         self.btn_generarPDF_proyecto.setEnabled(True)
-        self.btn_generarPDF_proyecto.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_proyecto.setMinimumSize(QSize(0, 35))
         self.btn_generarPDF_proyecto.setMaximumSize(QSize(320, 25))
         self.btn_generarPDF_proyecto.setStyleSheet(u"color:white")
 
@@ -92,7 +92,7 @@ class Ui_Proyecto_page(object):
         self.btn_generarPDF_todos = QPushButton(self.groupBox_3)
         self.btn_generarPDF_todos.setObjectName(u"btn_generarPDF_todos")
         self.btn_generarPDF_todos.setEnabled(True)
-        self.btn_generarPDF_todos.setMinimumSize(QSize(0, 25))
+        self.btn_generarPDF_todos.setMinimumSize(QSize(0, 35))
         self.btn_generarPDF_todos.setMaximumSize(QSize(230, 25))
         self.btn_generarPDF_todos.setStyleSheet(u"color:white")
 
@@ -187,6 +187,11 @@ class Ui_Proyecto_page(object):
 
         self.verticalLayout_4.addWidget(self.btn_limpiar)
 
+        self.btn_asignar_subvencion = QPushButton(Proyecto_page)
+        self.btn_asignar_subvencion.setObjectName(u"btn_asignar_subvencion")
+
+        self.verticalLayout_4.addWidget(self.btn_asignar_subvencion)
+
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_4)
 
@@ -215,11 +220,6 @@ class Ui_Proyecto_page(object):
 
         self.layoutSubvenciones = QVBoxLayout()
         self.layoutSubvenciones.setObjectName(u"layoutSubvenciones")
-        self.btn_asignar_subvencion = QPushButton(Proyecto_page)
-        self.btn_asignar_subvencion.setObjectName(u"btn_asignar_subvencion")
-
-        self.layoutSubvenciones.addWidget(self.btn_asignar_subvencion)
-
         self.tabla_subvenciones = QTableWidget(Proyecto_page)
         if (self.tabla_subvenciones.columnCount() < 2):
             self.tabla_subvenciones.setColumnCount(2)
@@ -262,13 +262,13 @@ class Ui_Proyecto_page(object):
         self.btn_guardar.setText(QCoreApplication.translate("Proyecto_page", u"Guardar", None))
         self.btn_eliminar.setText(QCoreApplication.translate("Proyecto_page", u"Eliminar", None))
         self.btn_limpiar.setText(QCoreApplication.translate("Proyecto_page", u"Limpiar", None))
+        self.btn_asignar_subvencion.setText(QCoreApplication.translate("Proyecto_page", u"Asignar subvenci\u00f3n (predet.)", None))
         ___qtablewidgetitem = self.tabla_proyectos.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Proyecto_page", u"Id proyecto", None));
         ___qtablewidgetitem1 = self.tabla_proyectos.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("Proyecto_page", u"Nombre", None));
         ___qtablewidgetitem2 = self.tabla_proyectos.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Proyecto_page", u"Descripci\u00f3n", None));
-        self.btn_asignar_subvencion.setText(QCoreApplication.translate("Proyecto_page", u"Asignar Subvenci\u00f3n", None))
         ___qtablewidgetitem3 = self.tabla_subvenciones.horizontalHeaderItem(0)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Proyecto_page", u"Subvenci\u00f3n", None));
         ___qtablewidgetitem4 = self.tabla_subvenciones.horizontalHeaderItem(1)

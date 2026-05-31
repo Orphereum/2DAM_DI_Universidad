@@ -17,6 +17,7 @@ class EdificioPage(QWidget):
         self.ui.setupUi(self)
 
         self._configurar_tabla()
+        self.refrescar_tabla()
         self._conectar_eventos()
         self._cargar_facultades()
 

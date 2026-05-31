@@ -1,6 +1,7 @@
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QAbstractItemView
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QAbstractItemView, QFileDialog
 from app.view.ClasesPage_ui import Ui_Form
 from app.controller.clasedialog import ClaseDialog
+from app.reports.clase_report import ClaseReportGenerator
 
 class ClasePage(QWidget):
     def __init__(self, service, parent=None):
@@ -18,6 +19,7 @@ class ClasePage(QWidget):
         self.ui.btnEditar.clicked.connect(self.abrir_editar)
         self.ui.btnBorrar.clicked.connect(self.borrar_clase)
         self.ui.btnRefrescar.clicked.connect(self.cargar_datos)
+        self.ui.btnExportarPDF.clicked.connect(self.exportar_pdf)
 
         # Cargar datos al iniciar
         self.cargar_datos()
@@ -26,16 +28,17 @@ class ClasePage(QWidget):
         """Pide las clases al servicio y rellena la tabla"""
         try:
             clases = self.service.obtener_clases()
+            edificios = {ed.id: ed.nombre for ed in self.service.obtener_edificios()}
             self.ui.tblClases.setRowCount(0) # Limpiar tabla
 
             for row_idx, clase in enumerate(clases):
                 self.ui.tblClases.insertRow(row_idx)
                 
-                # Columnas: 0:ID, 1:Nombre, 2:Capacidad, 3:Edificio (ID o Nombre)
+                # Columnas: 0:ID, 1:Nombre, 2:Capacidad, 3:Edificio (Nombre)
                 self.ui.tblClases.setItem(row_idx, 0, QTableWidgetItem(str(clase.id_clase)))
                 self.ui.tblClases.setItem(row_idx, 1, QTableWidgetItem(clase.nombre))
                 self.ui.tblClases.setItem(row_idx, 2, QTableWidgetItem(str(clase.capacidad)))
-                self.ui.tblClases.setItem(row_idx, 3, QTableWidgetItem(str(clase.id_edificio)))
+                self.ui.tblClases.setItem(row_idx, 3, QTableWidgetItem(edificios.get(clase.id_edificio, "N/A")))
                 
         except Exception as e:
             print(f"Error cargando tabla: {e}")
@@ -85,3 +88,26 @@ class ClasePage(QWidget):
                 self.cargar_datos()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"No se pudo eliminar: {e}")
+
+    def exportar_pdf(self):
+        """Exporta la tabla de clases a un PDF con diálogo de guardado"""
+        try:
+            # Diálogo para elegir dónde guardar el PDF
+            archivo_pdf, _ = QFileDialog.getSaveFileName(
+                self,
+                "Guardar informe de clases",
+                "informe_clases.pdf",
+                "PDF Files (*.pdf);;All Files (*)"
+            )
+            
+            # Si el usuario cancela, no hacer nada
+            if not archivo_pdf:
+                return
+            
+            clases = self.service.obtener_clases()
+            edificios = self.service.obtener_edificios()
+            generador = ClaseReportGenerator(clases, edificios, archivo_pdf)
+            generador.generar_informe()
+            QMessageBox.information(self, "Éxito", f"PDF generado correctamente en:\n{archivo_pdf}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error al generar PDF: {e}")

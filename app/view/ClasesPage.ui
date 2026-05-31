@@ -13,94 +13,120 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="lblTitulo">
+  <widget class="QWidget" name="centralWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>271</width>
-     <height>41</height>
+     <x>0</x>
+     <y>0</y>
+     <width>883</width>
+     <height>631</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>24</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Gestion de Clases</string>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="tblClases">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>150</y>
-     <width>831</width>
-     <height>371</height>
-    </rect>
-   </property>
-   <property name="selectionBehavior">
-    <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
-   </property>
-   <column>
-    <property name="text">
-     <string>ID</string>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>20</number>
     </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Nombre</string>
+    <property name="topMargin">
+     <number>10</number>
     </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Capacidad</string>
+    <property name="rightMargin">
+     <number>20</number>
     </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Edificio</string>
+    <property name="bottomMargin">
+     <number>10</number>
     </property>
-   </column>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>110</y>
-     <width>336</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QPushButton" name="btnCrear">
+    <property name="rowStretch" row="0">
+     <number>0</number>
+    </property>
+    <property name="rowStretch" row="1">
+     <number>0</number>
+    </property>
+    <property name="rowStretch" row="2">
+     <number>1</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="lblTitulo">
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Crear</string>
+       <string>Gestion de Clases</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter</set>
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QPushButton" name="btnEditar">
-      <property name="text">
-       <string>Editar</string>
-      </property>
-     </widget>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btnCrear">
+        <property name="text">
+         <string>Crear</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnEditar">
+        <property name="text">
+         <string>Editar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnBorrar">
+        <property name="text">
+         <string>Borrar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRefrescar">
+        <property name="text">
+         <string>Refrescar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnExportarPDF">
+        <property name="text">
+         <string>Exportar PDF</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item>
-     <widget class="QPushButton" name="btnBorrar">
-      <property name="text">
-       <string>Borrar</string>
+    <item row="2" column="0">
+     <widget class="QTableWidget" name="tblClases">
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnRefrescar">
-      <property name="text">
-       <string>Refrescar</string>
-      </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Capacidad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Edificio</string>
+       </property>
+      </column>
      </widget>
     </item>
    </layout>

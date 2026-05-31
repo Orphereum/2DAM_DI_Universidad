@@ -26,7 +26,7 @@ class ClaseDialog(QDialog):
             self.ui.cbEdificio.clear()
             for ed in edificios:
                 # addItem(texto_visible, dato_oculto_ID)
-                self.ui.cbEdificio.addItem(ed.nombre, ed.id_edificio)
+                self.ui.cbEdificio.addItem(ed.nombre, ed.id)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"No se pudieron cargar edificios: {e}")
 

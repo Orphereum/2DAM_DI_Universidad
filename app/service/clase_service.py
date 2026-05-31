@@ -8,6 +8,9 @@ class ClaseService:
     def obtener_clases(self):
         return self.clase_repo.find_all()
 
+    def obtener_por_id(self, id_clase):
+        return self.clase_repo.find_by_id(id_clase)
+
     def obtener_edificios(self):
         # Necesario para llenar el ComboBox en el formulario
         return self.edificio_repo.find_all() 

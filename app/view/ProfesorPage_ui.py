@@ -25,7 +25,7 @@ class Ui_ProfesorPage(object):
     def setupUi(self, ProfesorPage):
         if not ProfesorPage.objectName():
             ProfesorPage.setObjectName(u"ProfesorPage")
-        ProfesorPage.resize(605, 573)
+        ProfesorPage.resize(634, 591)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -59,6 +59,7 @@ class Ui_ProfesorPage(object):
         self.searchLayout.setObjectName(u"searchLayout")
         self.lnBusqueda = QLineEdit(ProfesorPage)
         self.lnBusqueda.setObjectName(u"lnBusqueda")
+        self.lnBusqueda.setStyleSheet(u"color:white")
 
         self.searchLayout.addWidget(self.lnBusqueda)
 
@@ -75,12 +76,34 @@ class Ui_ProfesorPage(object):
 
         self.searchLayout.addWidget(self.btnBusqueda)
 
+        self.btnRefrescar = QPushButton(ProfesorPage)
+        self.btnRefrescar.setObjectName(u"btnRefrescar")
+        self.btnRefrescar.setEnabled(True)
+        self.btnRefrescar.setSizeIncrement(QSize(0, 32))
+        font2 = QFont()
+        font2.setPointSize(16)
+        self.btnRefrescar.setFont(font2)
+        self.btnRefrescar.setStyleSheet(u"color:black")
+        icon1 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ViewRefresh))
+        self.btnRefrescar.setIcon(icon1)
+
+        self.searchLayout.addWidget(self.btnRefrescar)
+
+        self.btnNuevo = QPushButton(ProfesorPage)
+        self.btnNuevo.setObjectName(u"btnNuevo")
+        self.btnNuevo.setEnabled(True)
+        self.btnNuevo.setSizeIncrement(QSize(0, 32))
+        self.btnNuevo.setFont(font2)
+        self.btnNuevo.setStyleSheet(u"color:white")
+
+        self.searchLayout.addWidget(self.btnNuevo)
+
 
         self.topBar.addLayout(self.searchLayout)
 
         self.pushButton = QPushButton(ProfesorPage)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setFont(font1)
+        self.pushButton.setFont(font2)
         self.pushButton.setStyleSheet(u"color:white")
 
         self.topBar.addWidget(self.pushButton)
@@ -97,8 +120,6 @@ class Ui_ProfesorPage(object):
         self.formLayout.setVerticalSpacing(10)
         self.lblNombre = QLabel(ProfesorPage)
         self.lblNombre.setObjectName(u"lblNombre")
-        font2 = QFont()
-        font2.setPointSize(16)
         self.lblNombre.setFont(font2)
         self.lblNombre.setStyleSheet(u"color:white")
 
@@ -259,6 +280,8 @@ class Ui_ProfesorPage(object):
         self.pageTitle.setText(QCoreApplication.translate("ProfesorPage", u"Profesores", None))
         self.lnBusqueda.setPlaceholderText(QCoreApplication.translate("ProfesorPage", u"Buscar...", None))
         self.btnBusqueda.setText("")
+        self.btnRefrescar.setText("")
+        self.btnNuevo.setText(QCoreApplication.translate("ProfesorPage", u"Nuevo", None))
         self.pushButton.setText(QCoreApplication.translate("ProfesorPage", u"Exportar a PDF", None))
         self.lblNombre.setText(QCoreApplication.translate("ProfesorPage", u"Nombre:", None))
         self.lblCorreo.setText(QCoreApplication.translate("ProfesorPage", u"Correo:", None))

@@ -8,6 +8,13 @@ from app.models.profesor import Profesor
 from app.repository.profesor_repo import ProfesorRepository
 from app.service.profesor_service import ProfesorService
 from app.reports.profesor_report import generar_pdf_profesores
+from PySide6.QtWidgets import (
+    QWidget, QTableWidgetItem, QMessageBox,
+    QHeaderView, QSizePolicy, QFileDialog,
+    QPushButton, QDialog, QVBoxLayout, QFormLayout,
+    QLineEdit, QComboBox, QCheckBox, QDialogButtonBox
+)
+from PySide6.QtWidgets import QSizePolicy
 
 
 class ProfesorPage(QWidget):
@@ -22,11 +29,13 @@ class ProfesorPage(QWidget):
         self.service = ProfesorService(self.profesor_repo)
 
         self._selected_profesor_id: int | None = None
-        self._asignaturas_temporales = {}
+        #self._asignaturas_temporales = {}
 
+        self._crear_botones_extra()
         self._configurar_tabla()
         self._configurar_signals()
         self._cargar_profesores()
+
 
     def _configurar_signals(self):
         self.ui.btbGuardar.clicked.connect(self.on_guardar)
@@ -34,6 +43,11 @@ class ProfesorPage(QWidget):
         self.ui.btnEliminar.clicked.connect(self.on_eliminar)
         self.ui.btnLimpiar.clicked.connect(self.on_limpiar)
         self.ui.pushButton.clicked.connect(self.on_generar_pdf_profesores)
+        self.ui.btnRefrescar.clicked.connect(self.on_refrescar)
+        self.ui.btnNuevo.clicked.connect(self.on_nuevo_popup)
+        self.ui.btnBusqueda.clicked.connect(self.on_buscar)
+        self.ui.lnBusqueda.returnPressed.connect(self.on_buscar)
+        self.ui.lnBusqueda.textChanged.connect(self._mostrar_boton_limpiar_busqueda)
 
         self.ui.tblProfesores.itemSelectionChanged.connect(self.on_tabla_seleccion)
 
@@ -41,6 +55,7 @@ class ProfesorPage(QWidget):
         self.ui.txtCorreo.returnPressed.connect(self.ui.txtTlf.setFocus)
         self.ui.txtTlf.returnPressed.connect(self.ui.txtTitulo.setFocus)
         self.ui.txtTitulo.returnPressed.connect(self.ui.cbDpto.setFocus)
+
 
     def _configurar_tabla(self):
         tbl = self.ui.tblProfesores
@@ -59,21 +74,66 @@ class ProfesorPage(QWidget):
 
         tbl.setColumnHidden(0, True)
 
+        self.ui.tblProfesores.setStyleSheet("""
+            QTableWidget {
+                color: white;
+                gridline-color: #444;
+            }
+        """)
+
+    def on_buscar(self):
+        texto = self.ui.lnBusqueda.text().strip().lower()
+
+        if not texto:
+            self._cargar_profesores()
+            return
+
+        profesores = self.service.obtener_profesores_con_asignaturas()
+        filtrados = []
+
+        for p in profesores:
+            asignaturas = " ".join(p.asignaturas).lower() if p.asignaturas else ""
+
+            if (
+                texto in (p.nombre or "").lower()
+                or texto in (p.correo or "").lower()
+                or texto in (p.telefono or "").lower()
+                or texto in (p.titulo or "").lower()
+                or texto in asignaturas
+            ):
+                filtrados.append(p)
+
+        self._pintar_profesores_en_tabla(filtrados)
+
+
+    def on_limpiar_busqueda(self):
+        self.ui.lnBusqueda.clear()
+        self._cargar_profesores()
+
+
+    def _mostrar_boton_limpiar_busqueda(self):
+        self.btnLimpiarBusqueda.setVisible(bool(self.ui.lnBusqueda.text().strip()))
+
+    def on_refrescar(self):
+        self._cargar_profesores()
+        QMessageBox.information(self, "Refrescado", "Lista de profesores actualizada.")
+
     def on_guardar(self):
         try:
             profesor = self._leer_formulario()
+            asignatura = self.ui.lnAsignatura.text().strip()
 
             if self._selected_profesor_id is None:
                 profesor = self.service.crear_profesor(profesor)
-                QMessageBox.information(self, "OK", "Profesor creado correctamente")
+                mensaje = "Profesor creado correctamente"
             else:
                 profesor.id = self._selected_profesor_id
                 profesor = self.service.actualizar_profesor(profesor)
-                QMessageBox.information(self, "OK", "Profesor actualizado correctamente")
+                mensaje = "Profesor actualizado correctamente"
 
-            asignatura = self.ui.lnAsignatura.text().strip()
-            if asignatura:
-                self._asignaturas_temporales[profesor.id] = asignatura
+            self.service.asignar_asignatura_por_nombre(profesor.id, asignatura)
+
+            QMessageBox.information(self, "OK", mensaje)
 
             self._cargar_profesores()
             self._limpiar_formulario()
@@ -105,7 +165,7 @@ class ProfesorPage(QWidget):
 
         try:
             self.service.eliminar_profesor(self._selected_profesor_id)
-            self._asignaturas_temporales.pop(self._selected_profesor_id, None)
+            #self._asignaturas_temporales.pop(self._selected_profesor_id, None)
 
             QMessageBox.information(self, "OK", "Profesor eliminado correctamente")
 
@@ -117,6 +177,24 @@ class ProfesorPage(QWidget):
 
     def on_limpiar(self):
         self._limpiar_formulario()
+
+    def _pintar_profesores_en_tabla(self, profesores):
+        tabla = self.ui.tblProfesores
+        tabla.setRowCount(len(profesores))
+
+        for fila, p in enumerate(profesores):
+            tabla.setItem(fila, 0, QTableWidgetItem(str(p.id or "")))
+            tabla.setItem(fila, 1, QTableWidgetItem(p.nombre or ""))
+            tabla.setItem(fila, 2, QTableWidgetItem(p.correo or ""))
+            tabla.setItem(fila, 3, QTableWidgetItem(p.telefono or ""))
+            tabla.setItem(fila, 4, QTableWidgetItem(p.titulo or ""))
+            tabla.setItem(fila, 5, QTableWidgetItem(str(p.id_departamento or "")))
+            tabla.setItem(fila, 6, QTableWidgetItem("Sí" if p.jefe_dtp else "No"))
+
+            asignaturas = ", ".join(p.asignaturas) if p.asignaturas else "Sin asignaturas"
+            tabla.setItem(fila, 7, QTableWidgetItem(asignaturas))
+
+        tabla.resizeColumnsToContents()
 
     def on_tabla_seleccion(self):
         tbl = self.ui.tblProfesores
@@ -150,6 +228,7 @@ class ProfesorPage(QWidget):
 
     def _cargar_profesores(self):
         profesores = self.service.obtener_profesores_con_asignaturas()
+        self._pintar_profesores_en_tabla(profesores)
         tabla = self.ui.tblProfesores
         tabla.setRowCount(len(profesores))
 
@@ -162,12 +241,10 @@ class ProfesorPage(QWidget):
             tabla.setItem(fila, 5, QTableWidgetItem(str(p.id_departamento or "")))
             tabla.setItem(fila, 6, QTableWidgetItem("Sí" if p.jefe_dtp else "No"))
 
-            asignatura_temporal = self._asignaturas_temporales.get(p.id)
-
-            if asignatura_temporal:
-                asignaturas = asignatura_temporal
-            else:
-                asignaturas = ", ".join(p.asignaturas) if p.asignaturas else "Sin asignaturas"
+            #asignatura_temporal = self._asignaturas_temporales.get(p.id)
+                
+            asignaturas = ", ".join(p.asignaturas) if p.asignaturas else "Sin asignaturas"
+            tabla.setItem(fila, 7, QTableWidgetItem(asignaturas))
 
             tabla.setItem(fila, 7, QTableWidgetItem(asignaturas))
 
@@ -251,3 +328,73 @@ class ProfesorPage(QWidget):
 
         except Exception as e:
             QMessageBox.warning(self, "Error al generar PDF", str(e))
+
+    def _crear_botones_extra(self):
+
+        self.btnLimpiarBusqueda = QPushButton("✕")
+        self.btnLimpiarBusqueda.setFixedSize(35, 42)
+        self.btnLimpiarBusqueda.setStyleSheet("color:white; font-size:18px; font-weight:bold;")
+        self.btnLimpiarBusqueda.hide()
+
+        self.ui.searchLayout.addWidget(self.btnLimpiarBusqueda)
+        self.btnLimpiarBusqueda.clicked.connect(self.on_limpiar_busqueda)
+
+
+    def on_nuevo_popup(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Nuevo profesor")
+        dialog.setMinimumWidth(420)
+
+        layout = QVBoxLayout(dialog)
+        form = QFormLayout()
+
+        txtNombre = QLineEdit()
+        txtCorreo = QLineEdit()
+        txtTelefono = QLineEdit()
+        txtTitulo = QLineEdit()
+        cbDpto = QComboBox()
+        cbDpto.addItems(["Ciencias", "Ingenieria"])
+        checkJefe = QCheckBox("Es jefe de departamento")
+        txtAsignatura = QLineEdit()
+
+        form.addRow("Nombre:", txtNombre)
+        form.addRow("Correo:", txtCorreo)
+        form.addRow("Teléfono:", txtTelefono)
+        form.addRow("Título:", txtTitulo)
+        form.addRow("Departamento:", cbDpto)
+        form.addRow("Jefe:", checkJefe)
+        form.addRow("Asignatura:", txtAsignatura)
+
+        layout.addLayout(form)
+
+        botones = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        layout.addWidget(botones)
+
+        botones.accepted.connect(dialog.accept)
+        botones.rejected.connect(dialog.reject)
+
+        if dialog.exec() != QDialog.Accepted:
+            return
+
+        profesor = Profesor(
+            nombre=txtNombre.text().strip(),
+            correo=txtCorreo.text().strip(),
+            telefono=txtTelefono.text().strip(),
+            titulo=txtTitulo.text().strip(),
+            id_departamento=1 if cbDpto.currentIndex() == 0 else 2,
+            jefe_dtp=checkJefe.isChecked(),
+            asignaturas=[txtAsignatura.text().strip()] if txtAsignatura.text().strip() else []
+        )
+
+        try:
+            profesor = self.service.crear_profesor(profesor)
+
+            asignatura = txtAsignatura.text().strip()
+            if asignatura:
+                self.service.asignar_asignatura_por_nombre(profesor.id, asignatura)
+
+            QMessageBox.information(self, "OK", "Profesor creado correctamente")
+            self._cargar_profesores()
+
+        except Exception as e:
+            QMessageBox.warning(self, "Error", str(e))

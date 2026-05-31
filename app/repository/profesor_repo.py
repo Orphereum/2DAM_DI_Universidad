@@ -274,3 +274,65 @@ class ProfesorRepository:
 
         conn.commit()
         conn.close()
+
+
+    def crear_tabla_profesor_asignatura_si_no_existe(self):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS profesor_asignatura (
+                id_profesor INTEGER NOT NULL,
+                id_asignatura INTEGER NOT NULL,
+                PRIMARY KEY (id_profesor, id_asignatura),
+                FOREIGN KEY (id_profesor) REFERENCES profesor(id_profesor),
+                FOREIGN KEY (id_asignatura) REFERENCES asignatura(id_asignatura)
+            )
+        """)
+
+        conn.commit()
+        conn.close()
+
+
+    def buscar_asignatura_por_nombre(self, nombre_asignatura):
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT id_asignatura
+            FROM asignatura
+            WHERE LOWER(nombre) = LOWER(?)
+        """, (nombre_asignatura,))
+
+        row = cursor.fetchone()
+        conn.close()
+
+        return row[0] if row else None
+
+
+    def asignar_asignatura_por_nombre(self, id_profesor, nombre_asignatura):
+        self.crear_tabla_profesor_asignatura_si_no_existe()
+
+        id_asignatura = self.buscar_asignatura_por_nombre(nombre_asignatura)
+
+        if id_asignatura is None:
+            raise ValueError(
+                f"La asignatura '{nombre_asignatura}' no existe en la tabla asignatura. "
+                "Escríbela exactamente como está guardada."
+            )
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "DELETE FROM profesor_asignatura WHERE id_profesor = ?",
+            (id_profesor,)
+        )
+
+        cursor.execute("""
+            INSERT INTO profesor_asignatura (id_profesor, id_asignatura)
+            VALUES (?, ?)
+        """, (id_profesor, id_asignatura))
+
+        conn.commit()
+        conn.close()

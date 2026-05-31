@@ -145,8 +145,12 @@ QLineEdit, QSpinBox {
     color: #F5F5F5;
 }
 
-QLineEdit:focus, QSpinBox:focus {
-    border: 1px solid #7A1C2E;
+QLineEdit {
+    color: white;
+}
+
+QLineEdit::placeholder {
+    color: #bfbfbf;
 }
 
 /* ============================= */

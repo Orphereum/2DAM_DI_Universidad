@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>605</width>
-    <height>573</height>
+    <width>634</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -71,6 +71,9 @@
        </property>
        <item>
         <widget class="QLineEdit" name="lnBusqueda">
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
          <property name="placeholderText">
           <string>Buscar...</string>
          </property>
@@ -101,13 +104,64 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btnRefrescar">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:black</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnNuevo">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:white</string>
+         </property>
+         <property name="text">
+          <string>Nuevo</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>16</pointsize>
         </font>
        </property>
        <property name="styleSheet">

@@ -74,3 +74,10 @@ class ProfesorService:
     def asignar_asignaturas_a_profesor(self, id_profesor, ids_asignaturas):
         return self.profesor_repo.asignar_asignaturas(id_profesor, ids_asignaturas)
         
+
+    def asignar_asignatura_por_nombre(self, id_profesor, nombre_asignatura):
+        if nombre_asignatura and nombre_asignatura.strip():
+            return self.profesor_repo.asignar_asignatura_por_nombre(
+                id_profesor,
+                nombre_asignatura.strip()
+            )

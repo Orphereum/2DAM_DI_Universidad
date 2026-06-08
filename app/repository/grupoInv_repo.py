@@ -13,7 +13,7 @@ class GrupoInvRepository:
             cursor = conn.cursor()
 
             cursor.execute("""
-                SELECT id_grupo, nombre
+                SELECT id_grupo, nombre, descripcion, fecha_creacion
                 FROM grupo_investigacion
             """)
 
@@ -26,8 +26,9 @@ class GrupoInvRepository:
             cursor = conn.cursor()
 
             cursor.execute("""
-                SELECT id_grupo, nombre
+                SELECT id_grupo, nombre, descripcion, fecha_creacion
                 FROM grupo_investigacion
+
                 WHERE id_grupo = ?
             """, (id_grupo,))
 
@@ -96,7 +97,9 @@ class GrupoInvRepository:
     def _row_to_model(self, row):
         return GrupoInvestigacion(
             id_grupo=row["id_grupo"],
-            nombre=row["nombre"]
+            nombre=row["nombre"],
+            descripcion=row["descripcion"],
+            fecha_creacion=row["fecha_creacion"]
         )
   
     

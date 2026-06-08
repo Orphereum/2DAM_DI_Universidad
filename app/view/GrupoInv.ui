@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GruposInvView</class>
+ <widget class="QWidget" name="GruposInvView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Grupos de Investigación</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="verticalLayout">
+
+   <!-- ESPACIADOR SUPERIOR -->
+   <item>
+    <spacer name="verticalSpacerTop">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
+   <!-- TÍTULO PRINCIPAL -->
+   <item>
+    <widget class="QLabel" name="lblTitulo">
+     <property name="text">
+      <string>GRUPOS DE INVESTIGACIÓN</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>42</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </widget>
+   </item>
+
+   <!-- FRAME PRINCIPAL -->
+   <item>
+    <widget class="QFrame" name="frameMain">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+
+     <layout class="QVBoxLayout" name="vboxLayout">
+
+      <!-- TÍTULO TABLA -->
+      <item>
+       <widget class="QLabel" name="lblTablaTitulo">
+        <property name="text">
+         <string>Listado de grupos</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </widget>
+      </item>
+
+      <!-- TABLA -->
+      <item>
+       <widget class="QTableWidget" name="tbl_grupos"/>
+      </item>
+
+      <!-- BOTONES CRUD -->
+      <item>
+       <layout class="QHBoxLayout" name="hboxButtons">
+
+        <item>
+         <widget class="QPushButton" name="btn_nuevo">
+          <property name="text">
+           <string>Nuevo</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btn_editar">
+          <property name="text">
+           <string>Editar</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btn_eliminar">
+          <property name="text">
+           <string>Eliminar</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btn_refrescar">
+          <property name="text">
+           <string>Refrescar</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btnExportarPdf">
+          <property name="text">
+           <string>Exportar PDF</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btnGraficos">
+          <property name="text">
+           <string>Gráficos</string>
+          </property>
+         </widget>
+        </item>
+
+        <!-- ESPACIADOR DERECHA -->
+        <item>
+         <spacer name="spacerButtons">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+
+       </layout>
+      </item>
+
+     </layout>
+    </widget>
+   </item>
+
+   <!-- ESTADO -->
+   <item>
+    <widget class="QLabel" name="lbl_estado">
+     <property name="text">
+      <string>Listo</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+
+   <!-- ESPACIADOR INFERIOR -->
+   <item>
+    <spacer name="verticalSpacerBottom">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+
+  </layout>
+ </widget>
+
+ <resources/>
+ <connections/>
+</ui>

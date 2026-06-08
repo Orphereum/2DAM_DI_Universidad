@@ -312,6 +312,20 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="btnGrupoInv">
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>22</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Grupos de Investigación</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="btnPublicacion">
            <property name="font">
             <font>

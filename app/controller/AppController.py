@@ -1,5 +1,6 @@
 from app.controller.homewindow import HomeWindow
 from app.controller.universidadpage import UniversidadPage
+from app.repository import grupoInv_repo
 from app.repository.universidad_repo import UniversidadRepository
 from app.service.universidad_service import UniversidadService
 from app.controller.profesorpage import ProfesorPage
@@ -28,6 +29,7 @@ from app.service.grupo_debate_service import GrupoDebateService
 from app.service.proyecto_service import ProyectoService
 from app.repository.grupoInv_repo import GrupoInvRepository
 from app.service.grupoInv_service import GrupoInvService
+from app.controller.grupo_inv_page import GrupoInvPage
 from app.controller.premiopage import PremioPage
 from app.controller.facultadpage import FacultadPage
 from app.service.facultad_service import FacultadService
@@ -135,8 +137,9 @@ class AppController:
         # DEPENDENCIAS GRUPO INVESTIGACIÓN
         # -------------------------
         grupoInv_repo = GrupoInvRepository()
-
         grupoInv_service = GrupoInvService(grupoInv_repo)
+        
+        grupo_investigacion = GrupoInvPage(grupoInv_service)
 
         # grupoInv = GrupoInvPage(grupoInv_service, stacked)
 
@@ -179,6 +182,7 @@ class AppController:
             "asignatura": asignatura,
             "clase": clase,
             "edificio": edificio,
+            "grupo_inv": grupo_investigacion,
             "facultad": facultad,
             "proyecto": proyecto,
             "subvencion": subvencion,
@@ -211,6 +215,7 @@ class AppController:
         self.home.ui.btnFacultad.clicked.connect(lambda: self.show_page("facultad"))
         self.home.ui.btnProyecto.clicked.connect(lambda: self.show_page("proyecto"))
         self.home.ui.btnSubvencion.clicked.connect(lambda: self.show_page("subvencion"))
+        self.home.ui.btnGrupoInv.clicked.connect(lambda: self.show_page("grupo_inv"))
         self.home.ui.btnDebate.clicked.connect(lambda: self.show_page("grupo_debate"))
         self.home.ui.btnPremio.clicked.connect(lambda: self.show_page("premio"))
 

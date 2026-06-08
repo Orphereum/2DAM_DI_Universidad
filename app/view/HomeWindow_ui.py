@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'HomeWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.2
+## Created by: Qt User Interface Compiler version 6.10.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -170,6 +170,12 @@ class Ui_HomeWindow(object):
 
         self.verticalLayout.addWidget(self.btnSubvencion)
 
+        self.btnGrupoInv = QPushButton(self.verticalLayoutWidget)
+        self.btnGrupoInv.setObjectName(u"btnGrupoInv")
+        self.btnGrupoInv.setFont(font1)
+
+        self.verticalLayout.addWidget(self.btnGrupoInv)
+
         self.btnPublicacion = QPushButton(self.verticalLayoutWidget)
         self.btnPublicacion.setObjectName(u"btnPublicacion")
         self.btnPublicacion.setFont(font1)
@@ -233,6 +239,7 @@ class Ui_HomeWindow(object):
         self.btnInvestigacion.setText(QCoreApplication.translate("HomeWindow", u"Gr. Inv.", None))
         self.btnProyecto.setText(QCoreApplication.translate("HomeWindow", u"Proyectos", None))
         self.btnSubvencion.setText(QCoreApplication.translate("HomeWindow", u"Subvenciones", None))
+        self.btnGrupoInv.setText(QCoreApplication.translate("HomeWindow", u"Grupos de Investigaci\u00f3n", None))
         self.btnPublicacion.setText(QCoreApplication.translate("HomeWindow", u"Publicaciones", None))
     # retranslateUi
 

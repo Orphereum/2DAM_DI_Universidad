@@ -19,6 +19,9 @@ class GrupoInvService:
     # -------------------------------------------------
     def obtener_grupos(self):
         return self.grupoInv_repo.find_all()
+    
+    def cargar_lista_gruposInv(self):
+        return self.obtener_grupos()
 
     def obtener_grupo_por_id(self, id_grupo: int):
         return self.grupoInv_repo.find_by_id(id_grupo)

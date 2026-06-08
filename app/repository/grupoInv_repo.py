@@ -39,20 +39,19 @@ class GrupoInvRepository:
     # -------------------------
     # INSERT
     # -------------------------
-    def insert(self, grupo: GrupoInvestigacion):
+    def create(self, grupo):
         try:
             with get_connection() as conn:
                 cursor = conn.cursor()
 
                 cursor.execute("""
-                    INSERT INTO grupo_investigacion (nombre)
-                    VALUES (?)
-                """, (grupo.nombre,))
+                    INSERT INTO grupo_investigacion (nombre, descripcion, fecha_creacion)
+                    VALUES (?, ?, ?)
+                """, (grupo.nombre, grupo.descripcion, grupo.fecha_creacion))
 
-                conn.commit()
-                grupo.id_grupo = cursor.lastrowid
+                grupo.id_grupo = cursor.lastrowid  # asignar ID al objeto
 
-                return grupo
+            return grupo  # ✔ DEVOLVER OBJETO
 
         except sqlite3.IntegrityError:
             raise ValueError("El grupo de investigación ya existe (duplicado)")
@@ -60,21 +59,17 @@ class GrupoInvRepository:
     # -------------------------
     # UPDATE
     # -------------------------
-    def update(self, grupo: GrupoInvestigacion):
+    def update(self, grupo):
         with get_connection() as conn:
             cursor = conn.cursor()
 
             cursor.execute("""
-                UPDATE grupo_investigacion SET
-                    nombre = ?
+                UPDATE grupo_investigacion
+                SET nombre = ?, descripcion = ?, fecha_creacion = ?
                 WHERE id_grupo = ?
-            """, (
-                grupo.nombre,
-                grupo.id_grupo
-            ))
+            """, (grupo.nombre, grupo.descripcion, grupo.fecha_creacion, grupo.id_grupo))
 
-        print("UPDATE OK ID:", grupo.id_grupo)
-        return grupo
+        return grupo  # ✔ DEVOLVER OBJETO
 
     # -------------------------
     # DELETE

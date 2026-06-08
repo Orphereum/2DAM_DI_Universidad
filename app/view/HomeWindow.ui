@@ -270,20 +270,6 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btnInvestigacion">
-           <property name="font">
-            <font>
-             <family>Segoe UI</family>
-             <pointsize>22</pointsize>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="text">
-            <string>Gr. Inv.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="btnProyecto">
            <property name="font">
             <font>

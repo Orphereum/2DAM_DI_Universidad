@@ -148,12 +148,6 @@ class Ui_HomeWindow(object):
 
         self.verticalLayout.addWidget(self.lblSectionInvestigacion)
 
-        self.btnInvestigacion = QPushButton(self.verticalLayoutWidget)
-        self.btnInvestigacion.setObjectName(u"btnInvestigacion")
-        self.btnInvestigacion.setFont(font1)
-
-        self.verticalLayout.addWidget(self.btnInvestigacion)
-
         self.btnProyecto = QPushButton(self.verticalLayoutWidget)
         self.btnProyecto.setObjectName(u"btnProyecto")
         self.btnProyecto.setFont(font1)
@@ -236,7 +230,6 @@ class Ui_HomeWindow(object):
         self.btnDebate.setText(QCoreApplication.translate("HomeWindow", u"Debates", None))
         self.btnPremio.setText(QCoreApplication.translate("HomeWindow", u"Premios", None))
         self.lblSectionInvestigacion.setText(QCoreApplication.translate("HomeWindow", u"Investigaci\u00f3n", None))
-        self.btnInvestigacion.setText(QCoreApplication.translate("HomeWindow", u"Gr. Inv.", None))
         self.btnProyecto.setText(QCoreApplication.translate("HomeWindow", u"Proyectos", None))
         self.btnSubvencion.setText(QCoreApplication.translate("HomeWindow", u"Subvenciones", None))
         self.btnGrupoInv.setText(QCoreApplication.translate("HomeWindow", u"Grupos de Investigaci\u00f3n", None))

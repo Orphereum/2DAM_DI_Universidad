@@ -1,9 +1,16 @@
+from pydoc import doc, html, html
+
 from PySide6.QtWidgets import (
-    QWidget, QHeaderView, QAbstractItemView, QMessageBox, QTableWidgetItem
+    QFileDialog, QInputDialog, QWidget, QHeaderView, QAbstractItemView, QMessageBox, QTableWidgetItem
 )
 
 from app.view.GrupoInv_ui import Ui_GruposInvView
 from app.models.grupoInv import GrupoInvestigacion  
+
+import os
+from PySide6.QtPrintSupport import QPrinter
+from PySide6.QtGui import QTextDocument
+from PySide6.QtWidgets import QMessageBox
 
 class GrupoInvPage(QWidget):
     def __init__(self, grupo_service, parent=None):
@@ -52,45 +59,75 @@ class GrupoInvPage(QWidget):
         self.ui.btn_editar.clicked.connect(self.editar_grupo)
         self.ui.btn_eliminar.clicked.connect(self.eliminar_grupo)
         self.ui.btn_refrescar.clicked.connect(self.refrescar_tabla)
+        self.ui.btnExportarPdf.clicked.connect(self.exportar_pdf)
 
-        # Si más adelante tienes informes o gráficos:
-        # self.ui.btnExportarPdf.clicked.connect(self.abrir_informes)
-        # self.ui.btnGraficos.clicked.connect(self.abrir_graficos)
 
     # -------------------------
     # NUEVO GRUPO (SIN DIÁLOGO)
     # -------------------------
     def nuevo_grupo(self):
-        QMessageBox.information(
-            self,
-            "Función no implementada",
-            "No tienes diálogos, así que no puedo crear un grupo desde una ventana.\n"
-            "Si quieres, puedo generarte una ventana simple para introducir datos."
-        )
+        nombre, ok = QInputDialog.getText(self, "Nuevo Grupo", "Nombre del grupo:")
+        if not ok or not nombre.strip():
+            return
+
+        descripcion, ok = QInputDialog.getText(self, "Nuevo Grupo", "Descripción:")
+        if not ok:
+            return
+
+        fecha, ok = QInputDialog.getText(self, "Nuevo Grupo", "Fecha de creación (YYYY-MM-DD):")
+        if not ok:
+            return
+
+        try:
+            self.service.crear_grupo({
+                "nombre": nombre,
+                "descripcion": descripcion,
+                "fecha_creacion": fecha
+            })
+            self.refrescar_tabla()
+            self._mostrar_estado("Grupo creado correctamente", "success")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", str(e))
 
     # -------------------------
     # EDITAR GRUPO (SIN DIÁLOGO)
     # -------------------------
     def editar_grupo(self):
         fila = self.ui.tbl_grupos.currentRow()
-
         if fila < 0:
             QMessageBox.warning(self, "Aviso", "Selecciona un grupo para editar")
             return
 
-        QMessageBox.information(
-            self,
-            "Función no implementada",
-            "No tienes diálogos, así que no puedo editar un grupo desde una ventana.\n"
-            "Si quieres, puedo generarte una ventana simple para editar datos."
-        )
+        grupo = self._grupos_cache[fila]
 
+        nuevo_nombre, ok = QInputDialog.getText(self, "Editar Grupo", "Nuevo nombre:", text=grupo.nombre)
+        if not ok:
+            return
+
+        nueva_desc, ok = QInputDialog.getText(self, "Editar Grupo", "Nueva descripción:", text=grupo.descripcion)
+        if not ok:
+            return
+
+        nueva_fecha, ok = QInputDialog.getText(self, "Editar Grupo", "Nueva fecha (YYYY-MM-DD):", text=str(grupo.fecha_creacion))
+        if not ok:
+            return
+
+        try:
+            self.service.actualizar_grupo({
+                "id_grupo": grupo.id_grupo,
+                "nombre": nuevo_nombre,
+                "descripcion": nueva_desc,
+                "fecha_creacion": nueva_fecha
+            })
+            self.refrescar_tabla()
+            self._mostrar_estado("Grupo actualizado correctamente", "success")
+        except Exception as e:
+            QMessageBox.warning(self, "Error", str(e))
     # -------------------------
     # ELIMINAR GRUPO
     # -------------------------
     def eliminar_grupo(self):
         fila = self.ui.tbl_grupos.currentRow()
-
         if fila < 0:
             QMessageBox.warning(self, "Aviso", "Selecciona un grupo para eliminar")
             return
@@ -109,13 +146,15 @@ class GrupoInvPage(QWidget):
                 self.service.eliminar_grupo(grupo.id_grupo)
                 self.refrescar_tabla()
                 self._mostrar_estado("Grupo eliminado correctamente", "success")
-            except ValueError as e:
+            except Exception as e:
                 QMessageBox.warning(self, "Error", str(e))
+
 
     # -------------------------
     # REFRESCAR TABLA
     # -------------------------
     def refrescar_tabla(self):
+        # Obtener datos y limpiar tabla
         self._grupos_cache = self.service.obtener_grupos()
 
         tabla = self.ui.tbl_grupos
@@ -123,6 +162,7 @@ class GrupoInvPage(QWidget):
 
         for grupo in self._grupos_cache:
             self._añadir_a_tabla(grupo)
+
 
     # -------------------------
     # AÑADIR FILA A TABLA
@@ -143,3 +183,50 @@ class GrupoInvPage(QWidget):
         self.ui.lbl_estado.setProperty("estado", tipo)
         self.ui.lbl_estado.style().unpolish(self.ui.lbl_estado)
         self.ui.lbl_estado.style().polish(self.ui.lbl_estado)
+        
+    def exportar_pdf(self):
+        if not self._grupos_cache:
+            QMessageBox.warning(self, "Aviso", "No hay datos para exportar")
+            return
+
+        # Crear carpeta reports si no existe
+        carpeta_reports = os.path.join(os.getcwd(),"reports")
+        os.makedirs(carpeta_reports, exist_ok=True)
+
+        ruta_pdf = os.path.join(carpeta_reports, "grupos_investigacion.pdf")
+
+        # Construcción del HTML
+        html = """
+        <h1 style='text-align:center;'>Grupos de Investigación</h1>
+        <table border='1' cellspacing='0' cellpadding='4' width='100%'>
+            <tr style='background-color:#e0e0e0;'>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha de creación</th>
+            </tr>
+        """
+
+        for g in self._grupos_cache:
+            html += f"""
+            <tr>
+                <td>{g.nombre}</td>
+                <td>{g.descripcion}</td>
+                <td>{g.fecha_creacion}</td>
+            </tr>
+            """
+
+        html += "</table>"
+
+        # Crear documento PDF
+        doc = QTextDocument()
+        doc.setHtml(html)
+
+        printer = QPrinter()
+        printer.setOutputFormat(QPrinter.PdfFormat)
+        printer.setOutputFileName(ruta_pdf)
+
+        # PySide6 usa print_() en vez de print()
+        doc.print_(printer)
+
+        self._mostrar_estado(f"PDF exportado en: {ruta_pdf}", "success")
+

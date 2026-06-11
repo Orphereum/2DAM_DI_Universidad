@@ -17,7 +17,6 @@ class GrupoInvPage(QWidget):
         super().__init__(parent)
         self.service = grupo_service
 
-        # Cache de datos
         self._grupos_cache = []
 
         self.ui = Ui_GruposInvView()
@@ -26,12 +25,9 @@ class GrupoInvPage(QWidget):
         self._configurar_tabla()
         self._conectar_eventos()
 
-        # Cargar datos iniciales
         self.refrescar_tabla()
 
-    # -------------------------
-    # CONFIGURACIÓN DE LA TABLA
-    # -------------------------
+    
     def _configurar_tabla(self):
         tabla = self.ui.tbl_grupos
 
@@ -51,9 +47,7 @@ class GrupoInvPage(QWidget):
         tabla.verticalHeader().setDefaultSectionSize(26)
         tabla.setAlternatingRowColors(True)
 
-    # -------------------------
-    # EVENTOS
-    # -------------------------
+    
     def _conectar_eventos(self):
         self.ui.btn_nuevo.clicked.connect(self.nuevo_grupo)
         self.ui.btn_editar.clicked.connect(self.editar_grupo)
@@ -61,10 +55,7 @@ class GrupoInvPage(QWidget):
         self.ui.btn_refrescar.clicked.connect(self.refrescar_tabla)
         self.ui.btnExportarPdf.clicked.connect(self.exportar_pdf)
 
-
-    # -------------------------
-    # NUEVO GRUPO (SIN DIÁLOGO)
-    # -------------------------
+    
     def nuevo_grupo(self):
         nombre, ok = QInputDialog.getText(self, "Nuevo Grupo", "Nombre del grupo:")
         if not ok or not nombre.strip():
@@ -89,9 +80,7 @@ class GrupoInvPage(QWidget):
         except Exception as e:
             QMessageBox.warning(self, "Error", str(e))
 
-    # -------------------------
-    # EDITAR GRUPO (SIN DIÁLOGO)
-    # -------------------------
+    
     def editar_grupo(self):
         fila = self.ui.tbl_grupos.currentRow()
         if fila < 0:
@@ -123,9 +112,7 @@ class GrupoInvPage(QWidget):
             self._mostrar_estado("Grupo actualizado correctamente", "success")
         except Exception as e:
             QMessageBox.warning(self, "Error", str(e))
-    # -------------------------
-    # ELIMINAR GRUPO
-    # -------------------------
+    
     def eliminar_grupo(self):
         fila = self.ui.tbl_grupos.currentRow()
         if fila < 0:
@@ -148,13 +135,10 @@ class GrupoInvPage(QWidget):
                 self._mostrar_estado("Grupo eliminado correctamente", "success")
             except Exception as e:
                 QMessageBox.warning(self, "Error", str(e))
-
-
-    # -------------------------
-    # REFRESCAR TABLA
-    # -------------------------
+                
+    
     def refrescar_tabla(self):
-        # Obtener datos y limpiar tabla
+        
         self._grupos_cache = self.service.obtener_grupos()
 
         tabla = self.ui.tbl_grupos
@@ -162,11 +146,8 @@ class GrupoInvPage(QWidget):
 
         for grupo in self._grupos_cache:
             self._añadir_a_tabla(grupo)
-
-
-    # -------------------------
-    # AÑADIR FILA A TABLA
-    # -------------------------
+            
+    
     def _añadir_a_tabla(self, grupo: GrupoInvestigacion):
         fila = self.ui.tbl_grupos.rowCount()
         self.ui.tbl_grupos.insertRow(fila)
@@ -175,9 +156,7 @@ class GrupoInvPage(QWidget):
         self.ui.tbl_grupos.setItem(fila, 1, QTableWidgetItem(grupo.descripcion))
         self.ui.tbl_grupos.setItem(fila, 2, QTableWidgetItem(str(grupo.fecha_creacion)))
 
-    # -------------------------
-    # MENSAJES DE ESTADO
-    # -------------------------
+    
     def _mostrar_estado(self, texto, tipo="info"):
         self.ui.lbl_estado.setText(texto)
         self.ui.lbl_estado.setProperty("estado", tipo)
@@ -189,13 +168,11 @@ class GrupoInvPage(QWidget):
             QMessageBox.warning(self, "Aviso", "No hay datos para exportar")
             return
 
-        # Crear carpeta reports si no existe
         carpeta_reports = os.path.join(os.getcwd(),"reports")
         os.makedirs(carpeta_reports, exist_ok=True)
 
         ruta_pdf = os.path.join(carpeta_reports, "grupos_investigacion.pdf")
 
-        # Construcción del HTML
         html = """
         <h1 style='text-align:center;'>Grupos de Investigación</h1>
         <table border='1' cellspacing='0' cellpadding='4' width='100%'>
@@ -217,7 +194,6 @@ class GrupoInvPage(QWidget):
 
         html += "</table>"
 
-        # Crear documento PDF
         doc = QTextDocument()
         doc.setHtml(html)
 
@@ -225,7 +201,6 @@ class GrupoInvPage(QWidget):
         printer.setOutputFormat(QPrinter.PdfFormat)
         printer.setOutputFileName(ruta_pdf)
 
-        # PySide6 usa print_() en vez de print()
         doc.print_(printer)
 
         self._mostrar_estado(f"PDF exportado en: {ruta_pdf}", "success")

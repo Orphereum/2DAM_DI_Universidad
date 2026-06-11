@@ -5,9 +5,6 @@ class GrupoInvService:
     def __init__(self, grupoInv_repo):
         self.grupoInv_repo = grupoInv_repo
 
-    # -------------------------
-    # ADAPTADOR: dict → objeto
-    # -------------------------
     def _dict_to_model(self, data):
         return GrupoInvestigacion(
             id_grupo=data.get("id_grupo"),
@@ -16,9 +13,6 @@ class GrupoInvService:
             fecha_creacion=data["fecha_creacion"]
         )
 
-    # -------------------------
-    # CRUD
-    # -------------------------
     def crear_grupo(self, data):
         grupo = self._dict_to_model(data)
         return self.grupoInv_repo.create(grupo)
@@ -30,18 +24,16 @@ class GrupoInvService:
     def eliminar_grupo(self, id_grupo):
         return self.grupoInv_repo.delete(id_grupo)
 
-    # -------------------------
+    
     # CONSULTAS
-    # -------------------------
+    
     def obtener_grupos(self):
         return self.grupoInv_repo.find_all()
 
     def obtener_grupo_por_id(self, id_grupo):
         return self.grupoInv_repo.find_by_id(id_grupo)
 
-    # -------------------------
-    # COMPATIBILIDAD ProyectoPage
-    # -------------------------
+
     def cargar_lista_gruposInv(self):
         grupos = self.obtener_grupos()
         return [
@@ -54,15 +46,9 @@ class GrupoInvService:
             for g in grupos
         ]
 
-
-
-
     def obtener_grupo_por_id(self, id_grupo: int):
             return self.grupoInv_repo.find_by_id(id_grupo)
 
-        # -------------------------------------------------
-        # VALIDACIÓN
-        # -------------------------------------------------
     def validar_grupo(self, grupo: GrupoInvestigacion):
             if not grupo.nombre or grupo.nombre.strip() == "":
                 raise ValueError("El nombre del grupo es obligatorio")
@@ -73,9 +59,6 @@ class GrupoInvService:
             if grupo.fecha_creacion is None:
                 raise ValueError("La fecha de creación es obligatoria")
 
-        # -------------------------------------------------
-        # CRUD
-        # -------------------------------------------------
     def crear_grupo(self, grupo: GrupoInvestigacion):
             # Validación de duplicados
             if self.existe_grupo(grupo):
@@ -97,9 +80,6 @@ class GrupoInvService:
             except Exception:
                 raise ValueError("No se puede eliminar el grupo (tiene relaciones)")
 
-        # -------------------------------------------------
-        # UTILIDAD
-        # -------------------------------------------------
     def existe_grupo(self, grupo: GrupoInvestigacion):
             grupos = self.grupoInv_repo.find_all()
 

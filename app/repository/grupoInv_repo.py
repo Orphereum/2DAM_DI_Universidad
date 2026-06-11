@@ -5,9 +5,8 @@ import sqlite3
 
 class GrupoInvRepository:
 
-    # -------------------------
     # CONSULTAS
-    # -------------------------
+
     def find_all(self):
         with get_connection() as conn:
             cursor = conn.cursor()
@@ -36,9 +35,8 @@ class GrupoInvRepository:
 
         return self._row_to_model(row) if row else None
 
-    # -------------------------
     # INSERT
-    # -------------------------
+
     def create(self, grupo):
         try:
             with get_connection() as conn:
@@ -49,16 +47,16 @@ class GrupoInvRepository:
                     VALUES (?, ?, ?)
                 """, (grupo.nombre, grupo.descripcion, grupo.fecha_creacion))
 
-                grupo.id_grupo = cursor.lastrowid  # asignar ID al objeto
+                grupo.id_grupo = cursor.lastrowid  
 
-            return grupo  # ✔ DEVOLVER OBJETO
+            return grupo  
 
         except sqlite3.IntegrityError:
             raise ValueError("El grupo de investigación ya existe (duplicado)")
 
-    # -------------------------
+
     # UPDATE
-    # -------------------------
+
     def update(self, grupo):
         with get_connection() as conn:
             cursor = conn.cursor()
@@ -69,11 +67,10 @@ class GrupoInvRepository:
                 WHERE id_grupo = ?
             """, (grupo.nombre, grupo.descripcion, grupo.fecha_creacion, grupo.id_grupo))
 
-        return grupo  # ✔ DEVOLVER OBJETO
+        return grupo  
 
-    # -------------------------
     # DELETE
-    # -------------------------
+
     def delete(self, id_grupo):
         with get_connection() as conn:
             cursor = conn.cursor()
@@ -86,9 +83,6 @@ class GrupoInvRepository:
         print("DELETE OK ID:", id_grupo)
         return True
 
-    # -------------------------
-    # UTILIDAD PRIVADA
-    # -------------------------
     def _row_to_model(self, row):
         return GrupoInvestigacion(
             id_grupo=row["id_grupo"],
